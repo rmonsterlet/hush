@@ -1,0 +1,46 @@
+<div *ngIf="demande">
+  <div *ngFor="let notice of notices; let i = index;">
+    <div *ngIf="!notice.hidden" [ngClass]="{'app-mb': !notice.hidden}">
+      <md-toolbar>
+        <span>{{notice.title}}</span>
+        <span class="spacer"></span>
+        <button (click)="onRefreshClick(i)" md-icon-button color=primary mdTooltip="Rafraichir">
+          <md-icon>autorenew</md-icon>
+        </button>
+        <span class="app-mr">{{notice.count}}</span>
+        <md-icon *ngIf="!notice.collapsed" (click)="notice.collapsed = true" mdTooltip="Masquer" color=primary>keyboard_arrow_down</md-icon>
+        <md-icon *ngIf="notice.collapsed" (click)="notice.collapsed = false" mdTooltip="Afficher" color=primary>keyboard_arrow_right</md-icon>
+      </md-toolbar>
+      <md-card *ngIf="!notice.collapsed">
+        <ngx-datatable class="material" [rows]="notice.rows" [columns]="notice.columns" [columnMode]="'force'" [reorderable]=true
+          [loadingIndicator]="notice.loadingIndicator" [messages]="notice.messages" [headerHeight]="40" [rowHeight]="45">
+        </ngx-datatable>
+        <md-card-actions *ngIf="notice.position" fxLayout="column" fxLayoutAlign="space-around center">
+          <button md-raised-button (click)="getNotices(i)">Plus de résultats</button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #nnaTpl let-row="row" let-value="value">
+  <div *ngIf="row.nna">
+    <a href="{{appService?.conf?.baseUrlNotice}}/{{row.arkNNA}}" target="_blank" mdTooltip="Voir la notice sur le catalogue">{{value}}</a>
+  </div>
+</ng-template>
+
+<ng-template #isniTpl let-row="row">
+  <div *ngIf="row.isni">
+    <a href="{{appService?.conf?.baseUrlISNI}}/{{row.isni}}" target="_blank" mdTooltip="ISNI présent. Voir la fiche sur www.isni.org">
+      <md-icon class="isniCheck">check</md-icon>
+    </a>
+  </div>
+</ng-template>
+
+<ng-template #actionTpl let-row="row">
+  <div *ngIf="row.nna">
+    <button md-icon-button color=primary (click)="onAssocierNnaClick(row)" mdTooltip="Associer ce NNA">
+      <md-icon>link</md-icon>
+    </button>
+  </div>
+</ng-template>

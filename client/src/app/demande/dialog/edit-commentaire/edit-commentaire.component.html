@@ -1,0 +1,27 @@
+<h2 md-dialog-title>Liste des commentaires</h2>
+
+<md-dialog-content fxLayout=column>
+    <md-list>
+        <md-list-item *ngFor="let commentaire of demande.commentaires">
+            <md-icon color=accent md-list-avatar>comment</md-icon>
+            <h4 md-line *ngIf="!commentaire.edit">{{commentaire.commentaire}}</h4>
+            <md-form-field md-line *ngIf="commentaire.edit">
+                <input type=text mdInput [(ngModel)]="commentaire.commentaire" name="commentaire">
+            </md-form-field>
+            <p md-line> {{commentaire.dateDernModif | date:'dd/MM/yyyy HH:mm - '}}{{ commentaire.nomUtilisateur}}</p>
+            <button *ngIf="!commentaire.edit" (click)="commentaire.edit = true" mdTooltip="Editer le commentaire" md-icon-button color=primary>
+                <md-icon>mode_edit</md-icon>
+            </button>
+            <button *ngIf="commentaire.edit" (click)="onSaveCommentClick(commentaire)" mdTooltip="Sauvegarder le commentaire" md-icon-button
+                color=primary>
+                <md-icon>save</md-icon>
+            </button>
+            <button (click)="onDeleteCommentClick(commentaire)" mdTooltip="Supprimer le commentaire" md-icon-button color=primary>
+                <md-icon>delete</md-icon>
+            </button>
+        </md-list-item>
+    </md-list>
+</md-dialog-content>
+<md-dialog-actions>
+    <button md-raised-button (click)="dialogEditCommentaire.close(demandeFinal)">Fermer</button>
+</md-dialog-actions>

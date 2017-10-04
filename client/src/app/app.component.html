@@ -1,0 +1,42 @@
+<div>
+  <md-toolbar class="app-toolbar mat-elevation-z6" color="primary">
+    <div class="logo-bnf-ct">
+      <img class="logo-bnf" src="assets/icon/logo-bnf.png" alt="BnF">
+    </div>
+
+    <h1 *ngIf="connected"><a routerLink="/demande-list" routerLinkActive="active">{{title}}</a></h1>
+    <h1 *ngIf="!connected">{{title}}</h1>
+
+    <span class="spacer"></span>
+
+    <button md-button [md-menu-trigger-for]="mainMenu">
+      <md-icon *ngIf="!connected">help_outline</md-icon>
+      <md-icon *ngIf="connected">account_circle</md-icon>
+      &nbsp;&nbsp;{{username}}
+    </button>
+    <md-menu #mainMenu="mdMenu">
+      <button *ngIf="!connected" md-menu-item (click)="connect()">Connexion</button>
+      <button *ngIf="connected" md-menu-item routerLink="/profil">Mon profil</button>
+      <button *ngIf="connected" md-menu-item routerLink="/preferences">Mes préférences</button>
+      <button *ngIf="connected" md-menu-item (click)="disconnect()">Déconnexion</button>
+    </md-menu>
+
+    <div *ngIf="connected" fxLayout="row" fxLayoutAlign=" center" fxHide.xs fxHide.sm>
+      <button md-button routerLink="/demande-list" routerLinkActive="active">Accueil</button>
+      <div class="divider"></div>
+      <button md-button routerLink="/about" routerLinkActive="active">A propos</button>
+      <div class="divider"></div>
+      <button md-button routerLink="/help" routerLinkActive="active">Aide</button>
+      <div class="divider"></div>
+      <button md-button routerLink="/contact" routerLinkActive="active">Contact</button>
+    </div>
+  </md-toolbar>
+
+  <router-outlet></router-outlet>
+</div>
+
+<!--
+  <span class="app-footer-action">
+  <button color="primary" (click)="up()" md-fab><md-icon>arrow_upward</md-icon></button>
+</span>
+-->

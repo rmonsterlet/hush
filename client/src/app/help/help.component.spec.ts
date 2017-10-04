@@ -1,0 +1,31 @@
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { By } from '@angular/platform-browser'
+import { DebugElement } from '@angular/core'
+
+import { HelpComponent } from './help.component'
+import 'hammerjs'
+
+describe('HelpComponent', () => {
+  let component: HelpComponent
+  let fixture: ComponentFixture<HelpComponent>
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+      ],
+      declarations: [HelpComponent]
+    })
+      .compileComponents()
+  }))
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HelpComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
+
+  it('should create', () => {
+    expect(component).toBeTruthy()
+  })
+})

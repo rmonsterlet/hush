@@ -1,0 +1,83 @@
+<md-card class="search-items" *ngIf="searchItems.priorites.values.length || searchItems.statuts.values.length || searchItems.dates.values.length || searchItems.numero.values.length || searchItems.auteur.values.length || searchItems.expediteur.values.length || searchItems.editeur.values.length">
+  <md-list>
+    <div *ngFor="let entry of searchItems | keys">
+      <md-list-item *ngIf="entry.value.values.length">
+        <span class="search-item-title">{{entry.value.name}}</span>
+        <md-chip-list>
+          <md-chip *ngFor="let item of entry.value.values; let i = index" [id]="entry.key + '-' + i" (click)="removeSearchItem(entry.key, item)"
+            selected="true" class="{{item.class}} mat-chip">
+            {{item.text}}
+          </md-chip>
+        </md-chip-list>
+      </md-list-item>
+    </div>
+  </md-list>
+</md-card>
+
+<md-card class="available-search-items">
+  <span class="affiner">Affiner par</span>
+  <md-list>
+    <md-list-item class="available-search-item" *ngIf="availableSearchItems.priorites.length">
+      <span class="available-search-item-title">Priorité</span>
+      <md-chip-list>
+        <md-chip *ngFor="let item of availableSearchItems.priorites" (click)="addSearchItem('priorites', item)" selected="true" class="{{item.class}} mat-chip">
+          {{item.text}}
+        </md-chip>
+      </md-chip-list>
+    </md-list-item>
+    <md-list-item class="available-search-item available-search-long-chip-list" *ngIf="availableSearchItems.statuts.length">
+      <span class="available-search-item-title">Statut</span>
+      <md-chip-list>
+        <md-chip *ngFor="let item of availableSearchItems.statuts" (click)="addSearchItem('statuts', item)" selected="true" class="{{item.class}} mat-chip">
+          {{item.text}}
+        </md-chip>
+      </md-chip-list>
+    </md-list-item>
+    <md-list-item class="available-search-item" *ngIf="!searchItems.dates.values.length">
+      <div fxLayout="column" class="app-mt">
+        <span>Date de création</span>
+        <div fxLayout="row">
+          <md-form-field>
+            <input mdInput [mdDatepicker]="picker1" placeholder="Du" [(ngModel)]="availableSearchItems.dates.debut" (keyup.enter)="addSearchItem('dates')">
+            <md-datepicker-toggle mdSuffix [for]="picker1"></md-datepicker-toggle>
+            <md-datepicker #picker1></md-datepicker>
+          </md-form-field>
+          <md-form-field class="app-ml app-mr">
+            <input mdInput [mdDatepicker]="picker2" placeholder="Au" [(ngModel)]="availableSearchItems.dates.fin" (keyup.enter)="addSearchItem('dates')">
+            <md-datepicker-toggle mdSuffix [for]="picker2"></md-datepicker-toggle>
+            <md-datepicker #picker2></md-datepicker>
+          </md-form-field>
+        </div>
+      </div>
+      <button md-mini-fab (click)="addSearchItem('dates')">OK</button>
+    </md-list-item>
+    <md-list-item class="available-search-item">
+      <span md-line>Identifiant</span>
+      <md-form-field md-line>
+        <input mdInput placeholder="ID/NNA/ISNI/ID déclaration/ID Local" [(ngModel)]="availableSearchItems.numero" (keyup.enter)="addSearchItem('numero')">
+      </md-form-field>
+      <button md-mini-fab (click)="addSearchItem('numero')">OK</button>
+    </md-list-item>
+    <md-list-item class="available-search-item" *ngIf="!searchItems.auteur.values.length">
+      <span md-line>Auteur</span>
+      <md-form-field md-line>
+        <input mdInput placeholder=Nom [(ngModel)]="availableSearchItems.auteur" (keyup.enter)="addSearchItem('auteur')">
+      </md-form-field>
+      <button md-mini-fab (click)="addSearchItem('auteur')">OK</button>
+    </md-list-item>
+    <md-list-item class="available-search-item" *ngIf="!searchItems.expediteur.values.length">
+      <span md-line>Expéditeur</span>
+      <md-form-field md-line>
+        <input mdInput placeholder=Nom [(ngModel)]="availableSearchItems.expediteur" (keyup.enter)="addSearchItem('expediteur')">
+      </md-form-field>
+      <button md-mini-fab (click)="addSearchItem('expediteur')">OK</button>
+    </md-list-item>
+    <md-list-item class="available-search-item" *ngIf="!searchItems.editeur.values.length">
+      <span md-line>Editeur</span>
+      <md-form-field md-line>
+        <input mdInput placeholder=Nom [(ngModel)]="availableSearchItems.editeur" (keyup.enter)="addSearchItem('editeur')">
+      </md-form-field>
+      <button md-mini-fab (click)="addSearchItem('editeur')">OK</button>
+    </md-list-item>
+  </md-list>
+</md-card>

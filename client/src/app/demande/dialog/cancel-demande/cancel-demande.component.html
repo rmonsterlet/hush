@@ -1,0 +1,16 @@
+<h2 md-dialog-title>Annuler la demande</h2>
+<div fxLayout="column">
+  <md-select [(ngModel)]="motif" required placeholder="Motif d'annulation" (change)="onMotifChange(commentaire)" class="app-mt">
+    <md-option *ngFor="let _motif of motifsAnnulation" [value]="_motif">{{ _motif }}</md-option>
+  </md-select>
+  <form [formGroup]="cancelDemandeForm">
+    <md-form-field class="app-mt" style="width: 500px;">
+      <textarea mdInput required #commentaire placeholder="Commentaire" name="commentaire" formControlName="commentaire"></textarea>
+    </md-form-field>
+  </form>
+</div>
+<md-dialog-actions>
+  <button md-raised-button md-dialog-close>Fermer</button>
+  <div class="spacer app-mr"></div>
+  <button md-raised-button color="primary" (click)="dialogCancelDemande.close(commentaire.value)" [disabled]="!cancelDemandeForm.valid || !motif">Valider</button>
+</md-dialog-actions>
