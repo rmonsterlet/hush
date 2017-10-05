@@ -23,28 +23,34 @@ wss.on('connection', (ws: ExtWebSocket) => {
     })
 
     //connection is up, let's add a simple simple event
-    ws.on('message', (message: string) => {
+    ws.on('message', (data: string) => {
+
+        let _data = JSON.parse(data)
 
         //log the received message and send it back to the client
-        console.log('received: %s', message)
-        const broadcastRegex = /^broadcast\:/
-        if (broadcastRegex.test(message)) {
-            message = message.replace(broadcastRegex, '')
+        console.log('received: %s', data)
+        if (_data.broadcast) {
 
             //send back the message to the other clients
             wss.clients
                 .forEach(client => {
                     //if (client != ws) {
-                        client.send(`Hello, broadcast message -> ${message}`)
+                        client.send(data)
                     //}    
                 })
         } else {
-            ws.send(`Hello, you sent -> ${message}`)
+            ws.send(data)
         }
     })
 
-    //send immediatly a feedback to the incoming connection    
-    ws.send('Hi there, I am a WebSocket server')
+    //send immediatly a feedback to the incoming connection   
+    
+    const obj = {
+        date: new Date(),
+        author: 'SYSTEM',
+        message: 'Hi there, I am a WebSocket server'
+    }
+    ws.send(JSON.stringify(obj))
 })
 
 setInterval(() => {

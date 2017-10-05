@@ -15,7 +15,7 @@ import { ProfilComponent } from './profil'
 const APP_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'demande-list',
+    redirectTo: 'contact',
     pathMatch: 'full'
   },
   {

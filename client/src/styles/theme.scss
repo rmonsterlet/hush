@@ -18,7 +18,7 @@ $bnf-mat-blue: (
   800: #1565c0,
   900: #0d47a1,
   A100: #82b1ff,
-  A200: $bnf-primary, //override #448AFF with BnF app main color
+  A200: $app-primary, //override #448AFF with BnF app main color
   A400: #2979ff,
   A700: #2962ff,
   contrast: (
@@ -96,7 +96,7 @@ $bnf-app-theme: mat-light-theme($bnf-app-primary, $bnf-app-accent, $bnf-app-warn
 }
 
 .mat-toolbar-row {
-    height: 50px !important;
+    height: 56px !important;
 }
 
 .mat-elevation-z3, .mat-elevation-z6 {

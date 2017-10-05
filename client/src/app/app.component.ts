@@ -14,7 +14,7 @@ import { Priorite, Statut } from './_types'
 export class AppComponent implements OnInit {
 
   connected = false
-  title = 'Agence d\'enregistrement ISNI'
+  title = 'Hush'
   username = 'Anonyme'
 
   constructor(
@@ -24,10 +24,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    this._appService.getConf().then(data => {
+    /*this._appService.getConf().then(data => {
       this._appService.conf = data
       this.initAgent()
-    })
+    })*/
   }
 
   initAgent() {

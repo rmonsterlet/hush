@@ -230,7 +230,7 @@ md-chip-list{
 	color: white !important;
 }
 .chip-primary{
-	background-color: $bnf-primary !important;
+	background-color: $app-primary !important;
 	color: white !important;
 }
 
@@ -242,7 +242,7 @@ md-icon.app-icon{
 
 .ngx-datatable.material{
   .datatable-header {
-    background-color: $bnf-primary;
+    background-color: $app-primary;
     span {
       color: white !important;
     }

@@ -1,11 +1,27 @@
 <div class="route">
   <div class=route-title>Contact</div>
   <md-card>
-    <md-card-title>Abdelkader BESTAOUI/ETS/BnF@BnF</md-card-title>
-    <md-card-title>Andreas JEZEQUEL/SOCEXT/BnF@BnF</md-card-title>
-    <md-card-title>Anne BOMMIER-CHASLES/ETS/BnF@BnF</md-card-title>
-    <md-card-title>Anne HERY/ETS/BnF@BnF</md-card-title>
-    <md-card-title>Benoit CAFFE/ETS/BnF@BnF</md-card-title>
-    <md-card-title>Romain MONSTERLET/SOCEXT/BnF@BnF</md-card-title>
+    <md-form-field>
+      <input mdInput placeholder=Nickname [(ngModel)]=author name=author>
+    </md-form-field>
+    <md-form-field>
+        <input mdInput placeholder=Color [(ngModel)]=color name=color>
+      </md-form-field>
+    <md-divider></md-divider>
+    <md-list>
+      <md-list-item *ngFor="let data of datas" [ngClass]="{'myself' : data.author === author}">
+        <md-icon md-list-icon *ngIf="data.author !== author" [style.color]="data.color">message</md-icon>
+        <p md-line [style.color]="data.color" class=message>{{data.message}}</p>
+        <p md-line [style.color]="data.color">{{data.author !== author ? data.author : ''}} {{data.date | date:'HH:mm'}}</p>
+      </md-list-item>
+      <md-divider></md-divider>
+    </md-list>
+    <form>
+      <md-form-field>
+        <input mdInput placeholder=Message [(ngModel)]=broadcast name=broadcast>
+      </md-form-field>
+      <button md-raised-button color=primary (click)=onSendClick()>Envoyer</button>
+    </form>
+    {{data}}
   </md-card>
 </div>
