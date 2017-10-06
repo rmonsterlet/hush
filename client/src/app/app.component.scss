@@ -1,27 +1,28 @@
 .app-toolbar{
-  padding: 0 16px 0 0;
+  top: 0px;
+  padding: 0 15px 0 15px;
   
   .divider{
     height: 15px;
     border-left: 1px solid white;
   }
 
-  .logo-bnf-ct{
-    width: 120px;
-    background-color: #1e63be;
-    height: 100%;
+  .search{
+    margin-left: 50px;
+    width: 600px;
+    top: 5px;
+  }
+}
 
-    .logo-bnf{
-      display: block;
-      margin: auto;
-      padding-top: 10px;
-    }
-  } 
+.app-sidenav-container{
+  top: 0;
+  bottom: 0;
 }
     
 .app-sidenav {
   padding: 10px;
-  min-width: 200px;
+  min-width: 300px;
+  background-color: #BEBEBE;
 }
 
 .app-footer-action {

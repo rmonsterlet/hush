@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   connected = false
   title = 'Hush'
-  username = 'Anonyme'
+  username = 'SE CONNECTER'
 
   constructor(
     private _appService: AppService,

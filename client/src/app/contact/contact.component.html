@@ -1,12 +1,12 @@
 <div class="route">
-  <div class=route-title>Contact</div>
+  <div class=route-title>Room #5</div>
   <md-card>
     <md-form-field>
       <input mdInput placeholder=Nickname [(ngModel)]=author name=author>
     </md-form-field>
     <md-form-field>
-        <input mdInput placeholder=Color [(ngModel)]=color name=color>
-      </md-form-field>
+      <input mdInput placeholder=Color [(ngModel)]=color name=color>
+    </md-form-field>
     <md-divider></md-divider>
     <md-list>
       <md-list-item *ngFor="let data of datas" [ngClass]="{'myself' : data.author === author}">
@@ -16,12 +16,16 @@
       </md-list-item>
       <md-divider></md-divider>
     </md-list>
-    <form>
-      <md-form-field>
-        <input mdInput placeholder=Message [(ngModel)]=broadcast name=broadcast>
-      </md-form-field>
-      <button md-raised-button color=primary (click)=onSendClick()>Envoyer</button>
-    </form>
     {{data}}
   </md-card>
+  <!--<md-toolbar color=primary>
+    <form class="dark-theme">
+      <md-form-field class=input>
+        <input mdInput placeholder=Message [(ngModel)]=broadcast name=broadcast>
+      </md-form-field>
+      <button md-mini-fab color=primary (click)=onSendClick()>
+        <md-icon>send</md-icon>
+      </button>
+    </form>
+  </md-toolbar>-->
 </div>
