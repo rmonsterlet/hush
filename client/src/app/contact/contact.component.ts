@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { AppService } from 'app/app.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,13 +9,10 @@ import { Component, OnInit } from '@angular/core'
 export class ContactComponent implements OnInit {
 
   ws
-
-  author
-  color
   broadcast
   datas = []
 
-  constructor() { }
+  constructor(private _appService: AppService) { }
 
   ngOnInit() {
 
@@ -28,8 +26,8 @@ export class ContactComponent implements OnInit {
 
     const obj = {
       broadcast: true,
-      author: this.author,
-      color: this.color,
+      author: this._appService.user.name,
+      color: this._appService.user.color,
       date: new Date(),
       message: this.broadcast
     }

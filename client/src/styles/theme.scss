@@ -1,16 +1,12 @@
-@import './_variables.scss';
 @import '~@angular/material/theming';
-
-@import '~@swimlane/ngx-datatable/release/assets/icons.css';
-@import './_ngx-datatable-material-override.css';
 
 @include mat-core();
 
-$app-mat-primary: mat-palette($mat-indigo, 600);
-$app-mat-accent:  mat-palette($mat-orange, A200);
-$app-mat-warn:    mat-palette($mat-red, 600);
+$app-primary: mat-palette($mat-indigo, 600);
+$app-accent:  mat-palette($mat-orange, A200);
+$app-warn:    mat-palette($mat-red, 600);
 
-$app-theme: mat-light-theme($app-mat-primary, $app-mat-accent, $app-mat-warn);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);
 
 // Define an alternate dark theme.

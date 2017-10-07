@@ -1,55 +1,51 @@
-<md-toolbar class="app-toolbar mat-elevation-z6" color="primary">
+<mat-toolbar class="app-toolbar mat-elevation-z6" color="primary">
 
-  <button md-icon-button (click)="sidenav.toggle()">
-        <md-icon>menu</md-icon>
-    </button>
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
 
   <h1 *ngIf="!connected">{{title}}</h1>
 
   <div class="dark-theme" fxHide.xs fxHide.sm>
-    <md-form-field class="search">
-      <input mdInput placeholder=Rechercher [(ngModel)]=search name=search>
-    </md-form-field>
-    <button md-icon-button>
-          <md-icon>search</md-icon>
-      </button>
+    <mat-form-field class="search">
+      <input matInput placeholder=Rechercher [(ngModel)]=search name=search>
+    </mat-form-field>
+    <button mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
   </div>
 
   <span class="spacer"></span>
 
-  <button md-icon-button mdTooltip="Paramètres">
-        <md-icon>more_vert</md-icon>
-    </button>
+  <button mat-icon-button matTooltip="Paramètres">
+    <mat-icon>more_vert</mat-icon>
+  </button>
 
-  <button md-button [md-menu-trigger-for]="mainMenu">
-      <md-icon *ngIf="connected">account_circle</md-icon>
-      &nbsp;&nbsp;{{username}}
-    </button>
-  <md-menu #mainMenu="mdMenu">
-    <button *ngIf="!connected" md-menu-item (click)="connect()">Connexion</button>
-    <button *ngIf="connected" md-menu-item routerLink="/profil">Mon profil</button>
-    <button *ngIf="connected" md-menu-item routerLink="/preferences">Mes préférences</button>
-    <button *ngIf="connected" md-menu-item (click)="disconnect()">Déconnexion</button>
-  </md-menu>
+  <button mat-button>
+    <mat-icon *ngIf="connected">account_circle</mat-icon>
+    &nbsp;&nbsp;{{username}}
+  </button>
 
   <div *ngIf="connected" fxLayout="row" fxLayoutAlign=" center" fxHide.xs fxHide.sm>
-    <button md-button routerLink="/demande-list" routerLinkActive="active">Accueil</button>
+    <button mat-button routerLink="/demande-list" routerLinkActive="active">Accueil</button>
     <div class="divider"></div>
-    <button md-button routerLink="/about" routerLinkActive="active">A propos</button>
+    <button mat-button routerLink="/about" routerLinkActive="active">A propos</button>
     <div class="divider"></div>
-    <button md-button routerLink="/help" routerLinkActive="active">Aide</button>
+    <button mat-button routerLink="/help" routerLinkActive="active">Aide</button>
     <div class="divider"></div>
-    <button md-button routerLink="/contact" routerLinkActive="active">Contact</button>
+    <button mat-button routerLink="/contact" routerLinkActive="active">Contact</button>
   </div>
-</md-toolbar>
+</mat-toolbar>
 
-<md-sidenav-container fxFill class=app-sidenav-container>
-  <md-sidenav #sidenav mode="side" class=app-sidenav>
-  </md-sidenav>
+<mat-sidenav-container fxFill class=app-sidenav-container>
+  <mat-sidenav #sidenav mode="side" class=app-sidenav>
+  </mat-sidenav>
   <router-outlet></router-outlet>
-</md-sidenav-container>
+</mat-sidenav-container>
 
 <span>
   <span class="app-footer-action">
-  <button color="primary" (click)="up()" md-fab><md-icon>arrow_upward</md-icon></button>
-</span>
+    <button color="primary" (click)="up()" mat-fab>
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+  </span>

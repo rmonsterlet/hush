@@ -1,71 +1,71 @@
 import { NgModule } from '@angular/core'
 import * as moment from 'moment'
 import {
-    MdAutocompleteModule,
-    MdButtonModule,
-    MdButtonToggleModule,
-    MdCardModule,
-    MdCheckboxModule,
-    MdChipsModule,
-    MdDialogModule,
-    MdGridListModule,
-    MdIconModule,
-    MdInputModule,
-    MdListModule,
-    MdMenuModule,
-    MdProgressBarModule,
-    MdProgressSpinnerModule,
-    MdRadioModule,
-    MdSelectModule,
-    MdSidenavModule,
-    MdSlideToggleModule,
-    MdSliderModule,
-    MdSnackBarModule,
-    MdTabsModule,
-    MdToolbarModule,
-    MdTooltipModule,
-    MdExpansionModule,
-    MdDatepickerModule,
-    MdNativeDateModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     DateAdapter,
     NativeDateAdapter,
-    MD_DATE_FORMATS,
-    MD_NATIVE_DATE_FORMATS
+    MAT_DATE_FORMATS,
+    MAT_NATIVE_DATE_FORMATS
 } from '@angular/material'
 
 const MATERIAL_MODULES = [
-    MdAutocompleteModule,
-    MdButtonModule,
-    MdButtonToggleModule,
-    MdCardModule,
-    MdCheckboxModule,
-    MdChipsModule,
-    MdDialogModule,
-    MdGridListModule,
-    MdIconModule,
-    MdInputModule,
-    MdListModule,
-    MdMenuModule,
-    MdProgressBarModule,
-    MdProgressSpinnerModule,
-    MdRadioModule,
-    MdSelectModule,
-    MdSidenavModule,
-    MdSlideToggleModule,
-    MdSliderModule,
-    MdSnackBarModule,
-    MdTabsModule,
-    MdToolbarModule,
-    MdTooltipModule,
-    MdExpansionModule,
-    MdDatepickerModule,
-    MdNativeDateModule
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 ]
 
 export class MyDateAdapter extends NativeDateAdapter {
 
     parse(value: any): Date | null {
-        let timestamp = moment(value, "DD/MM/YYYY").format('L');
+        const timestamp = moment(value, 'DD/MM/YYYY').format('L');
         return timestamp === 'Invalid date' ? null : new Date(timestamp);
     }
 
@@ -83,7 +83,7 @@ export class MyDateAdapter extends NativeDateAdapter {
     exports: [...MATERIAL_MODULES],
     providers: [
         { provide: DateAdapter, useClass: MyDateAdapter },
-        { provide: MD_DATE_FORMATS, useValue: MD_NATIVE_DATE_FORMATS }
+        { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS }
     ],
 })
 export class AppMaterialModule { }

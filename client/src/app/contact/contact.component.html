@@ -1,31 +1,24 @@
 <div class="route">
-  <div class=route-title>Room #5</div>
-  <md-card>
-    <md-form-field>
-      <input mdInput placeholder=Nickname [(ngModel)]=author name=author>
-    </md-form-field>
-    <md-form-field>
-      <input mdInput placeholder=Color [(ngModel)]=color name=color>
-    </md-form-field>
-    <md-divider></md-divider>
-    <md-list>
-      <md-list-item *ngFor="let data of datas" [ngClass]="{'myself' : data.author === author}">
-        <md-icon md-list-icon *ngIf="data.author !== author" [style.color]="data.color">message</md-icon>
-        <p md-line [style.color]="data.color" class=message>{{data.message}}</p>
-        <p md-line [style.color]="data.color">{{data.author !== author ? data.author : ''}} {{data.date | date:'HH:mm'}}</p>
-      </md-list-item>
-      <md-divider></md-divider>
-    </md-list>
-    {{data}}
-  </md-card>
-  <!--<md-toolbar color=primary>
+  <h2 class=route-title>Room #5</h2>
+  <mat-card>
+    <mat-divider></mat-divider>
+    <mat-list>
+      <mat-list-item *ngFor="let data of datas" [ngClass]="{'myself' : data.author === author}">
+        <!--<mat-icon mat-list-icon *ngIf="data.author !== author" [style.color]="data.color">message</mat-icon>
+        <p mat-line [style.color]="data.color" class=message>{{data.message}}</p>
+        <p mat-line [style.color]="data.color">{{data.author !== author ? data.author : ''}} {{data.date | date:'HH:mm'}}</p>-->
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card>
+  <mat-toolbar color=primary>
     <form class="dark-theme">
-      <md-form-field class=input>
-        <input mdInput placeholder=Message [(ngModel)]=broadcast name=broadcast>
-      </md-form-field>
-      <button md-mini-fab color=primary (click)=onSendClick()>
-        <md-icon>send</md-icon>
+      <mat-form-field class=input>
+        <input matInput placeholder=Message [(ngModel)]=broadcast name=broadcast>
+      </mat-form-field>
+      <button mat-mini-fab color=primary (click)=onSendClick()>
+        <mat-icon>send</mat-icon>
       </button>
     </form>
-  </md-toolbar>-->
+  </mat-toolbar>
 </div>

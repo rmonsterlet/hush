@@ -11,6 +11,18 @@ import { Priorite, Statut } from '../_types'
     PreferencesService
   ]
 })
-export class PreferencesComponent {
+export class PreferencesComponent implements OnInit {
+
+  user = {}
+
+  years
+  options = []
+
+  constructor(private _appService: AppService) { }
+
+  ngOnInit(): void {
+    const date = new Date()
+    this.years = Array.from(new Array(125), (val, index) => date.getFullYear() - index)
+  }
 
 }

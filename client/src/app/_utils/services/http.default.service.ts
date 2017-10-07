@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { MdDialog } from '@angular/material'
+import { MatDialog } from '@angular/material'
 import { Http, Headers, RequestOptionsArgs } from '@angular/http'
 import { Router } from '@angular/router'
 import { DialogComponent } from '../components'
@@ -12,7 +12,7 @@ export class HttpDefaultService {
     private _headers: Headers
     constructor(
         private _http: Http,
-        private _dialog: MdDialog,
+        private _dialog: MatDialog,
         private _router: Router
     ) {
         this._headers = new Headers()

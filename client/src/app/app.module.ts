@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import 'hammerjs'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+import { ColorPickerModule } from 'ngx-color-picker';
+import { AgmCoreModule } from '@agm/core'
 
 import { AppComponent } from './app.component'
 import { AppService } from './app.service'
@@ -13,45 +15,9 @@ import { AppRouting } from './app.routes'
 
 import { OrderByPipe, KeysPipe } from './_pipes'
 import { AppMaterialModule, HttpDefaultService, DialogComponent } from './_utils'
-import { AboutComponent } from './about'
 import { ContactComponent } from './contact'
-import { DemandeComponent, DemandeTabsComponent } from './demande'
-import {
-  ShowHistoryComponent,
-  EditPrioriteComponent,
-  EditStatutComponent,
-  EditNnaComponent,
-  CancelDemandeComponent,
-  AddCommentaireComponent,
-  EditCommentaireComponent,
-  ShowEanComponent
-} from './demande/dialog'
-import { DonneesCatalogueComponent, NoticeAutoriteComponent } from './demande/tabs'
-import { DemandeListComponent, DemandeListSearchComponent } from './demande-list'
-import { DeniedComponent } from './denied'
-import { HelpComponent } from './help'
-import { LogoutComponent } from './logout'
 import { NotFoundComponent } from './not-found'
 import { PreferencesComponent } from './preferences'
-import { ProfilComponent } from './profil'
-
-const APP_DEMANDE_LIST_COMPONENTS = [
-  DemandeListSearchComponent
-]
-
-const APP_DEMANDE_COMPONENTS = [
-  DemandeTabsComponent,
-  ShowHistoryComponent,
-  EditStatutComponent,
-  EditPrioriteComponent,
-  EditNnaComponent,
-  CancelDemandeComponent,
-  AddCommentaireComponent,
-  EditCommentaireComponent,
-  ShowEanComponent,
-  DonneesCatalogueComponent,
-  NoticeAutoriteComponent
-]
 
 const APP_UTILS_COMPONENTS = [
   DialogComponent
@@ -63,15 +29,7 @@ const APP_PIPES = [
 ]
 
 const APP_DIALOG_COMPONENTS = [
-  DialogComponent,
-  ShowHistoryComponent,
-  EditStatutComponent,
-  EditPrioriteComponent,
-  EditNnaComponent,
-  CancelDemandeComponent,
-  AddCommentaireComponent,
-  EditCommentaireComponent,
-  ShowEanComponent
+  DialogComponent
 ]
 
 @NgModule({
@@ -82,24 +40,20 @@ const APP_DIALOG_COMPONENTS = [
     ReactiveFormsModule,
     HttpModule,
     FlexLayoutModule,
-    NgxDatatableModule,
     AppMaterialModule,
-    AppRouting
+    AppRouting,
+    NgxDatatableModule,
+    ColorPickerModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCn5M684ZDoTqQwaoZxMTasOlo7uuVvQ7E',
+      libraries: ['places']
+    }),
   ],
   declarations: [
     AppComponent,
-    AboutComponent,
     ContactComponent,
-    DemandeComponent,
-    ...APP_DEMANDE_COMPONENTS,
-    DemandeListComponent,
-    ...APP_DEMANDE_LIST_COMPONENTS,
-    DeniedComponent,
-    HelpComponent,
-    LogoutComponent,
     NotFoundComponent,
     PreferencesComponent,
-    ProfilComponent,
     ...APP_UTILS_COMPONENTS,
     ...APP_PIPES
   ],
