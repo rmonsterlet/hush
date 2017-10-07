@@ -13,7 +13,7 @@ import { Priorite, Statut } from '../_types'
 })
 export class PreferencesComponent implements OnInit {
 
-  user = {}
+  user: any = {}
 
   years
   options = []
