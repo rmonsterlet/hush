@@ -8,9 +8,13 @@ export class AppService {
 
   _user
   get user(){
+    if(localStorage.getItem('user'))
+      this._user = JSON.parse(localStorage.getItem('user'))
+
     return this._user
   }
   set user(user){
+    localStorage.setItem('user', JSON.stringify(user))
     this._user = user
   }
 

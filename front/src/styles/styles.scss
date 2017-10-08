@@ -7,18 +7,16 @@ html, body{
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	max-height: 100%;
 }
 
 .route{
-	padding: 0 20px 0 20px;
+	padding: 0 20px 90px 20px;
 }
 
 .route-title {
 	background-color: mat-color($app-primary);
 	color: mat-color($dark-primary);
-	padding: 25px;
-	margin: 0px;
+	padding: 90px 25px 25px 25px;
 }
 
 .spacer {
@@ -59,7 +57,7 @@ mat-chip-list{
 mat-icon.app-icon{
     font-size: 100px;
     height: 100px;
-		width: 100px;
-		margin: 20px;
+	width: 100px;
+	margin: 20px;
 }
 

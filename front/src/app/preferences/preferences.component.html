@@ -1,34 +1,36 @@
 <h1 class=route-title>Bienvenue sur Hush.io {{user.name}} !</h1>
 <div class=route>
-    <form>
-        <mat-card fxLayout=column fxLayoutAlign="center center">
-            <mat-icon class=app-icon color=primary>speaker_notes_off</mat-icon>
-            <mat-radio-group required>
-                <mat-radio-button value=F>Femme</mat-radio-button>
-                <mat-radio-button value=M>Homme</mat-radio-button>
-            </mat-radio-group>
-            <mat-form-field>
-                <input matInput required placeholder=Nom [(ngModel)]=user.name name=name>
-            </mat-form-field>
-            
-            <mat-form-field>
-                <mat-select required placeholder="Année de naissance" [(ngModel)]=user.year name=year>
-                    <mat-option *ngFor="let year of years" [value]=year>{{year}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput required placeholder="Ville" [matAutocomplete]="auto">
-            </mat-form-field>
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
-            </mat-autocomplete>
-            <mat-form-field>
-                <textarea matInput placeholder="Description"></textarea>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder=Couleur [(ngModel)]=user.color name=color [(colorPicker)]="user.color" [style.color]="user.color">
-            </mat-form-field>
-            <button mat-raised-button color=primary>SE CONNECTER</button>
-        </mat-card>
-    </form>
+  <form>
+    <mat-card fxLayout=column fxLayoutAlign="center center">
+      <mat-icon class=app-icon color=primary>speaker_notes_off</mat-icon>
+      <mat-radio-group name=sex [(ngModel)]=user.sex>
+        <mat-radio-button checked value=F>Femme</mat-radio-button>
+        <mat-radio-button value=M class=app-ml>Homme</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field>
+        <input matInput required placeholder=Nom [(ngModel)]=user.name name=name>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select required placeholder="Année de naissance" [(ngModel)]=user.year name=year>
+          <mat-option *ngFor="let year of years" [value]=year>{{year}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput required placeholder=Ville [matAutocomplete]=auto [(ngModel)]=user.city (change)=onCityChange() name=city>
+      </mat-form-field>
+      <mat-autocomplete #auto=matAutocomplete>
+        <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+      </mat-autocomplete>
+      <mat-form-field>
+        <textarea matInput matTextareaAutosize [(ngModel)]=user.description placeholder=Description name=description></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select required placeholder="Couleur de l'écriture" [(ngModel)]=user.color name=color [style.color]=user.color>
+          <mat-option *ngFor="let color of colors" [style.color]=color [value]=color>{{color}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color=primary (click)=connect()>SE CONNECTER</button>
+    </mat-card>
+  </form>
 </div>

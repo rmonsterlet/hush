@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core'
+import { Component, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core'
 import { Router } from '@angular/router'
 import { AppService } from './app.service'
 import { Priorite, Statut } from './_types'
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private _appService: AppService,
-    private _router: Router
+    public router: Router
   ) { }
 
   ngOnInit() {

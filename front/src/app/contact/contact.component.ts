@@ -8,28 +8,36 @@ import { AppService } from 'app/app.service';
 })
 export class ContactComponent implements OnInit {
 
+  user
+
   ws
-  broadcast
+  message
   datas = []
 
   constructor(private _appService: AppService) { }
 
   ngOnInit() {
 
+    this.user = this._appService.user
+
     this.ws = new WebSocket('ws://localhost:4100')
     this.ws.onmessage = (event: MessageEvent) => {
       this.datas.push(JSON.parse(event.data))
+      window.scrollTo(0, document.body.scrollHeight + 100)
     }
   }
 
   onSendClick() {
 
+    if(!this.message || !this.message.trim().length)
+      return
+
     const obj = {
       broadcast: true,
-      author: this._appService.user.name,
-      color: this._appService.user.color,
+      name: this.user.name,
+      color: this.user.color,
       date: new Date(),
-      message: this.broadcast
+      message: this.message
     }
     this.ws.send(JSON.stringify(obj))
   }

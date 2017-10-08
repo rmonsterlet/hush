@@ -1,24 +1,23 @@
+<h2 class=route-title>Room #5</h2>
 <div class="route">
-  <h2 class=route-title>Room #5</h2>
   <mat-card>
-    <mat-divider></mat-divider>
     <mat-list>
-      <mat-list-item *ngFor="let data of datas" [ngClass]="{'myself' : data.author === author}">
-        <!--<mat-icon mat-list-icon *ngIf="data.author !== author" [style.color]="data.color">message</mat-icon>
+      <mat-list-item *ngFor="let data of datas" [ngClass]="{'myself' : data.name === user.name}">
+        <mat-icon mat-list-icon *ngIf="data.name !== user.name" [style.color]="data.color">message</mat-icon>
         <p mat-line [style.color]="data.color" class=message>{{data.message}}</p>
-        <p mat-line [style.color]="data.color">{{data.author !== author ? data.author : ''}} {{data.date | date:'HH:mm'}}</p>-->
+        <p mat-line [style.color]="data.color">{{data.name !== user.name ? data.name : ''}} {{data.date | date:'HH:mm'}}</p>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
   </mat-card>
-  <mat-toolbar color=primary>
-    <form class="dark-theme">
-      <mat-form-field class=input>
-        <input matInput placeholder=Message [(ngModel)]=broadcast name=broadcast>
-      </mat-form-field>
-      <button mat-mini-fab color=primary (click)=onSendClick()>
-        <mat-icon>send</mat-icon>
-      </button>
-    </form>
-  </mat-toolbar>
 </div>
+<mat-toolbar class=message-toolbar color=primary>
+  <form class="dark-theme" fxFlex fxLayout=row fxLayoutAlign=" center">
+    <mat-form-field class=input>
+      <input matInput [(ngModel)]=message name=message>
+    </mat-form-field>
+    <button mat-mini-fab color=primary (click)=onSendClick() matTooltip=Envoyer>
+      <mat-icon>send</mat-icon>
+    </button>
+  </form>
+</mat-toolbar>

@@ -1,12 +1,12 @@
 <mat-toolbar class="app-toolbar mat-elevation-z6" color="primary">
 
-  <button mat-icon-button (click)="sidenav.toggle()">
+  <button [disabled]="router.url !== '/contact'" mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
 
   <h1 *ngIf="!connected">{{title}}</h1>
 
-  <div class="dark-theme" fxHide.xs fxHide.sm>
+  <div *ngIf="router.url == '/contact'" class="dark-theme" fxHide.xs fxHide.sm>
     <mat-form-field class="search">
       <input matInput placeholder=Rechercher [(ngModel)]=search name=search>
     </mat-form-field>
@@ -17,14 +17,14 @@
 
   <span class="spacer"></span>
 
-  <button mat-icon-button matTooltip="Paramètres">
-    <mat-icon>more_vert</mat-icon>
-  </button>
+  <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <button [disabled]="router.url !== '/contact'" mat-menu-item routerLink="/preferences" routerLinkActive="active">
+      <mat-icon>settings</mat-icon>
+      Préférences
+    </button>
+  </mat-menu>
 
-  <button mat-button>
-    <mat-icon *ngIf="connected">account_circle</mat-icon>
-    &nbsp;&nbsp;{{username}}
-  </button>
 
   <div *ngIf="connected" fxLayout="row" fxLayoutAlign=" center" fxHide.xs fxHide.sm>
     <button mat-button routerLink="/demande-list" routerLinkActive="active">Accueil</button>
@@ -37,15 +37,8 @@
   </div>
 </mat-toolbar>
 
-<mat-sidenav-container fxFill class=app-sidenav-container>
+<mat-sidenav-container class=app-sidenav-container>
   <mat-sidenav #sidenav mode="side" class=app-sidenav>
   </mat-sidenav>
   <router-outlet></router-outlet>
 </mat-sidenav-container>
-
-<span>
-  <span class="app-footer-action">
-    <button color="primary" (click)="up()" mat-fab>
-      <mat-icon>arrow_upward</mat-icon>
-    </button>
-  </span>

@@ -47,7 +47,7 @@ wss.on('connection', (ws: ExtWebSocket) => {
     
     const obj = {
         date: new Date(),
-        author: 'SYSTEM',
+        name: 'SYSTEM',
         message: 'Hi there, I am a WebSocket server'
     }
     ws.send(JSON.stringify(obj))
