@@ -18,9 +18,7 @@ import { Router } from '@angular/router';
 })
 export class PreferencesComponent implements OnInit {
 
-  user: any = {
-    sex: 'F'
-  }
+  user
 
   years
   options = []

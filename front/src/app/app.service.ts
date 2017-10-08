@@ -6,7 +6,7 @@ import { AppConfig } from './app.config'
 @Injectable()
 export class AppService {
 
-  _user
+  _user = {}
   get user(){
     if(localStorage.getItem('user'))
       this._user = JSON.parse(localStorage.getItem('user'))
