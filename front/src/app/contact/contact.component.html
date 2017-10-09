@@ -1,16 +1,16 @@
-<h2 class=route-title>{{'Room #' + rooms[selectedIndex]?.id}}</h2>
+<h2 class=route-title>{{'Room #' + rooms[selectedIndex]?.index}}</h2>
 <div class="route">
-  <button mat-mini-fab color=primary (click)=onCreateRoomClick() matTooltip=Envoyer>
-    <mat-icon>send</mat-icon>
+  <button mat-mini-fab color=primary (click)=onCreateRoomClick() matTooltip="Creer une room">
+    <mat-icon>group_add</mat-icon>
   </button>
-  <mat-tab-group [(selectedIndex)]=selectedIndex>
-    <mat-tab *ngFor="let room of rooms" [label]="'Room #' + room.id" >
+  <mat-tab-group [(selectedIndex)]=selectedIndex (selectedIndexChange)=onSelectedIndexChange()>
+    <mat-tab *ngFor="let room of rooms" [label]="'Room #' + room.index + ' ' + (room.notif ? '*' : '')" >
       <mat-card class=card>
         <mat-list>
-          <mat-list-item *ngFor="let message of room.messages" [ngClass]="{'myself' : message.user.name === user.name}">
-            <mat-icon mat-list-icon *ngIf="message.user.name !== user.name" [style.color]="message.user.color">message</mat-icon>
+          <mat-list-item *ngFor="let message of room.messages" [ngClass]="{'myself' : message.user.uuid === user.uuid}">
+            <mat-icon mat-list-icon *ngIf="message.user.uuid !== user.uuid" [style.color]="message.user.color">message</mat-icon>
             <p mat-line [style.color]="message.user.color" class=message>{{message.text}}</p>
-            <p mat-line [style.color]="message.user.color">{{message.user.name !== user.name ? message.user.name : ''}} {{message.date | date:'HH:mm'}}</p>
+            <p mat-line [style.color]="message.user.color">{{message.user.uuid !== user.uuid ? message.user.name : ''}} {{message.date | date:'HH:mm'}}</p>
           </mat-list-item>
         </mat-list>
       </mat-card>

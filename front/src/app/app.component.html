@@ -17,7 +17,7 @@
 
   <span class="spacer"></span>
 
-  <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+  <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
   <mat-menu #menu="matMenu">
     <button [disabled]="router.url !== '/contact'" mat-menu-item routerLink="/preferences" routerLinkActive="active">
       <mat-icon>settings</mat-icon>

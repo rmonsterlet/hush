@@ -5,6 +5,7 @@ import { Priorite, Statut } from '../_types'
 import { AppUtilsService, GeoCodingService } from 'app/_utils';
 import { createClient, GoogleMapsClient } from '@google/maps'
 import { Router } from '@angular/router';
+import * as uuid from 'uuid'
 
 @Component({
   selector: 'app-preferences',
@@ -54,6 +55,10 @@ export class PreferencesComponent implements OnInit {
   }
 
   connect(){
+
+    //if(!this.user.uuid)
+    this.user.uuid = uuid.v4()
+      
     this._appService.user = this.user   
     this._router.navigate(['contact'])
   }

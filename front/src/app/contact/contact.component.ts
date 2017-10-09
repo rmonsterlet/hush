@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'
+import { WsAction } from '../../../../shared/WsAction';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppService } from 'app/app.service';
 
 @Component({
@@ -26,26 +27,25 @@ export class ContactComponent implements OnInit {
 
     this.ws = new WebSocket('ws://localhost:4100')
     this.ws.onmessage = (event: MessageEvent) => {
-      const data = JSON.parse(event.data)
-
-      if(data.action === 'UPDATE_ROOMS'){
-        this.rooms = data.rooms
-      }
-      else if(data.action === 'CREATE_ROOM'){
-        this.rooms.push(data.room)
-      }
-      else if(data.action === 'BROADCAST'){
-
-        let room = this.rooms.find(room => room.id === data.roomId)
-        if (!room)
-          this.rooms.forEach(room => {
-            room.messages.push(data.message)
-          })
-        else {
-          room.messages.push(data.message)
-        }
+      
+      const _data = JSON.parse(event.data)
+      switch (_data.action) {
+       
+        case WsAction.UPDATE_ROOMS:
+          this.rooms = _data.rooms
+          break
+        case WsAction.CREATE_ROOM:
+          this.rooms.push(_data.room)
+          break
+        case WsAction.BROADCAST:
+          this.broadcast(_data);
+          break
       }
     }
+  }
+
+  onSelectedIndexChange(){
+    this.rooms.find(room => room.index === this.selectedIndex).notif = false
   }
 
   onSendClick() {
@@ -53,8 +53,8 @@ export class ContactComponent implements OnInit {
       return
 
     this.ws.send(JSON.stringify({
-      action: 'BROADCAST',
-      roomId: this.rooms[this.selectedIndex].id,
+      action: WsAction.BROADCAST,
+      roomUuid: this.rooms.find(room => room.index === this.selectedIndex).uuid,
       message: {
         user: this.user,
         date: new Date(),
@@ -64,9 +64,24 @@ export class ContactComponent implements OnInit {
   }
 
   onCreateRoomClick() {
-
     this.ws.send(JSON.stringify({
-      action: 'CREATE_ROOM'
+      action: WsAction.CREATE_ROOM
     }))
+  }
+
+  private broadcast(_data: any) {
+    let room = this.rooms.find(room => room.uuid === _data.roomUuid)
+    if (!room)
+      this.rooms.forEach(room => {
+        room.messages.push(_data.message)
+        if(room.index !== this.selectedIndex) 
+          room.notif = true
+      })
+    else {
+      room.messages.push(_data.message)
+      debugger
+      if(room.index !== this.selectedIndex) 
+        room.notif = true
+    }
   }
 }
