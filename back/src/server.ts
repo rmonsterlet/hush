@@ -1,6 +1,6 @@
-import * as express from 'express'
-import * as http from 'http'
-import * as WebSocket from 'ws'
+import * as express from 'express';
+import * as http from 'http';
+import * as WebSocket from 'ws';
 
 const app = express()
 
@@ -10,7 +10,12 @@ const server = http.createServer(app)
 //initialize the WebSocket server instance
 const wss = new WebSocket.Server({ server })
 
-interface ExtWebSocket extends WebSocket { 
+let rooms = [{
+    id: 0,
+    messages: new Array()
+}]
+
+interface ExtWebSocket extends WebSocket {
     isAlive: boolean
 }
 
@@ -29,35 +34,51 @@ wss.on('connection', (ws: ExtWebSocket) => {
 
         //log the received message and send it back to the client
         console.log('received: %s', data)
-        if (_data.broadcast) {
 
-            //send back the message to the other clients
-            wss.clients
-                .forEach(client => {
-                    //if (client != ws) {
-                        client.send(data)
-                    //}    
+
+        if (_data.action === 'CREATE_ROOM') {
+            let room = {
+                id: rooms.length,
+                messages: new Array()
+            }
+            rooms.push(room)
+            wss.clients.forEach(client => {
+                client.send(JSON.stringify({
+                    action: 'CREATE_ROOM',
+                    room: room
+                }))
+            })
+        }
+        else if (_data.action === 'BROADCAST') {
+
+            let room = rooms.find(room => room.id === _data.roomId)
+            if (!room)
+                rooms.forEach(room => {
+                    room.messages.push(_data.message)
                 })
-        } else {
-            ws.send(data)
+            else {
+                room.messages.push(_data.message)
+            }
+            wss.clients.forEach(client => {
+                client.send(data)
+            })
+        } 
+        else {
+            // ws.send(data)
         }
     })
 
-    //send immediatly a feedback to the incoming connection   
-    
-    const obj = {
-        date: new Date(),
-        name: 'SYSTEM',
-        message: 'Hi there, I am a WebSocket server'
-    }
-    ws.send(JSON.stringify(obj))
+    ws.send(JSON.stringify({
+        action: 'UPDATE_ROOMS',
+        rooms: rooms
+    }))
 })
 
 setInterval(() => {
     wss.clients.forEach((ws: ExtWebSocket) => {
-        
+
         if (!ws.isAlive) return ws.terminate()
-        
+
         ws.isAlive = false
         ws.ping(null, false, true)
     })

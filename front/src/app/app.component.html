@@ -4,7 +4,7 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <h1 *ngIf="!connected">{{title}}</h1>
+  <h1>{{title}}</h1>
 
   <div *ngIf="router.url == '/contact'" class="dark-theme" fxHide.xs fxHide.sm>
     <mat-form-field class="search">
@@ -24,20 +24,9 @@
       Préférences
     </button>
   </mat-menu>
-
-
-  <div *ngIf="connected" fxLayout="row" fxLayoutAlign=" center" fxHide.xs fxHide.sm>
-    <button mat-button routerLink="/demande-list" routerLinkActive="active">Accueil</button>
-    <div class="divider"></div>
-    <button mat-button routerLink="/about" routerLinkActive="active">A propos</button>
-    <div class="divider"></div>
-    <button mat-button routerLink="/help" routerLinkActive="active">Aide</button>
-    <div class="divider"></div>
-    <button mat-button routerLink="/contact" routerLinkActive="active">Contact</button>
-  </div>
 </mat-toolbar>
 
-<mat-sidenav-container class=app-sidenav-container>
+<mat-sidenav-container fxFill class=app-sidenav-container>
   <mat-sidenav #sidenav mode="side" class=app-sidenav>
   </mat-sidenav>
   <router-outlet></router-outlet>

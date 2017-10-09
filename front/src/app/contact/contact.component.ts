@@ -14,6 +14,10 @@ export class ContactComponent implements OnInit {
   message
   datas = []
 
+  rooms: any = []
+
+  selectedIndex = 0
+
   constructor(private _appService: AppService) { }
 
   ngOnInit() {
@@ -22,24 +26,47 @@ export class ContactComponent implements OnInit {
 
     this.ws = new WebSocket('ws://localhost:4100')
     this.ws.onmessage = (event: MessageEvent) => {
-      this.datas.push(JSON.parse(event.data))
-      window.scrollTo(0, document.body.scrollHeight + 100)
+      const data = JSON.parse(event.data)
+
+      if(data.action === 'UPDATE_ROOMS'){
+        this.rooms = data.rooms
+      }
+      else if(data.action === 'CREATE_ROOM'){
+        this.rooms.push(data.room)
+      }
+      else if(data.action === 'BROADCAST'){
+
+        let room = this.rooms.find(room => room.id === data.roomId)
+        if (!room)
+          this.rooms.forEach(room => {
+            room.messages.push(data.message)
+          })
+        else {
+          room.messages.push(data.message)
+        }
+      }
     }
   }
 
   onSendClick() {
-
-    if(!this.message || !this.message.trim().length)
+    if (!this.message || !this.message.trim().length)
       return
 
-    const obj = {
-      broadcast: true,
-      name: this.user.name,
-      color: this.user.color,
-      date: new Date(),
-      message: this.message
-    }
-    this.ws.send(JSON.stringify(obj))
+    this.ws.send(JSON.stringify({
+      action: 'BROADCAST',
+      roomId: this.rooms[this.selectedIndex].id,
+      message: {
+        user: this.user,
+        date: new Date(),
+        text: this.message
+      }
+    }))
   }
 
+  onCreateRoomClick() {
+
+    this.ws.send(JSON.stringify({
+      action: 'CREATE_ROOM'
+    }))
+  }
 }

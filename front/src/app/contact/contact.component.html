@@ -1,17 +1,23 @@
-<h2 class=route-title>Room #5</h2>
+<h2 class=route-title>{{'Room #' + rooms[selectedIndex]?.id}}</h2>
 <div class="route">
-  <mat-card>
-    <mat-list>
-      <mat-list-item *ngFor="let data of datas" [ngClass]="{'myself' : data.name === user.name}">
-        <mat-icon mat-list-icon *ngIf="data.name !== user.name" [style.color]="data.color">message</mat-icon>
-        <p mat-line [style.color]="data.color" class=message>{{data.message}}</p>
-        <p mat-line [style.color]="data.color">{{data.name !== user.name ? data.name : ''}} {{data.date | date:'HH:mm'}}</p>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
-  </mat-card>
+  <button mat-mini-fab color=primary (click)=onCreateRoomClick() matTooltip=Envoyer>
+    <mat-icon>send</mat-icon>
+  </button>
+  <mat-tab-group [(selectedIndex)]=selectedIndex>
+    <mat-tab *ngFor="let room of rooms" [label]="'Room #' + room.id" >
+      <mat-card class=card>
+        <mat-list>
+          <mat-list-item *ngFor="let message of room.messages" [ngClass]="{'myself' : message.user.name === user.name}">
+            <mat-icon mat-list-icon *ngIf="message.user.name !== user.name" [style.color]="message.user.color">message</mat-icon>
+            <p mat-line [style.color]="message.user.color" class=message>{{message.text}}</p>
+            <p mat-line [style.color]="message.user.color">{{message.user.name !== user.name ? message.user.name : ''}} {{message.date | date:'HH:mm'}}</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </mat-tab>
+  </mat-tab-group>
 </div>
-<mat-toolbar class=message-toolbar color=primary>
+<mat-toolbar class="message-toolbar mat-elevation-z6" color=primary>
   <form class="dark-theme" fxFlex fxLayout=row fxLayoutAlign=" center">
     <mat-form-field class=input>
       <input matInput [(ngModel)]=message name=message>
