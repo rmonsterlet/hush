@@ -59,7 +59,7 @@ export class PreferencesComponent implements OnInit {
     //if(!this.user.uuid)
     this.user.uuid = uuid.v4()
       
-    this._appService.user = this.user   
+    this._appService.user = this.user
     this._router.navigate(['contact'])
   }
 

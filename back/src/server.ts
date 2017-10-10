@@ -1,19 +1,20 @@
-import { WsAction } from '../../shared/WsAction';
 import * as express from 'express';
 import * as http from 'http';
 import * as WebSocket from 'ws';
-import { RoomManager } from './room';
+import { Router } from './router';
 
 const app = express()
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
-const roomManager = new RoomManager(wss)
 
-export interface ExtWebSocket extends WebSocket {
+const appRouter = new Router(wss)
+
+export interface AppWebSocket extends WebSocket {
   isAlive: boolean
+  uuid: string
 }
 
-wss.on('connection', (ws: ExtWebSocket) => {
+wss.on('connection', (ws: AppWebSocket) => {
 
   ws.isAlive = true
 
@@ -21,14 +22,17 @@ wss.on('connection', (ws: ExtWebSocket) => {
     ws.isAlive = true
   })
   ws.on('message', (data: string) => {
-    roomManager.onMessage(data)
+
+    console.log('received: %s', data)
+    let _data = JSON.parse(data)
+    appRouter.onMessage(ws, _data)
   })
 
-  roomManager.sendRooms(ws)
+  appRouter.sendRooms(ws)
 })
 
 setInterval(() => {
-  wss.clients.forEach((ws: ExtWebSocket) => {
+  wss.clients.forEach((ws: AppWebSocket) => {
 
     if (!ws.isAlive)
       return ws.terminate()

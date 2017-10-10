@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core'
-import { WsAction } from '../../../../../shared/WsAction';
+import { RoomAction } from '../../../../../shared/RoomAction';
 
 @Injectable()
 export class WsService {
 
-    ws
+    _ws
+    get ws(){
+        return this._ws
+    }
 
     _rooms
     get rooms(){
@@ -13,19 +16,19 @@ export class WsService {
 
     constructor() {
 
-        this.ws = new WebSocket('ws://localhost:4100')
-        this.ws.onmessage = (event: MessageEvent) => {
+        this._ws = new WebSocket('ws://localhost:4100')
+        this._ws.onmessage = (event: MessageEvent) => {
 
             const _data = JSON.parse(event.data)
             switch (_data.action) {
 
-                case WsAction.UPDATE_ROOMS:
+                case RoomAction.UPDATE_ROOMS:
                     this._rooms = _data.rooms
                     break
-                case WsAction.CREATE_ROOM:
+                case RoomAction.CREATE_ROOM:
                     this._rooms.push(_data.room)
                     break
-                case WsAction.BROADCAST:
+                case RoomAction.BROADCAST:
                     this.broadcast(_data);
                     break
             }
@@ -48,6 +51,6 @@ export class WsService {
     }
 
     public send(obj){
-        this.ws.send(JSON.stringify(obj))
+        this._ws.send(JSON.stringify(obj))
     }
 }

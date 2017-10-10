@@ -1,4 +1,6 @@
-import { WsAction } from '../../../../shared/WsAction';
+import { RouteType } from '../../../../shared/RouteType';
+import { RoomAction } from '../../../../shared/RoomAction';
+import { UserAction } from '../../../../shared/UserAction';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppService } from 'app/app.service';
 import { WsService } from 'app/_utils';
@@ -26,6 +28,14 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
 
     this.user = this._appService.user
+
+    this.wsService.ws.onopen = (event: MessageEvent) => {
+      this.wsService.send({
+        route: RouteType.USER_ACTION,
+        action: UserAction.CREATE_USER,
+        user: this.user
+      })
+    }
   }
 
   onSelectedIndexChange(){
@@ -39,7 +49,8 @@ export class ContactComponent implements OnInit {
       return
 
     this.wsService.send({
-      action: WsAction.BROADCAST,
+      route: RouteType.ROOM_ACTION,
+      action: RoomAction.BROADCAST,
       roomUuid: this.wsService.rooms.find(room => room.index === this.selectedIndex).uuid,
       selectedIndex: this.selectedIndex,
       message: {
@@ -52,8 +63,19 @@ export class ContactComponent implements OnInit {
 
   onCreateRoomClick() {
     this.wsService.send({
-      action: WsAction.CREATE_ROOM
+      route: RouteType.ROOM_ACTION,
+      action: RoomAction.CREATE_ROOM
     })
   }
 
+  onCreatePrivateRoomClick(user){
+    this.wsService.send({
+      route: RouteType.ROOM_ACTION,
+      action: RoomAction.CREATE_PRIVATE_ROOM,
+      userUuids: [
+        this.user.uuid,
+        user.uuid
+      ]
+    })
+  }
 }
