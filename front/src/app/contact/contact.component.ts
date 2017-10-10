@@ -16,9 +16,10 @@ import { WsService } from 'app/_utils';
 export class ContactComponent implements OnInit {
 
   user
-  room
   message
+  
   selectedIndex = 0
+  selectedRoom
 
   constructor(
     private _appService: AppService,
@@ -31,7 +32,7 @@ export class ContactComponent implements OnInit {
 
     this.wsService.ws.onopen = (event: MessageEvent) => {
       this.wsService.send({
-        route: RouteType.USER_ACTION,
+        route: RouteType.USER,
         action: UserAction.CREATE_USER,
         user: this.user
       })
@@ -39,9 +40,13 @@ export class ContactComponent implements OnInit {
   }
 
   onSelectedIndexChange() {
+
+    if(this.selectedRoom)
+      this.selectedRoom.notif = false
+
     const room = this.wsService.rooms.find(room => room.index === this.selectedIndex)
     room.notif = false
-    this.room = room
+    this.selectedRoom = room
   }
 
   onSendClick() {
@@ -49,10 +54,9 @@ export class ContactComponent implements OnInit {
       return
 
     this.wsService.send({
-      route: RouteType.ROOM_ACTION,
+      route: RouteType.ROOM,
       action: RoomAction.BROADCAST,
-      roomUuid: this.wsService.rooms.find(room => room.index === this.selectedIndex).uuid,
-      selectedIndex: this.selectedIndex,
+      roomUuid: this.selectedRoom.uuid,
       message: {
         user: this.user,
         date: new Date(),
@@ -64,7 +68,7 @@ export class ContactComponent implements OnInit {
   onCreateRoomClick(user?) {
 
     let data: any = {
-      route: RouteType.ROOM_ACTION,
+      route: RouteType.ROOM,
       action: RoomAction.CREATE_ROOM,
     }
 

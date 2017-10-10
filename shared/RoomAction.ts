@@ -1,5 +1,5 @@
 export enum RoomAction {
-    UPDATE_ROOMS,
+    GET_ROOMS,
     CREATE_ROOM,
     BROADCAST
 }

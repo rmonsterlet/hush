@@ -1,13 +1,13 @@
 import * as express from 'express';
 import * as http from 'http';
 import * as WebSocket from 'ws';
-import { Router } from './router';
+import { AppRouter } from './router';
 
 const app = express()
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 
-const appRouter = new Router(wss)
+const appRouter = new AppRouter(wss)
 
 export interface AppWebSocket extends WebSocket {
   isAlive: boolean
@@ -29,6 +29,7 @@ wss.on('connection', (ws: AppWebSocket) => {
   })
 
   appRouter.sendRooms(ws)
+  appRouter.sendUsers(ws)
 })
 
 setInterval(() => {

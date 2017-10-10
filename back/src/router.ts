@@ -4,7 +4,7 @@ import { AppWebSocket } from './server';
 import { RoomController } from './controllers/room';
 import { UserController } from './controllers/user';
 
-export class Router {
+export class AppRouter {
 
     private _roomController: RoomController
     private _userController: UserController
@@ -17,16 +17,20 @@ export class Router {
     onMessage(ws: AppWebSocket, data: any) {
 
         switch (data.route) {
-            case RouteType.ROOM_ACTION:
+            case RouteType.ROOM:
                 this._roomController.onMessage(ws, data)
-                break;
-            case RouteType.USER_ACTION:
+                break
+            case RouteType.USER:
                 this._userController.onMessage(ws, data)
-                break;
+                break
         }
     }
 
     sendRooms(ws: AppWebSocket) {
-        this._roomController.sendRooms(ws)
+        this._roomController.sendAll(ws)
+    }
+
+    sendUsers(ws: AppWebSocket) {
+        this._userController.sendAll(ws)
     }
 }

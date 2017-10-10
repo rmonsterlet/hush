@@ -3,6 +3,7 @@ import { RoomAction } from '../../../shared/RoomAction';
 import * as WebSocket from 'ws';
 import * as uuid from 'uuid';
 import { AppWebSocket } from '../server';
+import { RouteType } from '../../../shared/RouteType';
 
 export class RoomController implements AppController {
 
@@ -34,10 +35,11 @@ export class RoomController implements AppController {
     }
   }
 
-  sendRooms(ws: AppWebSocket) {
+  sendAll(ws: AppWebSocket) {
 
     ws.send(JSON.stringify({
-      action: 0,
+      route: RouteType.ROOM,
+      action: RoomAction.GET_ROOMS,
       rooms: this._rooms
     }))
   }
@@ -53,8 +55,9 @@ export class RoomController implements AppController {
 
     this._rooms.push(room)
     this.wss.clients.forEach((client: AppWebSocket) => {
-      if (!data.userUuids || data.userUuids.includes(client.uuid)) {
+      if (!data || !data.userUuids || data.userUuids.includes(client.uuid)) {
         client.send(JSON.stringify({
+          route: RouteType.ROOM,
           action: RoomAction.CREATE_ROOM,
           room: room
         }))

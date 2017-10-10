@@ -1,10 +1,10 @@
-<h2 class=route-title>{{'Room #' + room?.index}}</h2>
+<h2 class=route-title>{{'Room #' + selectedRoom?.index}}</h2>
 <div class="route">
   <button mat-mini-fab color=primary (click)=onCreateRoomClick() matTooltip="Creer une room">
     <mat-icon>group_add</mat-icon>
   </button>
   <mat-tab-group [(selectedIndex)]=selectedIndex (selectedIndexChange)=onSelectedIndexChange()>
-    <mat-tab *ngFor="let room of wsService.rooms" [label]="'Room #' + room.index + ' ' + (room.notif ? '*' : '')" >
+    <mat-tab *ngFor="let room of wsService.rooms" [label]="'Room #' + room.index + ' ' + (selectedRoom && selectedRoom.uuid !== room.uuid && room.notif ? '*' : '')" >
       <mat-card class=card>
         <mat-list>
           <mat-list-item *ngFor="let message of room.messages" [matMenuTriggerFor]="menu" [ngClass]="{'myself' : message.user.uuid === user.uuid}">
