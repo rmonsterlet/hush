@@ -38,7 +38,7 @@ export class ContactComponent implements OnInit {
     }
   }
 
-  onSelectedIndexChange(){
+  onSelectedIndexChange() {
     const room = this.wsService.rooms.find(room => room.index === this.selectedIndex)
     room.notif = false
     this.room = room
@@ -61,21 +61,19 @@ export class ContactComponent implements OnInit {
     })
   }
 
-  onCreateRoomClick() {
-    this.wsService.send({
-      route: RouteType.ROOM_ACTION,
-      action: RoomAction.CREATE_ROOM
-    })
-  }
+  onCreateRoomClick(user?) {
 
-  onCreatePrivateRoomClick(user){
-    this.wsService.send({
+    let data: any = {
       route: RouteType.ROOM_ACTION,
-      action: RoomAction.CREATE_PRIVATE_ROOM,
-      userUuids: [
+      action: RoomAction.CREATE_ROOM,
+    }
+
+    if (user)
+      data.userUuids = [
         this.user.uuid,
         user.uuid
       ]
-    })
+
+    this.wsService.send(data)
   }
 }

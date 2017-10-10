@@ -12,7 +12,7 @@
             <p mat-line [style.color]="message.user.color" class=message>{{message.text}}</p>
             <div mat-line [style.color]="message.user.color"><a >{{message.user.uuid !== user.uuid ? message.user.name : ''}} {{message.date | date:'HH:mm'}}</a></div>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)=onCreatePrivateRoomClick(message.user)>
+              <button mat-menu-item (click)=onCreateRoomClick(message.user)>
                 <mat-icon>mode_edit</mat-icon>
                 Ecrire à {{message.user.name}}
               </button>

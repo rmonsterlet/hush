@@ -26,14 +26,11 @@ export class RoomController implements AppController {
 
     switch (_data.action) {
       case RoomAction.CREATE_ROOM:
-        this.createRoom();
-        break;
-      case RoomAction.CREATE_PRIVATE_ROOM:
-        this.createPrivateRoom(ws, _data);
-        break;
+        this.createRoom(_data);
+        break
       case RoomAction.BROADCAST:
         this.broadcast(_data);
-        break;
+        break
     }
   }
 
@@ -45,7 +42,7 @@ export class RoomController implements AppController {
     }))
   }
 
-  private createRoom() {
+  private createRoom(data: any) {
 
     let room = {
       uuid: uuid.v4(),
@@ -53,26 +50,10 @@ export class RoomController implements AppController {
       messages: new Array()
     }
     room.messages.push(this.getDefaultMessage(room))
+
     this._rooms.push(room)
-    this.wss.clients.forEach(client => {
-      client.send(JSON.stringify({
-        action: RoomAction.CREATE_ROOM,
-        room: room
-      }))
-    })
-  }
-
-  private createPrivateRoom(ws: AppWebSocket, data: any) {
-
-    let room = {
-      uuid: uuid.v4(),
-      private: true,
-      index: this._rooms.length,
-      messages: new Array()
-    }
-    room.messages.push(this.getDefaultMessage(room))
     this.wss.clients.forEach((client: AppWebSocket) => {
-      if (data.userUuids.includes(client.uuid)) {
+      if (!data.userUuids || data.userUuids.includes(client.uuid)) {
         client.send(JSON.stringify({
           action: RoomAction.CREATE_ROOM,
           room: room

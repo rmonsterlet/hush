@@ -37,13 +37,7 @@ export class WsService {
 
     private broadcast(_data: any) {
         let room = this._rooms.find(room => room.uuid === _data.roomUuid)
-        if (!room)
-            this._rooms.forEach(room => {
-                room.messages.push(_data.message)
-                if (room.index !== _data.selectedIndex)
-                    room.notif = true
-            })
-        else {
+        if (room){
             room.messages.push(_data.message)
             if (room.index !== _data.selectedIndex)
                 room.notif = true
