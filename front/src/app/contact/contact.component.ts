@@ -1,87 +1,59 @@
 import { WsAction } from '../../../../shared/WsAction';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppService } from 'app/app.service';
+import { WsService } from 'app/_utils';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  providers: [
+    WsService
+  ]
 })
 export class ContactComponent implements OnInit {
 
   user
-
-  ws
+  room
   message
-  datas = []
-
-  rooms: any = []
-
   selectedIndex = 0
 
-  constructor(private _appService: AppService) { }
+  constructor(
+    private _appService: AppService,
+    public wsService: WsService
+  ) { }
 
   ngOnInit() {
 
     this.user = this._appService.user
-
-    this.ws = new WebSocket('ws://localhost:4100')
-    this.ws.onmessage = (event: MessageEvent) => {
-      
-      const _data = JSON.parse(event.data)
-      switch (_data.action) {
-       
-        case WsAction.UPDATE_ROOMS:
-          this.rooms = _data.rooms
-          break
-        case WsAction.CREATE_ROOM:
-          this.rooms.push(_data.room)
-          break
-        case WsAction.BROADCAST:
-          this.broadcast(_data);
-          break
-      }
-    }
   }
 
   onSelectedIndexChange(){
-    this.rooms.find(room => room.index === this.selectedIndex).notif = false
+    const room = this.wsService.rooms.find(room => room.index === this.selectedIndex)
+    room.notif = false
+    this.room = room
   }
 
   onSendClick() {
     if (!this.message || !this.message.trim().length)
       return
 
-    this.ws.send(JSON.stringify({
+    this.wsService.send({
       action: WsAction.BROADCAST,
-      roomUuid: this.rooms.find(room => room.index === this.selectedIndex).uuid,
+      roomUuid: this.wsService.rooms.find(room => room.index === this.selectedIndex).uuid,
+      selectedIndex: this.selectedIndex,
       message: {
         user: this.user,
         date: new Date(),
         text: this.message
       }
-    }))
+    })
   }
 
   onCreateRoomClick() {
-    this.ws.send(JSON.stringify({
+    this.wsService.send({
       action: WsAction.CREATE_ROOM
-    }))
+    })
   }
 
-  private broadcast(_data: any) {
-    let room = this.rooms.find(room => room.uuid === _data.roomUuid)
-    if (!room)
-      this.rooms.forEach(room => {
-        room.messages.push(_data.message)
-        if(room.index !== this.selectedIndex) 
-          room.notif = true
-      })
-    else {
-      room.messages.push(_data.message)
-      debugger
-      if(room.index !== this.selectedIndex) 
-        room.notif = true
-    }
-  }
 }
