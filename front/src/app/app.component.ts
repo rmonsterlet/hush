@@ -14,6 +14,7 @@ import { Priorite, Statut } from './_types'
 export class AppComponent implements OnInit {
 
   title = 'Hush.io'
+  theme = {}
   search
 
   constructor(

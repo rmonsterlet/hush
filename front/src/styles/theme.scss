@@ -5,22 +5,34 @@
 $app-primary: mat-palette($mat-teal, 500);
 $app-accent:  mat-palette($mat-grey, 100);
 $app-warn:    mat-palette($mat-red, 600);
-
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);
 
-// Define an alternate dark theme.
 $dark-primary: mat-palette($mat-grey, 50);
 $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
 $dark-warn:    mat-palette($mat-deep-orange);
 $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
-
-// Include the alternative theme styles inside of a block with a CSS class. You can make this
-// CSS class whatever you want. In this example, any component inside of an element with
-// `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .dark-theme {
   @include angular-material-theme($dark-theme);
 }
+
+$red-primary: mat-palette($mat-red, 500);
+$red-accent:  mat-palette($mat-grey, 100);
+$red-warn:    mat-palette($mat-red, 600);
+$red-theme: mat-light-theme($red-primary, $red-accent, $red-warn);
+.red-theme {
+  @include angular-material-theme($red-theme);
+}
+
+$blue-primary: mat-palette($mat-blue, 500);
+$gblue-accent: mat-palette($mat-grey, 100);
+$blue-warn:    mat-palette($mat-red, 600);
+$blue-theme: mat-light-theme($red-primary, $red-accent, $red-warn);
+.blue-theme {
+  @include angular-material-theme($blue-theme);
+}
+
+
 
 @font-face {
   font-family: 'Material Icons';
