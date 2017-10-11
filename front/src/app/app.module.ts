@@ -1,4 +1,3 @@
-import { WsService } from './_utils/services/ws.service';
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -15,10 +14,12 @@ import { AppService } from './app.service'
 import { AppRouting } from './app.routes'
 
 import { OrderByPipe, KeysPipe } from './_pipes'
-import { AppMaterialModule, HttpDefaultService, DialogComponent } from './_utils'
+import { AppMaterialModule, HttpDefaultService, DialogComponent, WsService } from './_utils'
+
+import { LoginComponent } from './login';
 import { MainComponent } from './main'
+import { MenuComponent } from './menu'
 import { NotFoundComponent } from './not-found'
-import { LoginComponent } from './login'
 
 const APP_UTILS_COMPONENTS = [
   DialogComponent
@@ -51,12 +52,13 @@ const APP_DIALOG_COMPONENTS = [
     }),
   ],
   declarations: [
-    AppComponent,
-    MainComponent,
-    NotFoundComponent,
-    LoginComponent,
     ...APP_UTILS_COMPONENTS,
-    ...APP_PIPES
+    ...APP_PIPES,
+    AppComponent,
+    LoginComponent,
+    MainComponent,
+    MenuComponent,
+    NotFoundComponent 
   ],
   providers: [
     HttpDefaultService,
