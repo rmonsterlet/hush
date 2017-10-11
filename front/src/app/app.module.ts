@@ -1,10 +1,11 @@
+import { WsService } from './_utils/services/ws.service';
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import 'hammerjs'
+import 'hammerjs';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
 import { ColorPickerModule } from 'ngx-color-picker';
 import { AgmCoreModule } from '@agm/core'
@@ -15,9 +16,9 @@ import { AppRouting } from './app.routes'
 
 import { OrderByPipe, KeysPipe } from './_pipes'
 import { AppMaterialModule, HttpDefaultService, DialogComponent } from './_utils'
-import { ContactComponent } from './contact'
+import { MainComponent } from './main'
 import { NotFoundComponent } from './not-found'
-import { PreferencesComponent } from './preferences'
+import { LoginComponent } from './login'
 
 const APP_UTILS_COMPONENTS = [
   DialogComponent
@@ -51,15 +52,16 @@ const APP_DIALOG_COMPONENTS = [
   ],
   declarations: [
     AppComponent,
-    ContactComponent,
+    MainComponent,
     NotFoundComponent,
-    PreferencesComponent,
+    LoginComponent,
     ...APP_UTILS_COMPONENTS,
     ...APP_PIPES
   ],
   providers: [
     HttpDefaultService,
-    AppService
+    AppService,
+    WsService
   ],
   entryComponents: [
     ...APP_DIALOG_COMPONENTS

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { PreferencesService } from './preferences.service'
+import { LoginService } from './login.service'
 import { AppService } from '../app.service'
 import { Priorite, Statut } from '../_types'
 import { AppUtilsService, GeoCodingService } from 'app/_utils';
@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
 import * as uuid from 'uuid'
 
 @Component({
-  selector: 'app-preferences',
-  templateUrl: './preferences.component.html',
-  styleUrls: ['./preferences.component.scss'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
   providers: [
-    PreferencesService,
+    LoginService,
     AppUtilsService,
     GeoCodingService
   ]
 })
-export class PreferencesComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   user
 
@@ -60,7 +60,7 @@ export class PreferencesComponent implements OnInit {
     this.user.uuid = uuid.v4()
       
     this._appService.user = this.user
-    this._router.navigate(['contact'])
+    this._router.navigate(['main'])
   }
 
 }

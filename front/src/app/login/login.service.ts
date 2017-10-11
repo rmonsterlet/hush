@@ -4,7 +4,7 @@ import { Statut } from '../_types'
 import { AppConfig } from '../app.config'
 
 @Injectable()
-export class PreferencesService {
+export class LoginService {
 
   constructor(private _httpService: HttpDefaultService) { }
 

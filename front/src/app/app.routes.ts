@@ -1,23 +1,23 @@
 import { ModuleWithProviders } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { ContactComponent } from './contact'
+import { MainComponent } from './main'
 import { NotFoundComponent } from './not-found'
-import { PreferencesComponent } from './preferences'
+import { LoginComponent } from './login'
 
 const APP_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'preferences',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
-    path: 'preferences',
-    component: PreferencesComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path: 'contact',
-    component: ContactComponent
+    path: 'main',
+    component: MainComponent
   }/*,
   {
     path: '**',

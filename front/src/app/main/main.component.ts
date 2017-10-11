@@ -6,14 +6,14 @@ import { AppService } from 'app/app.service';
 import { WsService } from 'app/_utils';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss'],
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss'],
   providers: [
     WsService
   ]
 })
-export class ContactComponent implements OnInit {
+export class MainComponent implements OnInit {
 
   user
   message
