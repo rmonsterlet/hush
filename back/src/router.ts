@@ -33,4 +33,8 @@ export class AppRouter {
     sendUsers(ws: AppWebSocket) {
         this._userController.sendAll(ws)
     }
+
+    removeUser(uuid: string) {
+        this._userController.removeUser(uuid)
+    }
 }

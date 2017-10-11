@@ -1,5 +1,6 @@
 export enum RoomAction {
     GET_ROOMS,
-    CREATE_ROOM,
+    ADD_ROOM,
+    REMOVE_ROOM,
     BROADCAST
 }

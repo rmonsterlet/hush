@@ -26,7 +26,7 @@ export class RoomController implements AppController {
   onMessage(ws: AppWebSocket, _data: any) {
 
     switch (_data.action) {
-      case RoomAction.CREATE_ROOM:
+      case RoomAction.ADD_ROOM:
         this.createRoom(_data);
         break
       case RoomAction.BROADCAST:
@@ -40,29 +40,31 @@ export class RoomController implements AppController {
     ws.send(JSON.stringify({
       route: RouteType.ROOM,
       action: RoomAction.GET_ROOMS,
-      rooms: this._rooms
+      rooms: this._rooms.filter(room => !room.secret)
     }))
   }
 
   private createRoom(data: any) {
 
-    let room = {
+    let room: any = {
       uuid: uuid.v4(),
       index: this._rooms.length,
       messages: new Array()
     }
     room.messages.push(this.getDefaultMessage(room))
-
-    this._rooms.push(room)
+    room.secret = (data.userUuids && data.userUuids.length)
+    
     this.wss.clients.forEach((client: AppWebSocket) => {
-      if (!data || !data.userUuids || data.userUuids.includes(client.uuid)) {
+      if (!room.secret || data.userUuids.includes(client.uuid)) {
         client.send(JSON.stringify({
           route: RouteType.ROOM,
-          action: RoomAction.CREATE_ROOM,
+          action: RoomAction.ADD_ROOM,
           room: room
         }))
       }
     })
+
+    this._rooms.push(room)
   }
 
   private broadcast(data: any) {

@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.user = this._appService.user
+    if(localStorage.getItem('user'))
+      this.user = JSON.parse(localStorage.getItem('user'))
 
     const date = new Date()
     this.years = Array.from(new Array(125), (val, index) => date.getFullYear() - index)
@@ -58,8 +59,9 @@ export class LoginComponent implements OnInit {
 
     //if(!this.user.uuid)
     this.user.uuid = uuid.v4()
-      
+
     this._appService.user = this.user
+    localStorage.setItem('user', JSON.stringify(this.user))
     this._router.navigate(['main'])
   }
 

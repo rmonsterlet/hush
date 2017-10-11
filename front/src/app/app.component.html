@@ -17,6 +17,8 @@
 
   <span class="spacer"></span>
 
+  <div [style.color]=appService.user.color>{{appService.user.name}}</div>
+
   <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
   <mat-menu #menu="matMenu">
     <button [disabled]="router.url !== '/main'" mat-menu-item routerLink="/login" routerLinkActive="active">
@@ -26,8 +28,9 @@
   </mat-menu>
 </mat-toolbar>
 
-<mat-sidenav-container fxFill class=app-sidenav-container>
+<mat-sidenav-container fxFill>
   <mat-sidenav #sidenav mode="side" class=app-sidenav>
+    <app-menu [user]=appService.user></app-menu>
   </mat-sidenav>
   <router-outlet></router-outlet>
 </mat-sidenav-container>

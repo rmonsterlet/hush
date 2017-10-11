@@ -30,13 +30,17 @@ export class MainComponent implements OnInit {
 
     this.user = this._appService.user
 
-    this.wsService.ws.onopen = (event: MessageEvent) => {
-      this.wsService.send({
-        route: RouteType.USER,
-        action: UserAction.CREATE_USER,
-        user: this.user
-      })
-    }
+    if(!this.user.uuid && localStorage.getItem('user'))
+      this.user = JSON.parse(localStorage.getItem('user'))
+
+    if(this.user.uuid)
+      this.wsService.ws.onopen = (event: MessageEvent) => {
+        this.wsService.send({
+          route: RouteType.USER,
+          action: UserAction.ADD_USER,
+          user: this.user
+        })
+      }
   }
 
   onSelectedIndexChange() {
@@ -69,7 +73,7 @@ export class MainComponent implements OnInit {
 
     let data: any = {
       route: RouteType.ROOM,
-      action: RoomAction.CREATE_ROOM,
+      action: RoomAction.ADD_ROOM,
     }
 
     if (user)

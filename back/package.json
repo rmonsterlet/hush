@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "copy-deps": "copy-newer --cwd node_modules ** ./dist/node_modules",
-    "start": "tsc && node ./dist/server/back/src/server.js",
+    "start": "tsc && node --inspect ./dist/server/back/src/server.js",
     "preserve": "npm run build",
     "s": "npm run serve",
     "serve": "concurrently \"npm run build.w\" \"nodemon --watch ./dist/server ./dist/server/server.js\"",

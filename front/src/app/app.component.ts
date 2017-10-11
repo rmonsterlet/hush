@@ -13,13 +13,11 @@ import { Priorite, Statut } from './_types'
 })
 export class AppComponent implements OnInit {
 
-  connected = false
   title = 'Hush.io'
-  username = 'SE CONNECTER'
   search
 
   constructor(
-    private _appService: AppService,
+    public appService: AppService,
     public router: Router
   ) { }
 

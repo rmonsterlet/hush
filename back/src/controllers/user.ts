@@ -18,7 +18,7 @@ export class UserController implements AppController {
     onMessage(ws: AppWebSocket, data: any) {
 
         switch (data.action) {
-            case UserAction.CREATE_USER:
+            case UserAction.ADD_USER:
                 this.addUser(ws, data.user)
                 break
         }
@@ -36,14 +36,29 @@ export class UserController implements AppController {
     addUser(ws: AppWebSocket, user: any) {
         const index = this._users.findIndex(_user => _user.uuid === user.uuid)
         if (index < 0) {
+            this.wss.clients.forEach(client => {
+                client.send(JSON.stringify({
+                    route: RouteType.USER,
+                    action: UserAction.ADD_USER,
+                    user: user
+                }))
+            })
             this._users.push(user)
             ws.uuid = user.uuid
         }
     }
 
-    removeUser(user: any) {
-        const index = this._users.findIndex(_user => _user.uuid === user.uuid)
-        if (index >= 0)
+    removeUser(uuid: string) {
+        const index = this._users.findIndex(_user => _user.uuid === uuid)
+        if (index >= 0){
+            this.wss.clients.forEach(client => {
+                client.send(JSON.stringify({
+                    route: RouteType.USER,
+                    action: UserAction.REMOVE_USER,
+                    user: this._users[index]
+                }))
+            })
             this._users.splice(index, 1)
+        }
     }
 }

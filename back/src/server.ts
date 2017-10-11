@@ -35,13 +35,17 @@ wss.on('connection', (ws: AppWebSocket) => {
 setInterval(() => {
   wss.clients.forEach((ws: AppWebSocket) => {
 
-    if (!ws.isAlive)
+    if (!ws.isAlive){
+      //FIXME
+      appRouter.removeUser(ws.uuid)
       return ws.terminate()
+    }
+      
 
     ws.isAlive = false
     ws.ping(null, false, true)
   })
-}, 10000)
+}, 5000)
 
 //start our server
 server.listen(process.env.PORT || 4100, () => {

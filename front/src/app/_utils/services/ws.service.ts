@@ -26,6 +26,8 @@ export class WsService {
     this._ws = new WebSocket('ws://localhost:4100')
     this._ws.onmessage = (event: MessageEvent) => {
 
+      console.log(event.data)
+
       const data = JSON.parse(event.data)
 
       switch (data.route) {
@@ -44,7 +46,7 @@ export class WsService {
       case RoomAction.GET_ROOMS:
         this._rooms = data.rooms
         break
-      case RoomAction.CREATE_ROOM:
+      case RoomAction.ADD_ROOM:
         this._rooms.push(data.room)
         break
       case RoomAction.BROADCAST:
@@ -57,7 +59,14 @@ export class WsService {
     switch (data.action) {
       case UserAction.GET_USERS:
         this._users = data.users
-        debugger
+        break
+      case UserAction.ADD_USER:
+        this._users.push(data.user)
+        break
+      case UserAction.REMOVE_USER:
+        const index = this._users.findIndex(_user => _user.uuid === data.uuid)
+        if (index >= 0)
+          this._users.splice(index, 1)
         break
     }
   }

@@ -3,9 +3,9 @@
   <form>
     <mat-card fxLayout=column fxLayoutAlign="center center">
       <mat-icon class=app-icon color=primary>speaker_notes_off</mat-icon>
-      <mat-radio-group name=sex [(ngModel)]=user.sex>
-        <mat-radio-button checked value=F>Femme</mat-radio-button>
-        <mat-radio-button value=M class=app-ml>Homme</mat-radio-button>
+      <mat-radio-group [(ngModel)]=user.sex name=sex class=app-mb>
+        <mat-radio-button checked value=F color=primary>Femme</mat-radio-button>
+        <mat-radio-button value=M class=app-ml color=primary >Homme</mat-radio-button>
       </mat-radio-group>
       <mat-form-field>
         <input matInput required placeholder=Nom [(ngModel)]=user.name name=name>
