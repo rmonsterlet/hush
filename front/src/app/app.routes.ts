@@ -6,17 +6,17 @@ import { NotFoundComponent } from './not-found'
 import { LoginComponent } from './login'
 
 const APP_ROUTES: Routes = [
-  {
+  /*{
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },
+  },*/
   {
     path: 'login',
     component: LoginComponent
   },
   {
-    path: 'main',
+    path: '',
     component: MainComponent
   }/*,
   {

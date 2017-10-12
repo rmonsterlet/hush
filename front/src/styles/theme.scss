@@ -217,8 +217,8 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 .theme-deep-orange {
   @include theme($mat-orange); 
-  .app-primary-orange {
-    background-color: mat-color(mat-palette($mat-orange, 500))
+  .app-primary-deep-orange {
+    background-color: mat-color(mat-palette($mat-deep-orange, 500))
   }
 }
 

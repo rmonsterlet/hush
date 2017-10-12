@@ -24,6 +24,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
+    if(!localStorage.getItem('user'))
+      this.router.navigate(['login'])
+    else
+      this.appService.user = JSON.parse(localStorage.getItem('user'))
+    
     /*this._appService.getConf().then(data => {
       this._appService.conf = data
       this.initAgent()

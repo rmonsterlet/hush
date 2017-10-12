@@ -19,8 +19,6 @@ import * as uuid from 'uuid'
 })
 export class LoginComponent implements OnInit {
 
-  user: any = {}
-
   years
   options = []
   colors
@@ -100,16 +98,13 @@ export class LoginComponent implements OnInit {
   ]
 
   constructor(
-    private _appService: AppService,
+    private appService: AppService,
     private _appUtilsService: AppUtilsService,
     private _geoCodingService: GeoCodingService,
     private _router: Router
   ) { }
 
   ngOnInit(): void {
-
-    if(localStorage.getItem('user'))
-      this.user = JSON.parse(localStorage.getItem('user'))
 
     const date = new Date()
     this.years = Array.from(new Array(125), (val, index) => date.getFullYear() - index)
@@ -132,11 +127,10 @@ export class LoginComponent implements OnInit {
   connect(){
 
     //if(!this.user.uuid)
-    this.user.uuid = uuid.v4()
+    this.appService.user.uuid = uuid.v4()
 
-    this._appService.user = this.user
-    localStorage.setItem('user', JSON.stringify(this.user))
-    this._router.navigate(['main'])
+    localStorage.setItem('user', JSON.stringify(this.appService.user))
+    this._router.navigate(['/'])
   }
 
 }

@@ -1,37 +1,37 @@
-<h1 class=route-title>Bienvenue sur Hush.io {{user.name}} !</h1>
+<h1 class=route-title [ngClass]="'app-primary-'+appService.user.theme">Bienvenue sur Hush.io {{appService.user.name}} !</h1>
 <div class=route>
   <form>
     <mat-card fxLayout=column fxLayoutAlign="center center">
       <mat-icon class=app-icon color=primary>speaker_notes_off</mat-icon>
-      <mat-radio-group [(ngModel)]=user.sex name=sex class=app-mb>
+      <mat-radio-group [(ngModel)]=appService.user.sex name=sex class=app-mb>
         <mat-radio-button checked value=F color=primary>Femme</mat-radio-button>
         <mat-radio-button value=M class=app-ml color=primary >Homme</mat-radio-button>
       </mat-radio-group>
       <mat-form-field>
-        <input matInput required placeholder=Nom [(ngModel)]=user.name name=name>
+        <input matInput required placeholder=Nom [(ngModel)]=appService.user.name name=name>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select required placeholder="Année de naissance" [(ngModel)]=user.year name=year>
+        <mat-select required placeholder="Année de naissance" [(ngModel)]=appService.user.year name=year>
           <mat-option *ngFor="let year of years" [value]=year>{{year}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <input matInput required placeholder=Ville [matAutocomplete]=auto [(ngModel)]=user.city (change)=onCityChange() name=city>
+        <input matInput required placeholder=Ville [matAutocomplete]=auto [(ngModel)]=appService.user.city (change)=onCityChange() name=city>
       </mat-form-field>
       <mat-autocomplete #auto=matAutocomplete>
         <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
       </mat-autocomplete>
       <mat-form-field>
-        <textarea matInput matTextareaAutosize [(ngModel)]=user.description placeholder=Description name=description></textarea>
+        <textarea matInput matTextareaAutosize [(ngModel)]=appService.user.description placeholder=Description name=description></textarea>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Thème" [(ngModel)]=user.theme name=theme>
+        <mat-select placeholder="Thème" [(ngModel)]=appService.user.theme name=theme>
           <mat-option *ngFor="let theme of themes" [style.color]=theme.color [value]="theme.label.toLowerCase().split(' ').join('-')">{{theme.label}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-          <mat-select placeholder="Couleur de l'écriture" [(ngModel)]=user.color name=color>
+          <mat-select placeholder="Couleur de l'écriture" [(ngModel)]=appService.user.color name=color>
             <mat-option *ngFor="let color of colors" [style.color]=color [value]=color>{{color}}</mat-option>
           </mat-select>
         </mat-form-field>

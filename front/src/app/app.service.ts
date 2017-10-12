@@ -6,7 +6,7 @@ import { AppConfig } from './app.config'
 @Injectable()
 export class AppService {
 
-  _user = {}
+  _user: any = {}
   get user(){
     return this._user
   }
