@@ -20,7 +20,8 @@ export class AppUtilsService {
 
     public getColorNames() {
         return [
-            'INDIANRED'
+            ''
+            ,'INDIANRED'
             , 'LIGHTCORAL'
             , 'SALMON'
             , 'DARKSALMON'

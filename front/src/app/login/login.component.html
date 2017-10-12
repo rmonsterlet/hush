@@ -26,10 +26,15 @@
         <textarea matInput matTextareaAutosize [(ngModel)]=user.description placeholder=Description name=description></textarea>
       </mat-form-field>
       <mat-form-field>
-        <mat-select required placeholder="Couleur de l'écriture" [(ngModel)]=user.color name=color [style.color]=user.color>
-          <mat-option *ngFor="let color of colors" [style.color]=color [value]=color>{{color}}</mat-option>
+        <mat-select placeholder="Thème" [(ngModel)]=user.theme name=theme>
+          <mat-option *ngFor="let theme of themes" [style.color]=theme.color [value]="theme.label.toLowerCase().split(' ').join('-')">{{theme.label}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field>
+          <mat-select placeholder="Couleur de l'écriture" [(ngModel)]=user.color name=color>
+            <mat-option *ngFor="let color of colors" [style.color]=color [value]=color>{{color}}</mat-option>
+          </mat-select>
+        </mat-form-field>
       <button mat-raised-button color=primary (click)=connect()>SE CONNECTER</button>
     </mat-card>
   </form>

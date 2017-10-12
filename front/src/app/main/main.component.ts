@@ -22,13 +22,13 @@ export class MainComponent implements OnInit {
   selectedRoom
 
   constructor(
-    private _appService: AppService,
+    public appService: AppService,
     public wsService: WsService
   ) { }
 
   ngOnInit() {
 
-    this.user = this._appService.user
+    this.user = this.appService.user
 
     if(!this.user.uuid && localStorage.getItem('user'))
       this.user = JSON.parse(localStorage.getItem('user'))

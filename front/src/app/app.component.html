@@ -1,36 +1,41 @@
-<mat-toolbar class="app-toolbar mat-elevation-z6" color="primary">
+<div fxFill [ngClass]="'theme-'+appService.user.theme">
 
-  <button [disabled]="router.url !== '/main'" mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <mat-toolbar class="app-toolbar mat-elevation-z6" color="primary">
 
-  <h1>{{title}}</h1>
-
-  <div *ngIf="router.url == '/main'" class="dark-theme" fxHide.xs fxHide.sm>
-    <mat-form-field class="search">
-      <input matInput placeholder=Rechercher [(ngModel)]=search name=search>
-    </mat-form-field>
-    <button mat-icon-button>
-      <mat-icon>search</mat-icon>
+    <button [disabled]="router.url !== '/main'" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
     </button>
-  </div>
 
-  <span class="spacer"></span>
+    <h1>{{title}}</h1>
 
-  <div [style.color]=appService.user.color>{{appService.user.name}}</div>
+    <div *ngIf="router.url == '/main'" class="dark-theme" fxHide.xs fxHide.sm>
+      <mat-form-field class="search">
+        <input matInput placeholder=Rechercher [(ngModel)]=search name=search>
+      </mat-form-field>
+      <button mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
 
-  <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
-  <mat-menu #menu="matMenu">
-    <button [disabled]="router.url !== '/main'" mat-menu-item routerLink="/login" routerLinkActive="active">
-      <mat-icon>settings</mat-icon>
-      Préférences
+    <span class="spacer"></span>
+
+    <div [style.color]=appService.user.color>{{appService.user.name}}</div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
     </button>
-  </mat-menu>
-</mat-toolbar>
+    <mat-menu #menu="matMenu">
+      <button [disabled]="router.url !== '/main'" mat-menu-item routerLink="/login" routerLinkActive="active">
+        <mat-icon>settings</mat-icon>
+        Préférences
+      </button>
+    </mat-menu>
+  </mat-toolbar>
 
-<mat-sidenav-container fxFill>
-  <mat-sidenav #sidenav mode="side" class=app-sidenav>
-    <app-menu [user]=appService.user></app-menu>
-  </mat-sidenav>
-  <router-outlet></router-outlet>
-</mat-sidenav-container>
+  <mat-sidenav-container fxFill>
+    <mat-sidenav #sidenav mode="side" [ngClass]="'app-primary-'+appService.user.theme" class=app-sidenav>
+      <app-menu [user]=appService.user></app-menu>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
+</div>
