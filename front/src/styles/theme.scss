@@ -10,29 +10,238 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 $dark-primary: mat-palette($mat-grey, 50);
 $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-$dark-warn:    mat-palette($mat-deep-orange);
+$dark-warn:    mat-palette($mat-red, 600);
 $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 .dark-theme {
   @include angular-material-theme($dark-theme);
 }
 
-$red-primary: mat-palette($mat-red, 500);
-$red-accent:  mat-palette($mat-grey, 100);
-$red-warn:    mat-palette($mat-red, 600);
-$red-theme: mat-light-theme($red-primary, $red-accent, $red-warn);
-.red-theme {
-  @include angular-material-theme($red-theme);
+@mixin theme($app-color) {
+  $primary: mat-palette($app-color, 500);
+  $accent:  mat-palette($mat-grey, 100);
+  $warn:    mat-palette($mat-red, 600);
+  $theme: mat-light-theme($primary, $accent, $warn);
+
+  @include angular-material-theme($theme);
 }
 
-$blue-primary: mat-palette($mat-blue, 500);
-$gblue-accent: mat-palette($mat-grey, 100);
-$blue-warn:    mat-palette($mat-red, 600);
-$blue-theme: mat-light-theme($red-primary, $red-accent, $red-warn);
-.blue-theme {
-  @include angular-material-theme($blue-theme);
+.theme-undefined {
+  @include theme($mat-teal); 
+  .app-primary-undefined {
+    background-color: mat-color(mat-palette($mat-teal, 500))
+  }
+}
+
+.theme-red {
+  @include theme($mat-red); 
+  .app-primary-red {
+    background-color: mat-color(mat-palette($mat-red, 500))
+  }
+}
+
+.theme-pink {
+  @include theme($mat-red); 
+  .app-primary-pink {
+    background-color: mat-color(mat-palette($mat-pink, 500))
+  }
+}
+
+.theme-purple {
+  @include theme($mat-purple); 
+  .app-primary-purple {
+    background-color: mat-color(mat-palette($mat-purple, 500))
+  }
+}
+
+.theme-purple {
+  @include theme($mat-purple); 
+  .app-primary-purple {
+    background-color: mat-color(mat-palette($mat-purple, 500))
+  }
+}
+
+.theme-purple {
+  @include theme($mat-purple); 
+  .app-primary-purple {
+    background-color: mat-color(mat-palette($mat-purple, 500))
+  }
+}
+
+.theme-purple {
+  @include theme($mat-purple); 
+  .app-primary-purple {
+    background-color: mat-color(mat-palette($mat-purple, 500))
+  }
+}
+
+.theme-purple {
+  @include theme($mat-purple); 
+  .app-primary-purple {
+    background-color: mat-color(mat-palette($mat-purple, 500))
+  }
+}
+
+.theme-purple {
+  @include theme($mat-purple); 
+  .app-primary-purple {
+    background-color: mat-color(mat-palette($mat-purple, 500))
+  }
+}
+
+.theme-deep-purple {
+  @include theme($mat-deep-purple); 
+  .app-primary-deep-purple {
+    background-color: mat-color(mat-palette($mat-deep-purple, 500))
+  }
+}
+
+.theme-indigo {
+  @include theme($mat-indigo); 
+  .app-primary-indigo {
+    background-color: mat-color(mat-palette($mat-indigo, 500))
+  }
 }
 
 
+.theme-purple {
+  @include theme($mat-purple); 
+  .app-primary-purple {
+    background-color: mat-color(mat-palette($mat-purple, 500))
+  }
+}
+
+.theme-deep-purple {
+  @include theme($mat-deep-purple); 
+  .app-primary-deep-purple {
+    background-color: mat-color(mat-palette($mat-deep-purple, 500))
+  }
+}
+
+.theme-indigo {
+  @include theme($mat-indigo); 
+  .app-primary-indigo {
+    background-color: mat-color(mat-palette($mat-indigo, 500))
+  }
+}
+
+.theme-purple {
+  @include theme($mat-purple); 
+  .app-primary-purple {
+    background-color: mat-color(mat-palette($mat-purple, 500))
+  }
+}
+
+.theme-deep-purple {
+  @include theme($mat-deep-purple); 
+  .app-primary-deep-purple {
+    background-color: mat-color(mat-palette($mat-deep-purple, 500))
+  }
+}
+
+.theme-indigo {
+  @include theme($mat-indigo); 
+  .app-primary-indigo {
+    background-color: mat-color(mat-palette($mat-indigo, 500))
+  }
+}
+
+.theme-blue {
+  @include theme($mat-blue); 
+  .app-primary-blue {
+    background-color: mat-color(mat-palette($mat-blue, 500))
+  }
+}
+
+.theme-light-blue {
+  @include theme($mat-light-blue); 
+  .app-primary-light-blue {
+    background-color: mat-color(mat-palette($mat-light-blue, 500))
+  }
+}
+
+.theme-cyan {
+  @include theme($mat-cyan); 
+  .app-primary-cyan {
+    background-color: mat-color(mat-palette($mat-cyan, 500))
+  }
+}
+
+.theme-teal {
+  @include theme($mat-teal); 
+  .app-primary-teal {
+    background-color: mat-color(mat-palette($mat-teal, 500))
+  }
+}
+
+.theme-green {
+  @include theme($mat-green); 
+  .app-primary-green {
+    background-color: mat-color(mat-palette($mat-green, 500))
+  }
+}
+
+.theme-light-green {
+  @include theme($mat-light-green); 
+  .app-primary-light-green {
+    background-color: mat-color(mat-palette($mat-light-green, 500))
+  }
+}
+
+.theme-lime {
+  @include theme($mat-lime); 
+  .app-primary-lime {
+    background-color: mat-color(mat-palette($mat-lime, 500))
+  }
+}
+
+.theme-yellow {
+  @include theme($mat-yellow); 
+  .app-primary-yellow {
+    background-color: mat-color(mat-palette($mat-yellow, 500))
+  }
+}
+
+.theme-amber {
+  @include theme($mat-amber); 
+  .app-primary-amber {
+    background-color: mat-color(mat-palette($mat-amber, 500))
+  }
+}
+
+.theme-orange {
+  @include theme($mat-orange); 
+  .app-primary-orange {
+    background-color: mat-color(mat-palette($mat-orange, 500))
+  }
+}
+
+.theme-deep-orange {
+  @include theme($mat-orange); 
+  .app-primary-orange {
+    background-color: mat-color(mat-palette($mat-orange, 500))
+  }
+}
+
+.theme-brown {
+  @include theme($mat-brown); 
+  .app-primary-brown {
+    background-color: mat-color(mat-palette($mat-brown, 500))
+  }
+}
+
+.theme-grey {
+  @include theme($mat-grey); 
+  .app-primary-grey {
+    background-color: mat-color(mat-palette($mat-grey, 500))
+  }
+}
+
+.theme-blue-grey {
+  @include theme($mat-blue-grey); 
+  .app-primary-blue-grey {
+    background-color: mat-color(mat-palette($mat-blue-grey, 500))
+  }
+}
 
 @font-face {
   font-family: 'Material Icons';

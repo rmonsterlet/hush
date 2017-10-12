@@ -1,4 +1,4 @@
-<h2 class=route-title>{{'Room #' + selectedRoom?.index}}</h2>
+<h2 class=route-title [ngClass]="'app-primary-'+appService.user.theme">{{'Room #' + selectedRoom?.index}}</h2>
 <div class="route">
 
   <mat-tab-group [(selectedIndex)]=selectedIndex (selectedIndexChange)=onSelectedIndexChange()>
