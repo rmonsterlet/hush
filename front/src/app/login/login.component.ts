@@ -1,3 +1,4 @@
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core'
 import { LoginService } from './login.service'
 import { AppService } from '../app.service'
@@ -5,7 +6,7 @@ import { Priorite, Statut } from '../_types'
 import { AppUtilsService, GeoCodingService } from 'app/_utils';
 import { createClient, GoogleMapsClient } from '@google/maps'
 import { Router } from '@angular/router';
-import * as uuid from 'uuid'
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-login',
@@ -22,83 +23,12 @@ export class LoginComponent implements OnInit {
   years
   options = []
   colors
-  themes = [
-    {
-      value: 'undefined',
-      label: ''
-    },
-    {
-      color: '#F44336',
-      label: 'Red'
-    },
-    {
-      color: '#9C27B0',
-      label: 'Purple'
-    },
-    {
-      color: '#673AB7',
-      label: 'Deep Purple'
-    },
-    {
-      color: '#3F51B5',
-      label: 'Indigo'
-    },
-    {
-      color: '#2196F3',
-      label: 'Blue'
-    },
-    {
-      color: '#03A9F4',
-      label: 'Light Blue'
-    },
-    {
-      color: '#00BCD4',
-      label: 'Cyan'
-    },
-    {
-      color: '#009688',
-      label: 'Teal'
-    },
-    {
-      color: '#4CAF50',
-      label: 'Green'
-    },
-    {
-      color: '#8BC34A',
-      label: 'Light Green'
-    },
-    {
-      color: '#CDDC39',
-      label: 'Lime'
-    },
-    {
-      color: '#FFEB3B',
-      label: 'Yellow'
-    },
-    {
-      color: '#FFC107',
-      label: 'Amber'
-    },
-    {
-      color: '#FF9800',
-      label: 'Orange'
-    },
-    {
-      color: '#FF5722',
-      label: 'Deep Orange'
-    },
-    {
-      color: '#9E9E9E',
-      label: 'Grey'
-    },
-    {
-      color: '#607D8B',
-      label: 'Blue Grey'
-    }
-  ]
+  themes
+
+  loginForm: FormGroup
 
   constructor(
-    private appService: AppService,
+    public appService: AppService,
     private _appUtilsService: AppUtilsService,
     private _geoCodingService: GeoCodingService,
     private _router: Router
@@ -106,13 +36,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const date = new Date()
-    this.years = Array.from(new Array(125), (val, index) => date.getFullYear() - index)
+    this.loginForm = this.loginForm = new FormGroup({
+      'sex': new FormControl('F'),
+      'name': new FormControl('', [
+        Validators.required,
+        Validators.maxLength(16),
+      ]),
+      'age': new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100)
+      ]),
+      'description': new FormControl(''),
+      'city': new FormControl(''),
+      'theme': new FormControl(''),
+      'color': new FormControl('')
+    });
 
+    this.themes = this._appUtilsService.getThemeNames()
     this.colors = this._appUtilsService.getColorNames()
   }
 
-  onCityChange(){
+  onCityChange() {
 
     /*
     TODO
@@ -124,7 +69,7 @@ export class LoginComponent implements OnInit {
     })*/
   }
 
-  connect(){
+  connect() {
 
     //if(!this.user.uuid)
     this.appService.user.uuid = uuid.v4()

@@ -1,0 +1,6 @@
+/docs
+/back/dist
+
+/front/node_modules/
+/back/node_modules/
+*.log

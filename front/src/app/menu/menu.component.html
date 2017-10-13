@@ -7,8 +7,8 @@
   <mat-card-title>En ligne</mat-card-title>
   <mat-list>
     <mat-list-item *ngFor="let _user of wsService.users" [matMenuTriggerFor]=menu>
-      <mat-icon mat-list-icon [style.color]=_user.color>face</mat-icon>
-      <p mat-line [style.color]=_user.color>{{_user.name}}</p>
+      <mat-icon mat-list-icon [style.color]="_user.sex === 'F' ? 'hotpink' : 'dodgerblue'">face</mat-icon>
+      <p mat-line [style.color]=_user.color>{{_user.name + ' (' + _user.age + ')'}}</p>
       <mat-menu #menu=matMenu>
         <button mat-menu-item (click)=onCreateRoomClick(_user)>
           <mat-icon>mode_edit</mat-icon>
