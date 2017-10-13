@@ -1,0 +1,16 @@
+<div fxLayout=row>
+  <mat-icon color=primary class=app-mr>school</mat-icon>
+  <h2 mat-dialog-title>Admin</h2>
+</div>
+<mat-dialog-content>
+  <mat-form-field>
+    <input type=password matInput required placeholder=Password [(ngModel)]=password (change)=onPasswordChange() name=password>
+  </mat-form-field>
+  <div *ngIf="true || admin" fxLayout=column fxLayoutAlign=" center">
+    <button mat-raised-button (click)=onClearRoomsClick() color=primary>Clear all rooms</button>
+    <button mat-raised-button (click)=onClearUsersClick() color=primary class=app-mt>Clear all users</button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>

@@ -21,6 +21,9 @@ export class UserController implements AppController {
             case UserAction.ADD_USER:
                 this.addUser(ws, data.user)
                 break
+            case UserAction.REMOVE_ALL:
+                this.removeAll(ws)
+                break
         }
     }
 
@@ -50,7 +53,7 @@ export class UserController implements AppController {
 
     removeUser(uuid: string) {
         const index = this._users.findIndex(_user => _user.uuid === uuid)
-        if (index >= 0){
+        if (index >= 0) {
             this.wss.clients.forEach(client => {
                 client.send(JSON.stringify({
                     route: RouteType.USER,
@@ -60,5 +63,10 @@ export class UserController implements AppController {
             })
             this._users.splice(index, 1)
         }
+    }
+
+    removeAll(ws: AppWebSocket) {
+        this._users = []
+        this.sendAll(ws)
     }
 }

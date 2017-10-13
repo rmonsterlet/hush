@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { MainComponent } from './main'
-import { NotFoundComponent } from './not-found'
-import { LoginComponent } from './login'
+import { MainComponent } from 'app/main/main.component';
+import { LoginComponent } from 'app/login/login.component';
+
 
 const APP_ROUTES: Routes = [
   
@@ -20,22 +20,6 @@ const APP_ROUTES: Routes = [
     path: 'main',
     component: MainComponent
   }
-  
-  /*
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: '',
-    component: MainComponent
-  }
-  */
   /*,
   {
     path: '**',

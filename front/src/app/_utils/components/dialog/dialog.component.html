@@ -1,12 +1,12 @@
 <div fxLayout="row">
-  <mat-icon *ngIf="icon" [style.color]="icon.color" class="app-mr">{{icon.code}}</mat-icon>
-  <h2 *ngIf="title" mat-dialog-title>{{title}}</h2>
+  <mat-icon *ngIf="data.icon" [style.color]="data.icon.color" class="app-mr">{{data.icon.code}}</mat-icon>
+  <h2 *ngIf="data.title" mat-dialog-title>{{data.title}}</h2>
 </div>
-<mat-dialog-content [ngClass]="{'content': true, 'overflowHidden': overflowHidden}" *ngIf="content || text">
-  <span [innerHtml]="content"></span>{{text}}
+<mat-dialog-content [ngClass]="{'content': true, 'overflowHidden': data.overflowHidden}" *ngIf="data.content || data.text">
+  <span [innerHtml]="data.content"></span>{{text}}
 </mat-dialog-content>
-<mat-dialog-actions *ngIf="actions">
-  <button *ngIf="actions.cancel" mat-raised-button mat-dialog-close>{{actions.cancel}}</button>
+<mat-dialog-actions *ngIf="data.actions">
+  <button *ngIf="data.actions.cancel" mat-raised-button mat-dialog-close>{{data.actions.cancel}}</button>
   <div class="spacer app-mr"></div>
-  <button *ngIf="actions.ok" mat-raised-button color="primary" (click)="dialog.close(true)">{{actions.ok}}</button>
+  <button *ngIf="data.actions.ok" mat-raised-button color="primary" (click)="dialog.close(true)">{{data.actions.ok}}</button>
 </mat-dialog-actions>

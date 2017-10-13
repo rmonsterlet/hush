@@ -30,7 +30,7 @@ export class HttpDefaultService {
     }
 
     public post(url: string, object?: any, options?: RequestOptionsArgs): Promise<any> {
-        const _options: RequestOptionsArgs = options || { headers: this._headers}
+        const _options: RequestOptionsArgs = options || { headers: this._headers }
         return this._http.post(url, object, _options)
             .toPromise()
             .then((response) => this.handleSuccess(response))
@@ -60,17 +60,19 @@ export class HttpDefaultService {
             case 500:
                 const json = error.json()
                 const dialog = this._dialog.open(DialogComponent, {
-                    disableClose: true
+                    disableClose: true,
+                    data: {
+                        title: json.titre,
+                        icon: {
+                            code: 'error',
+                            color: 'warn'
+                        },
+                        content: json.message,
+                        actions: {
+                            cancel: 'Fermer'
+                        }
+                    }
                 })
-                dialog.componentInstance.title = json.titre
-                dialog.componentInstance.icon = {
-                    code: 'error',
-                    color: 'warn'
-                }
-                dialog.componentInstance.content = json.message
-                dialog.componentInstance.actions = {
-                    cancel: 'Fermer'
-                }
                 return Promise.reject(error.message || error)
             default:
                 console.warn('An error occurred', error)

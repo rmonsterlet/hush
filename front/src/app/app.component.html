@@ -26,14 +26,16 @@
     </button>
     <mat-menu #menu="matMenu">
       <button [disabled]="router.url !== '/main'" mat-menu-item routerLink="/login" routerLinkActive="active">
-        <mat-icon>settings</mat-icon>
-        Préférences
+        <mat-icon>settings</mat-icon>Préférences
+      </button>
+      <button *ngIf="isAdmin()" mat-menu-item (click)=onAdminClick()>
+        <mat-icon>school</mat-icon>Administration
       </button>
     </mat-menu>
   </mat-toolbar>
 
   <mat-sidenav-container fxFill>
-    <mat-sidenav #sidenav mode="side" [ngClass]="'app-primary-'+appService.user.theme" class=app-sidenav>
+    <mat-sidenav #sidenav [mode]="sideNavMode" [ngClass]="'app-primary-'+appService.user.theme" class=app-sidenav>
       <app-menu [user]=appService.user></app-menu>
     </mat-sidenav>
     <router-outlet></router-outlet>

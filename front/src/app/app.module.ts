@@ -16,10 +16,11 @@ import { AppRouting } from './app.routes'
 import { OrderByPipe, KeysPipe } from './_pipes'
 import { AppMaterialModule, HttpDefaultService, DialogComponent, WsService } from './_utils'
 
-import { LoginComponent } from './login';
-import { MainComponent } from './main'
-import { MenuComponent } from './menu'
-import { NotFoundComponent } from './not-found'
+import { LoginComponent } from 'app/login/login.component'
+import { MainComponent } from 'app/main/main.component'
+import { MenuComponent } from 'app/menu/menu.component'
+import { NotFoundComponent } from 'app/not-found/not-found.component'
+import { AdminComponent } from 'app/dialog/admin/admin.component';
 
 const APP_UTILS_COMPONENTS = [
   DialogComponent
@@ -31,7 +32,8 @@ const APP_PIPES = [
 ]
 
 const APP_DIALOG_COMPONENTS = [
-  DialogComponent
+  DialogComponent,
+  AdminComponent
 ]
 
 @NgModule({
@@ -58,7 +60,8 @@ const APP_DIALOG_COMPONENTS = [
     LoginComponent,
     MainComponent,
     MenuComponent,
-    NotFoundComponent 
+    NotFoundComponent,
+    AdminComponent 
   ],
   providers: [
     HttpDefaultService,

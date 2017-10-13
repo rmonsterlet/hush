@@ -32,6 +32,9 @@ export class RoomController implements AppController {
       case RoomAction.BROADCAST:
         this.broadcast(_data);
         break
+      case RoomAction.REMOVE_ALL:
+        this.removeAll(ws)
+        break
     }
   }
 
@@ -53,7 +56,7 @@ export class RoomController implements AppController {
     }
     room.messages.push(this.getDefaultMessage(room))
     room.secret = (data.userUuids && data.userUuids.length)
-    
+
     this.wss.clients.forEach((client: AppWebSocket) => {
       if (!room.secret || data.userUuids.includes(client.uuid)) {
         client.send(JSON.stringify({
@@ -65,6 +68,11 @@ export class RoomController implements AppController {
     })
 
     this._rooms.push(room)
+  }
+
+  removeAll(ws: AppWebSocket) {
+    this._rooms = []
+    this.sendAll(ws)
   }
 
   private broadcast(data: any) {
