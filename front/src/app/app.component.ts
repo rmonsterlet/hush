@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     else
       this.appService.user = JSON.parse(localStorage.getItem('user'))
 
-    this.sideNavMode = (window.innerWidth < 800 && window.innerHeight < 600) ? 'over' : 'side'
+    this.sideNavMode = typeof window.orientation === 'undefined' ? 'side' : 'over' 
 
     /*this._appService.getConf().then(data => {
       this._appService.conf = data
