@@ -50,7 +50,10 @@ export class AppComponent implements OnInit {
   }
 
   isNimda() {
-    const struct = ['b546','11b2bbdc77','b7bf991028','d4d549c838','d62df68acb','a52368d672','763b216bb3']
+    if (!this.appService.user.name)
+      return
+
+    const struct = ['b546', '11b2bbdc77', 'b7bf991028', 'd4d549c838', 'd62df68acb', 'a52368d672', '763b216bb3']
     return sha256.x2(this.appService.user.name.toLowerCase()) === struct.join('')
   }
 
