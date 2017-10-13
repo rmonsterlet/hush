@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
     this.appService.user.uuid = uuid.v4()
 
     localStorage.setItem('user', JSON.stringify(this.appService.user))
-    //this._router.navigate(['/main'])
+    this._router.navigate(['/'])
   }
 
 }

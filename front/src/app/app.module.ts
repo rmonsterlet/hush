@@ -20,7 +20,7 @@ import { LoginComponent } from 'app/login/login.component'
 import { MainComponent } from 'app/main/main.component'
 import { MenuComponent } from 'app/menu/menu.component'
 import { NotFoundComponent } from 'app/not-found/not-found.component'
-import { AdminComponent } from 'app/dialog/admin/admin.component';
+import { NimdaComponent } from 'app/dialog/admin/admin.component';
 
 const APP_UTILS_COMPONENTS = [
   DialogComponent
@@ -33,7 +33,7 @@ const APP_PIPES = [
 
 const APP_DIALOG_COMPONENTS = [
   DialogComponent,
-  AdminComponent
+  NimdaComponent
 ]
 
 @NgModule({
@@ -61,7 +61,7 @@ const APP_DIALOG_COMPONENTS = [
     MainComponent,
     MenuComponent,
     NotFoundComponent,
-    AdminComponent 
+    NimdaComponent 
   ],
   providers: [
     HttpDefaultService,

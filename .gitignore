@@ -1,5 +1,8 @@
-/back/dist
 
+/front/dist/
 /front/node_modules/
+
+/back/dist/
 /back/node_modules/
+
 *.log

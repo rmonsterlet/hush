@@ -4,7 +4,7 @@ import { AppService } from './app.service'
 import { Priorite, Statut } from './_types'
 import * as sha256 from 'sha256'
 import { MatDialog } from '@angular/material';
-import { AdminComponent } from 'app/dialog/admin/admin.component';
+import { NimdaComponent } from 'app/dialog/admin/admin.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   title = 'Hush.io'
   theme = {}
   search
-  sideNavMode
+  sideNavMode = 'side'
 
   constructor(
     public appService: AppService,
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     else
       this.appService.user = JSON.parse(localStorage.getItem('user'))
 
-    this.sideNavMode = typeof window.orientation === 'undefined' ? 'side' : 'over' 
+    this.sideNavMode = typeof window.orientation === 'undefined' ? 'side' : 'over'
 
     /*this._appService.getConf().then(data => {
       this._appService.conf = data
@@ -42,13 +42,21 @@ export class AppComponent implements OnInit {
     })*/
   }
 
-  isAdmin() {
-    return sha256.x2(this.appService.user.name.toLowerCase()) === 'b54611b2bbdc77b7bf991028d4d549c838d62df68acba52368d672763b216bb3'
+  setSideNavMode() {
+    if (typeof window.orientation !== 'undefined')
+      this.sideNavMode = 'over'
+    else
+      this.sideNavMode = window.innerWidth < 600 ? 'over' : 'side'
   }
 
-  onAdminClick() {
+  isNimda() {
+    const struct = ['b546','11b2bbdc77','b7bf991028','d4d549c838','d62df68acb','a52368d672','763b216bb3']
+    return sha256.x2(this.appService.user.name.toLowerCase()) === struct.join('')
+  }
 
-    const dialog = this._dialog.open(AdminComponent, {
+  onNimdaClick() {
+
+    const dialog = this._dialog.open(NimdaComponent, {
       data: {
       }
     })

@@ -1,7 +1,9 @@
+import { DialogComponent } from '../components/dialog'
 import { Injectable } from '@angular/core'
-import { RoomAction } from '../../../../../shared/RoomAction';
-import { UserAction } from '../../../../../shared/UserAction';
-import { RouteType } from '../../../../../shared/RouteType';
+import { RoomAction } from '../../../../../shared/RoomAction'
+import { UserAction } from '../../../../../shared/UserAction'
+import { RouteType } from '../../../../../shared/RouteType'
+import { MatDialog } from '@angular/material'
 
 @Injectable()
 export class WsService {
@@ -21,15 +23,13 @@ export class WsService {
     return this._users
   }
 
-  constructor() {
+  constructor(private _dialog: MatDialog) {
 
     this._ws = new WebSocket('ws://localhost:4100')
     this._ws.onmessage = (event: MessageEvent) => {
 
       console.log(event.data)
-
       const data = JSON.parse(event.data)
-
       switch (data.route) {
         case RouteType.ROOM:
           this.onRoomMessage(data)
@@ -38,6 +38,23 @@ export class WsService {
           this.onUserMessage(data)
           break
       }
+    }
+    this._ws.onerror = (event: MessageEvent) => {
+      console.warn(event)
+      const dialog = this._dialog.open(DialogComponent, {
+        disableClose: true,
+        data: {
+          title: event.type.toUpperCase(),
+          icon: {
+            code: 'error',
+            color: 'warn'
+          },
+          content: 'Websocket Server disconnected !',
+          actions: {
+            cancel: 'Fermer'
+          }
+        }
+      })
     }
   }
 

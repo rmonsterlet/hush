@@ -2,13 +2,13 @@
 
   <mat-toolbar class="app-toolbar mat-elevation-z6" color="primary">
 
-    <button mat-icon-button (click)="sidenav.toggle()">
+    <button mat-icon-button (click)="setSideNavMode(); sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
 
     <h1>{{title}}</h1>
 
-    <div *ngIf="router.url == '/main'" class="dark-theme" fxHide.xs fxHide.sm>
+    <div *ngIf="router.url == '/'" class="dark-theme" fxHide.xs fxHide.sm>
       <mat-form-field class="search">
         <input matInput placeholder=Rechercher [(ngModel)]=search name=search>
       </mat-form-field>
@@ -25,11 +25,11 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button [disabled]="router.url !== '/main'" mat-menu-item routerLink="/login" routerLinkActive="active">
+      <button [disabled]="router.url !== '/'" mat-menu-item routerLink="/login" routerLinkActive="active">
         <mat-icon>settings</mat-icon>Préférences
       </button>
-      <button *ngIf="isAdmin()" mat-menu-item (click)=onAdminClick()>
-        <mat-icon>school</mat-icon>Administration
+      <button *ngIf="isNimda()" mat-menu-item (click)=onNimdaClick()>
+        <mat-icon>school</mat-icon>DEV_DOOR
       </button>
     </mat-menu>
   </mat-toolbar>

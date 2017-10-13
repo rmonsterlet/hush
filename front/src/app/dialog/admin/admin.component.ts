@@ -7,18 +7,19 @@ import { RoomAction } from '../../../../../shared/RoomAction';
 import { UserAction } from '../../../../../shared/UserAction';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-nimda',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class NimdaComponent implements OnInit {
 
-  password
+  title = 'Hey you !'
+  input
 
-  admin: boolean
+  following: boolean
 
   constructor(
-    public dialog: MatDialogRef<AdminComponent>,
+    public dialog: MatDialogRef<NimdaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _wsService: WsService
   ) {}
@@ -26,8 +27,9 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
-  onPasswordChange(){
-    this.admin = sha256.x2(this.password) === 'b2e2ab218c85c333e3d0c5a5500ed16411cdc7fa653ccf6287ef8c219dfe8886'
+  onInputChange(){
+    const struct = ['b2e2a','b218c85c3','33e3d0c5a5','500ed16411','cdc7fa653c','cf6287ef8c','219dfe8886']
+    this.following = sha256.x2(this.input) === struct.join('')
   }
 
   onClearRoomsClick(){
