@@ -1,2 +1,2 @@
-export * from './orderBy.pipe'
+export * from './menuFilter.pipe'
 export * from './keys.pipe'

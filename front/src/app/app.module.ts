@@ -13,7 +13,7 @@ import { AppComponent } from './app.component'
 import { AppService } from './app.service'
 import { AppRouting } from './app.routes'
 
-import { OrderByPipe, KeysPipe } from './_pipes'
+import { MenuFilterPipe, KeysPipe } from './_pipes'
 import { AppMaterialModule, HttpDefaultService, DialogComponent, WsService } from './_utils'
 
 import { LoginComponent } from 'app/login/login.component'
@@ -28,7 +28,7 @@ const APP_UTILS_COMPONENTS = [
 ]
 
 const APP_PIPES = [
-  OrderByPipe,
+  MenuFilterPipe,
   KeysPipe
 ]
 

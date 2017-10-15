@@ -4,11 +4,36 @@
   </button>
 </mat-toolbar>
 <mat-card>
+  <mat-card-title>Filters</mat-card-title>
+  <div fxLayout=column fxLayoutAlign=" center" class=app-mb>
+    <div fxLayout=row>
+      <div fxLayout=column fxLayoutAlign="space-around stretch">
+        <mat-checkbox [(ngModel)]=filter.woman color=primary>Woman</mat-checkbox>
+        <mat-checkbox [(ngModel)]=filter.man color=primary>Man</mat-checkbox>
+      </div>
+      <div fxLayout=column fxLayoutAlign="space-around stretch" class=checkbox-spacer>
+        <mat-checkbox [(ngModel)]=filter.sameCountry color=primary>Same country</mat-checkbox>
+        <mat-checkbox *ngIf=filter.sameCountry [(ngModel)]=filter.sameCity color=primary>Same city</mat-checkbox>
+      </div>
+    </div>
+    <div fxLayout=row fxLayoutAlign=" center">
+      Min
+      <mat-slider [(ngModel)]="filter.age.min" min=0 max=100 thumb-label=true color=primary></mat-slider>
+      {{filter.age.min}}
+    </div>
+    <div fxLayout=row fxLayoutAlign=" center">
+      Max
+      <mat-slider [(ngModel)]="filter.age.max" [min]=filter.age.min max=100 thumb-label=true color=primary></mat-slider>
+      {{filter.age.max}}
+    </div>
+    <button mat-button (click)=onClearClick() color=primary>Clear</button>
+    <button mat-raised-button (click)=onFilterClick() color=primary>Filter</button>
+  </div>
   <mat-card-title>Online ({{wsService.users?.length - 1}})</mat-card-title>
   <mat-list>
-    <div *ngFor="let _user of wsService.users">
-      <mat-list-item *ngIf="_user.uuid != appService.user.uuid" [matMenuTriggerFor]=menu>
-        <mat-icon  mat-list-icon [style.color]="_user.sex === 'F' ? 'hotpink' : 'dodgerblue'">face</mat-icon>
+    <div *ngFor="let _user of wsService.users | menuFilter:filter">
+      <mat-list-item [matMenuTriggerFor]=menu>
+        <mat-icon mat-list-icon [style.color]="_user.sex === 'F' ? 'hotpink' : 'dodgerblue'">face</mat-icon>
         <p mat-line [style.color]=_user.color>{{_user.name + ' (' + _user.age + ')'}}</p>
         <mat-menu #menu=matMenu>
           <button mat-menu-item (click)=onCreateRoomClick(_user)>

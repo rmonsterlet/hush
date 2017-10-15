@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       ]),
       'description': new FormControl(''),
       'country': new FormControl(''),
-      'city': new FormControl({value: '', disabled: true}),
+      'city': new FormControl({ value: '', disabled: true }),
       'theme': new FormControl(''),
       'color': new FormControl('')
     });
@@ -60,16 +60,17 @@ export class LoginComponent implements OnInit {
     this.themes = this._appUtilsService.getThemeNames()
     this.colors = this._appUtilsService.getColorNames()
 
-    this.countries = this._httpService.get('https://restcountries.eu/rest/v2/all').then(data => {
-      this.countries = data
+    this._httpService.get('https://restcountries.eu/rest/v2/all').then(data => {
+      this.appService.session.countries = data
       this.filteredCountries = this.loginForm.controls.country.valueChanges
         .startWith(null)
-        .map(value => value ? this.filterCountry(value) : this.countries.slice());
+        .map(value => value ? this.filterCountry(value) : this.appService.session.countries.slice())
     })
   }
 
   filterCountry(value) {
-    return this.countries.filter(country => country.name.toLowerCase().indexOf(value.toLowerCase()) === 0)
+    if (this.appService.session.countries)
+      return this.appService.session.countries.filter(country => country.name.toLowerCase().indexOf(value.toLowerCase()) === 0)
   }
 
   onCityChange() {

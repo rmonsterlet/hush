@@ -18,6 +18,18 @@ export class MenuComponent implements OnInit {
 
   @Input('user') user
 
+  filterIni = {
+    woman: true,
+    man: true,
+    age: {
+      min: 0,
+      max: 100
+    },
+    sameCountry: false,
+    sameCity: false
+  }
+  filter = JSON.parse(JSON.stringify(this.filterIni))
+
   constructor(
     public wsService: WsService,
     public appService: AppService,
@@ -38,5 +50,13 @@ export class MenuComponent implements OnInit {
         user: user
       }
     })
+  }
+
+  onClearClick(){
+    this.filter = JSON.parse(JSON.stringify(this.filterIni))
+  }
+
+  onFilterClick(){
+    this.filter = JSON.parse(JSON.stringify(this.filter))
   }
 }

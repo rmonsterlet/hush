@@ -14,6 +14,14 @@ export class AppService {
     this._user = user
   }
 
+  _session: any = {}
+  get session(){
+    return this._session
+  }
+  set session(session){
+    this._session = session
+  }
+
   eventEmitter: EventEmitter<any> = new EventEmitter()
 
   constructor(private _httpService: HttpDefaultService) { }
