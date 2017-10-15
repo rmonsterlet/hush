@@ -18,7 +18,7 @@ export class RoomController implements AppController {
     this._rooms.push({
       uuid: uuid.v4(),
       index: 0,
-      roomName: 'Hush.io !',
+      name: 'Hush.io !',
       messages: new Array()
     })
     this._rooms[0].messages.push(this.getDefaultMessage(this._rooms[0]))
@@ -53,11 +53,11 @@ export class RoomController implements AppController {
     let room: any = {
       uuid: uuid.v4(),
       index: this._rooms.length,
-      roomName: data.roomName,
+      name: data.name,
       messages: new Array()
     }
     room.messages.push(this.getDefaultMessage(room))
-    room.secret = (data.userUuids && data.userUuids.length)
+    room.secret = (data.userUuids && !!data.userUuids.length)
 
     this.wss.clients.forEach((client: AppWebSocket) => {
       if (!room.secret || data.userUuids.includes(client.uuid)) {
@@ -94,19 +94,12 @@ export class RoomController implements AppController {
 
   private getDefaultMessage = (room: any) => {
 
-    const obj: any = {
+    return {
       date: new Date(),
-      roomeName: room.roomName,
-      text: `Welcome to ${room.roomName}`,
+      text: `Welcome to ${room.name}`,
       user: {
         name: 'Hush.io'
       }
     }
-
-    if(!room.roomName){
-      obj.text = 'Hush.io !'
-    }
-
-    return obj
   }
 }

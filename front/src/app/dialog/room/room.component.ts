@@ -12,7 +12,7 @@ import { AppService } from 'app/app.service';
 export class RoomComponent implements OnInit {
 
   title = 'Créer une room'
-  roomName
+  name
 
   constructor(
     public dialog: MatDialogRef<RoomComponent>,
@@ -29,7 +29,7 @@ export class RoomComponent implements OnInit {
     let data: any = {
       route: RouteType.ROOM,
       action: RoomAction.ADD_ROOM,
-      roomName: this.roomName
+      name: this.name
     }
 
     if (this.data.author && this.data.user)

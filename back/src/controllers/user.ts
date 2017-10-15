@@ -8,7 +8,6 @@ import { RouteType } from '../../../shared/RouteType';
 export class UserController implements AppController {
 
     private _users = new Array()
-
     get users() {
         return this._users
     }
@@ -47,8 +46,8 @@ export class UserController implements AppController {
                 }))
             })
             this._users.push(user)
-            ws.uuid = user.uuid
         }
+        ws.uuid = user.uuid
     }
 
     removeUser(uuid: string) {
@@ -68,5 +67,18 @@ export class UserController implements AppController {
     removeAll(ws: AppWebSocket) {
         this._users = []
         this.sendAll(ws)
+    }
+
+    removeDisconnectedUsers(clients: Set<AppWebSocket>) {
+
+        const clientUuids = Array.from(clients)
+            .map((client => client.uuid))
+            .filter(uuid => uuid)
+
+        const uuidsToRemove = this._users
+            .map(user => user.uuid)
+            .filter(userUuid => clientUuids.indexOf(userUuid) < 0)
+
+        uuidsToRemove.forEach(uuidToRemove => this.removeUser(uuidToRemove))
     }
 }

@@ -10,16 +10,14 @@ const wss = new WebSocket.Server({ server })
 const appRouter = new AppRouter(wss)
 
 export interface AppWebSocket extends WebSocket {
-  isAlive: boolean
   uuid: string
 }
 
 wss.on('connection', (ws: AppWebSocket) => {
 
-  ws.isAlive = true
 
   ws.on('pong', () => {
-    ws.isAlive = true
+
   })
   ws.on('message', (data: string) => {
 
@@ -33,17 +31,10 @@ wss.on('connection', (ws: AppWebSocket) => {
 })
 
 setInterval(() => {
+
+  appRouter.removeDisconnectedUsers(<Set<AppWebSocket>>wss.clients)
   wss.clients.forEach((ws: AppWebSocket) => {
-
-    if (!ws.isAlive){
-      //FIXME
-      appRouter.removeUser(ws.uuid)
-      return ws.terminate()
-    }
-      
-
-    ws.isAlive = false
-    ws.ping(null, false, true)
+    ws.ping(null, false, true)   
   })
 }, 5000)
 

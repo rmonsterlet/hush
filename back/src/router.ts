@@ -34,7 +34,7 @@ export class AppRouter {
         this._userController.sendAll(ws)
     }
 
-    removeUser(uuid: string) {
-        this._userController.removeUser(uuid)
+    removeDisconnectedUsers(clients: Set<AppWebSocket>){
+        this._userController.removeDisconnectedUsers(clients)
     }
 }

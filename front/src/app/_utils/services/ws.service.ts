@@ -81,7 +81,7 @@ export class WsService {
         this._users.push(data.user)
         break
       case UserAction.REMOVE_USER:
-        const index = this._users.findIndex(_user => _user.uuid === data.uuid)
+        const index = this._users.findIndex(_user => _user.uuid === data.user.uuid)
         if (index >= 0)
           this._users.splice(index, 1)
         break

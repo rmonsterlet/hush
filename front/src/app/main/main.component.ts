@@ -69,20 +69,21 @@ export class MainComponent implements OnInit {
         text: this.message
       }
     })
+
+    this.message = null
   }
 
-  onCreateRoomClick(user?) {
+  onCreateRoomClick(user) {
 
     let data: any = {
       route: RouteType.ROOM,
       action: RoomAction.ADD_ROOM,
-    }
-
-    if (user)
-      data.userUuids = [
+      name : `${user.name} & ${this.user.name}`,
+      userUuids: [
         this.user.uuid,
         user.uuid
       ]
+    }
 
     this.wsService.send(data)
   }
