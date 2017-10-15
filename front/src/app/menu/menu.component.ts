@@ -26,20 +26,17 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
 
-    if(!this.user.uuid && localStorage.getItem('user'))
+    if (!this.user.uuid && localStorage.getItem('user'))
       this.user = JSON.parse(localStorage.getItem('user'))
   }
 
   onCreateRoomClick(user?) {
 
-    const _data: any = {
-      author: this.appService.user,
-      user: user
-    }
-
     const dialog = this._dialog.open(RoomComponent, {
-      data: _data
+      data: {
+        author: this.appService.user,
+        user: user
+      }
     })
   }
-
 }

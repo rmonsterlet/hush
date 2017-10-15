@@ -2,13 +2,22 @@
   <mat-icon color=primary class=app-mr>group_add</mat-icon>
   <h2 mat-dialog-title>{{title}}</h2>
 </div>
-<mat-dialog-content>
-  <mat-form-field>
-    <input matInput required placeholder="Nom de la room" [(ngModel)]=name name=name>
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close>Fermer</button>
-  <div class="spacer app-mr"></div>
-  <button mat-raised-button color="primary" (click)="onCreateRoomClick()">Creer</button>
-</mat-dialog-actions>
+<form [formGroup]=roomForm>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput required placeholder="Nom de la room" [(ngModel)]=name formControlName=name name=_name>
+    </mat-form-field>
+    <mat-list *ngIf="data.user">
+      <h3 mat-subheader>Participants :</h3>
+      <mat-list-item>
+        <mat-icon mat-list-icon [style.color]="data.user.sex === 'F' ? 'hotpink' : 'dodgerblue'">face</mat-icon>
+        <p mat-line [style.color]=data.user.color>{{data.user.name + ' (' + data.user.age + ')'}}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Fermer</button>
+    <div class="spacer app-mr"></div>
+    <button mat-raised-button [disabled]=!roomForm.valid (click)=onCreateRoomClick() color=primary>Creer</button>
+  </mat-dialog-actions>
+</form>

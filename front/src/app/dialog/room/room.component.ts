@@ -4,6 +4,7 @@ import { WsService } from 'app/_utils'
 import { RouteType } from '../../../../../shared/RouteType';
 import { RoomAction } from '../../../../../shared/RoomAction';
 import { AppService } from 'app/app.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
@@ -14,6 +15,8 @@ export class RoomComponent implements OnInit {
   title = 'Créer une room'
   name
 
+  roomForm: FormGroup
+
   constructor(
     public dialog: MatDialogRef<RoomComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,6 +25,13 @@ export class RoomComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.roomForm = new FormGroup({
+      'name': new FormControl('', [
+        Validators.required,
+        Validators.maxLength(32)
+      ])
+    })
   }
 
   onCreateRoomClick() {
