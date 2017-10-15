@@ -24,16 +24,24 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder=City [matAutocomplete]=auto [(ngModel)]=appService.user.city (change)=onCityChange() name=city
+        <input matInput placeholder=Country [matAutocomplete]=country [(ngModel)]=appService.user.country name=country formControlName=country>
+      </mat-form-field>
+      <mat-autocomplete #country=matAutocomplete>
+        <mat-option *ngFor="let country of filteredCountries | async" [value]=country.name>
+          <img style="vertical-align:middle;" aria-hidden src="{{country.flag}}" height="25" width="40" />  {{country.name}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-form-field>
+        <input matInput placeholder=City [matAutocomplete]=city [(ngModel)]=appService.user.city (change)=onCityChange() name=city
           formControlName=city>
       </mat-form-field>
-      <mat-autocomplete #auto=matAutocomplete>
+      <mat-autocomplete #city=matAutocomplete>
         <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
       </mat-autocomplete>
       <mat-form-field>
         <textarea matInput matTextareaAutosize [(ngModel)]=appService.user.description placeholder=Description name=description formControlName=description></textarea>
       </mat-form-field>
-      <button mat-raised-button [disabled]="!loginForm.valid" (click)=connect() color=primary>SIGN IN</button>
+      <button mat-raised-button [disabled]=!loginForm.valid (click)=connect() color=primary>SIGN IN</button>
     </mat-card>
   </form>
 </div>

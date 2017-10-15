@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core'
 import { LoginService } from './login.service'
 import { AppService } from '../app.service'
 import { Priorite, Statut } from '../_types'
-import { AppUtilsService, GeoCodingService } from 'app/_utils';
+import { AppUtilsService, GeoCodingService, HttpDefaultService } from 'app/_utils';
 import { createClient, GoogleMapsClient } from '@google/maps'
 import { Router } from '@angular/router';
 import * as uuid from 'uuid';
+import 'rxjs/add/operator/startWith';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +21,11 @@ import * as uuid from 'uuid';
 })
 export class LoginComponent implements OnInit {
 
-  years
-  options = []
   colors
   themes
+
+  countries
+  filteredCountries
 
   loginForm: FormGroup
 
@@ -31,13 +33,14 @@ export class LoginComponent implements OnInit {
     public appService: AppService,
     private _appUtilsService: AppUtilsService,
     private _geoCodingService: GeoCodingService,
+    private _httpService: HttpDefaultService,
     private _router: Router
   ) { }
 
   ngOnInit(): void {
 
     this.loginForm = new FormGroup({
-      'sex': new FormControl('F'),
+      'sex': new FormControl(''),
       'name': new FormControl('', [
         Validators.required,
         Validators.maxLength(16),
@@ -48,13 +51,25 @@ export class LoginComponent implements OnInit {
         Validators.max(100)
       ]),
       'description': new FormControl(''),
-      'city': new FormControl(''),
+      'country': new FormControl(''),
+      'city': new FormControl({value: '', disabled: true}),
       'theme': new FormControl(''),
       'color': new FormControl('')
     });
 
     this.themes = this._appUtilsService.getThemeNames()
     this.colors = this._appUtilsService.getColorNames()
+
+    this.countries = this._httpService.get('https://restcountries.eu/rest/v2/all').then(data => {
+      this.countries = data
+      this.filteredCountries = this.loginForm.controls.country.valueChanges
+        .startWith(null)
+        .map(value => value ? this.filterCountry(value) : this.countries.slice());
+    })
+  }
+
+  filterCountry(value) {
+    return this.countries.filter(country => country.name.toLowerCase().indexOf(value.toLowerCase()) === 0)
   }
 
   onCityChange() {

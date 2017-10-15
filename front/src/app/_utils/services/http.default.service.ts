@@ -20,6 +20,10 @@ export class HttpDefaultService {
         this._headers.append('Access-Control-Allow-Origin', '*')
     }
 
+    /*async getAsync(url: string, options?: RequestOptionsArgs){
+        return await this.get(url, options)
+    }*/
+
     public get(url: string, options?: RequestOptionsArgs): Promise<any> {
 
         const _options: RequestOptionsArgs = options || {}
