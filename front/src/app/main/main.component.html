@@ -12,7 +12,7 @@
             <mat-menu #menu="matMenu">
               <button *ngIf="message.user.uuid && message.user.uuid != user.uuid" mat-menu-item (click)=onCreateRoomClick(message.user)>
                 <mat-icon>mode_edit</mat-icon>
-                Ecrire à {{message.user.name}}
+                Write to {{message.user.name}}
               </button>
             </mat-menu>
           </mat-list-item>

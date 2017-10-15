@@ -1,10 +1,10 @@
 <mat-toolbar color=accent>
-  <button mat-mini-fab color=primary (click)=onCreateRoomClick() matTooltip="Creer une room">
+  <button mat-mini-fab color=primary (click)=onCreateRoomClick() matTooltip="Create a room">
     <mat-icon>group_add</mat-icon>
   </button>
 </mat-toolbar>
 <mat-card>
-  <mat-card-title>En ligne ({{wsService.users?.length - 1}})</mat-card-title>
+  <mat-card-title>Online ({{wsService.users?.length - 1}})</mat-card-title>
   <mat-list>
     <div *ngFor="let _user of wsService.users">
       <mat-list-item *ngIf="_user.uuid != appService.user.uuid" [matMenuTriggerFor]=menu>
@@ -13,7 +13,7 @@
         <mat-menu #menu=matMenu>
           <button mat-menu-item (click)=onCreateRoomClick(_user)>
             <mat-icon>mode_edit</mat-icon>
-            Ecrire à {{_user.name}}
+            Write to {{_user.name}}
           </button>
         </mat-menu>
       </mat-list-item>

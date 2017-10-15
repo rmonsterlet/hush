@@ -1,30 +1,30 @@
-<h1 class=route-title [ngClass]="'app-primary-'+appService.user.theme">Bienvenue sur Hush.io {{appService.user.name}} !</h1>
+<h1 class=route-title [ngClass]="'app-primary-'+appService.user.theme">Welcome to Hush.io {{appService.user.name}} !</h1>
 <div class=route>
   <form [formGroup]=loginForm>
     <mat-card fxLayout=column fxLayoutAlign="center center">
       <mat-icon class=app-icon color=primary>speaker_notes_off</mat-icon>
       <mat-radio-group required [(ngModel)]=appService.user.sex name=sex formControlName=sex class=app-mb>
-        <mat-radio-button checked value=F color=primary>Femme</mat-radio-button>
-        <mat-radio-button value=M class=app-ml color=primary>Homme</mat-radio-button>
+        <mat-radio-button checked value=F color=primary>Woman</mat-radio-button>
+        <mat-radio-button value=M class=app-ml color=primary>Man</mat-radio-button>
       </mat-radio-group>
       <mat-form-field>
-        <input matInput required placeholder=Nom [(ngModel)]=appService.user.name name=name formControlName=name>
+        <input matInput required placeholder=Username [(ngModel)]=appService.user.name name=name formControlName=name>
       </mat-form-field>
       <mat-form-field>
         <input type=number matInput required placeholder=Age [(ngModel)]=appService.user.age name=age formControlName=age>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Thème" [(ngModel)]=appService.user.theme name=theme formControlName=theme>
+        <mat-select placeholder=Theme [(ngModel)]=appService.user.theme name=theme formControlName=theme>
           <mat-option *ngFor="let theme of themes" [style.color]=theme.color [value]="theme.label.toLowerCase().split(' ').join('-')">{{theme.label.toUpperCase()}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Couleur de l'écriture" [(ngModel)]=appService.user.color name=color formControlName=color>
+        <mat-select placeholder=Color [(ngModel)]=appService.user.color name=color formControlName=color>
           <mat-option *ngFor="let color of colors" [style.color]=color [value]=color>{{color}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder=Ville [matAutocomplete]=auto [(ngModel)]=appService.user.city (change)=onCityChange() name=city
+        <input matInput placeholder=City [matAutocomplete]=auto [(ngModel)]=appService.user.city (change)=onCityChange() name=city
           formControlName=city>
       </mat-form-field>
       <mat-autocomplete #auto=matAutocomplete>
@@ -33,7 +33,7 @@
       <mat-form-field>
         <textarea matInput matTextareaAutosize [(ngModel)]=appService.user.description placeholder=Description name=description formControlName=description></textarea>
       </mat-form-field>
-      <button mat-raised-button [disabled]="!loginForm.valid" (click)=connect() color=primary>SE CONNECTER</button>
+      <button mat-raised-button [disabled]="!loginForm.valid" (click)=connect() color=primary>SIGN IN</button>
     </mat-card>
   </form>
 </div>

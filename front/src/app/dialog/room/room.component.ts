@@ -12,7 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class RoomComponent implements OnInit {
 
-  title = 'Créer une room'
+  title = 'Create a room'
   name
 
   roomForm: FormGroup
