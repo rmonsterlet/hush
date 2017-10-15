@@ -5,6 +5,7 @@ import { WsService } from 'app/_utils';
 import { MatDialog } from '@angular/material';
 import { RoomComponent } from 'app/dialog/room/room.component';
 import { AppService } from 'app/app.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
@@ -28,7 +29,9 @@ export class MenuComponent implements OnInit {
     sameCountry: false,
     sameCity: false
   }
-  filter = JSON.parse(JSON.stringify(this.filterIni))
+  filter
+
+  filterForm: FormGroup
 
   constructor(
     public wsService: WsService,
@@ -40,6 +43,16 @@ export class MenuComponent implements OnInit {
 
     if (!this.user.uuid && localStorage.getItem('user'))
       this.user = JSON.parse(localStorage.getItem('user'))
+
+    this.filterForm = new FormGroup({
+      'woman': new FormControl(''),
+      'man': new FormControl(''),
+      'sameCountry': new FormControl(''),
+      'sameCity': new FormControl(''),
+      'ageMin': new FormControl(''),
+      'ageMax': new FormControl('')  
+    })
+    this.filter = JSON.parse(JSON.stringify(this.filterIni))
   }
 
   onCreateRoomClick(user?) {
@@ -52,11 +65,7 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  onClearClick(){
+  onClearClick() {
     this.filter = JSON.parse(JSON.stringify(this.filterIni))
-  }
-
-  onFilterClick(){
-    this.filter = JSON.parse(JSON.stringify(this.filter))
   }
 }

@@ -1,6 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core'
-import { LoginService } from './login.service'
 import { AppService } from '../app.service'
 import { Priorite, Statut } from '../_types'
 import { AppUtilsService, GeoCodingService, HttpDefaultService } from 'app/_utils';
@@ -14,7 +13,6 @@ import 'rxjs/add/operator/startWith';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   providers: [
-    LoginService,
     AppUtilsService,
     GeoCodingService
   ]
@@ -55,7 +53,7 @@ export class LoginComponent implements OnInit {
       'city': new FormControl({ value: '', disabled: true }),
       'theme': new FormControl(''),
       'color': new FormControl('')
-    });
+    })
 
     this.themes = this._appUtilsService.getThemeNames()
     this.colors = this._appUtilsService.getColorNames()

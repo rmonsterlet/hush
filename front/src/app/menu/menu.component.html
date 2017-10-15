@@ -4,35 +4,43 @@
   </button>
 </mat-toolbar>
 <mat-card>
-  <mat-card-title>Filters</mat-card-title>
-  <div fxLayout=column fxLayoutAlign=" center" class=app-mb>
-    <div fxLayout=row>
-      <div fxLayout=column fxLayoutAlign="space-around stretch">
-        <mat-checkbox [(ngModel)]=filter.woman color=primary>Woman</mat-checkbox>
-        <mat-checkbox [(ngModel)]=filter.man color=primary>Man</mat-checkbox>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filters
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form [formGroup]=filterForm fxLayout=column fxLayoutAlign=" center">
+      <div fxLayout=row>
+        <div fxLayout=column fxLayoutAlign="space-around stretch">
+          <mat-checkbox [(ngModel)]=filter.woman color=primary name=woman formControlName=woman>Woman</mat-checkbox>
+          <mat-checkbox [(ngModel)]=filter.man color=primary name=man formControlName=man>Man</mat-checkbox>
+        </div>
+        <div fxLayout=column fxLayoutAlign="space-around stretch" class=checkbox-spacer>
+          <mat-checkbox [(ngModel)]=filter.sameCountry name=sameCountry formControlName=sameCountry color=primary>Same country</mat-checkbox>
+          <mat-checkbox *ngIf=filter.sameCountry [(ngModel)]=filter.sameCity name=sameCity formControlName=sameCity color=primary>Same city</mat-checkbox>
+        </div>
       </div>
-      <div fxLayout=column fxLayoutAlign="space-around stretch" class=checkbox-spacer>
-        <mat-checkbox [(ngModel)]=filter.sameCountry color=primary>Same country</mat-checkbox>
-        <mat-checkbox *ngIf=filter.sameCountry [(ngModel)]=filter.sameCity color=primary>Same city</mat-checkbox>
+      <div fxLayout=row fxLayoutAlign=" center">
+        Min
+        <mat-slider [(ngModel)]="filter.age.min" min=0 max=100 thumb-label=true name=ageMin formControlName=ageMin color=primary></mat-slider>
+        {{filter.age.min}}
       </div>
-    </div>
-    <div fxLayout=row fxLayoutAlign=" center">
-      Min
-      <mat-slider [(ngModel)]="filter.age.min" min=0 max=100 thumb-label=true color=primary></mat-slider>
-      {{filter.age.min}}
-    </div>
-    <div fxLayout=row fxLayoutAlign=" center">
-      Max
-      <mat-slider [(ngModel)]="filter.age.max" [min]=filter.age.min max=100 thumb-label=true color=primary></mat-slider>
-      {{filter.age.max}}
-    </div>
-    <button mat-button (click)=onClearClick() color=primary>Clear</button>
-    <button mat-raised-button (click)=onFilterClick() color=primary>Filter</button>
-  </div>
-  <mat-card-title>Online ({{wsService.users?.length - 1}})</mat-card-title>
+      <div fxLayout=row fxLayoutAlign=" center">
+        Max
+        <mat-slider [(ngModel)]="filter.age.max" [min]=filter.age.min max=100 thumb-label=true name=ageMax formControlName=ageMax
+          color=primary></mat-slider>
+        {{filter.age.max}}
+      </div>
+      <button mat-raised-button (click)=onClearClick() color=primary>Clear</button>
+    </form>
+  </mat-expansion-panel>
+  <mat-card-title class=app-mt>Online ({{wsService.users?.length - 1}})</mat-card-title>
   <mat-list>
-    <div *ngFor="let _user of wsService.users | menuFilter:filter">
-      <mat-list-item [matMenuTriggerFor]=menu>
+    <div *ngFor="let _user of (wsService.users | menuFilter:filter)">
+      <mat-list-item *ngIf="_user.uuid !== appService.user.uuid" [matMenuTriggerFor]=menu>
         <mat-icon mat-list-icon [style.color]="_user.sex === 'F' ? 'hotpink' : 'dodgerblue'">face</mat-icon>
         <p mat-line [style.color]=_user.color>{{_user.name + ' (' + _user.age + ')'}}</p>
         <mat-menu #menu=matMenu>
