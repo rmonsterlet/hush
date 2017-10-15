@@ -18,6 +18,7 @@ export class RoomController implements AppController {
     this._rooms.push({
       uuid: uuid.v4(),
       index: 0,
+      roomName: 'Hush.io !',
       messages: new Array()
     })
     this._rooms[0].messages.push(this.getDefaultMessage(this._rooms[0]))
@@ -52,6 +53,7 @@ export class RoomController implements AppController {
     let room: any = {
       uuid: uuid.v4(),
       index: this._rooms.length,
+      roomName: data.roomName,
       messages: new Array()
     }
     room.messages.push(this.getDefaultMessage(room))
@@ -91,12 +93,20 @@ export class RoomController implements AppController {
   }
 
   private getDefaultMessage = (room: any) => {
-    return {
+
+    const obj: any = {
       date: new Date(),
-      text: `Bienvenue dans la Room #${room.index}`,
+      roomeName: room.roomName,
+      text: `Welcome to ${room.roomName}`,
       user: {
         name: 'Hush.io'
       }
     }
+
+    if(!room.roomName){
+      obj.text = 'Hush.io !'
+    }
+
+    return obj
   }
 }

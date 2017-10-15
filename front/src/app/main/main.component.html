@@ -1,8 +1,8 @@
-<h2 class=route-title [ngClass]="'app-primary-'+appService.user.theme">{{'Room #' + selectedRoom?.index}}</h2>
+<h2 class=route-title [ngClass]="'app-primary-'+appService.user.theme">{{selectedRoom?.roomName}}</h2>
 <div class="route">
 
   <mat-tab-group [(selectedIndex)]=selectedIndex (selectedIndexChange)=onSelectedIndexChange()>
-    <mat-tab *ngFor="let room of wsService.rooms" [label]="'Room #' + room.index + ' ' + (selectedRoom && selectedRoom.uuid !== room.uuid && room.notif ? '*' : '')">
+    <mat-tab *ngFor="let room of wsService.rooms" [label]="room.roomName + (selectedRoom && selectedRoom.uuid !== room.uuid && room.notif ? ' *' : '')">
       <mat-card class=card>
         <mat-list>
           <mat-list-item *ngFor="let message of room.messages" [matMenuTriggerFor]="menu" [ngClass]="{'myself' : message.user.uuid === user.uuid}">

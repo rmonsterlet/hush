@@ -21,6 +21,7 @@ import { MainComponent } from 'app/main/main.component'
 import { MenuComponent } from 'app/menu/menu.component'
 import { NotFoundComponent } from 'app/not-found/not-found.component'
 import { NimdaComponent } from 'app/dialog/admin/admin.component';
+import { RoomComponent } from './dialog/room/room.component';
 
 const APP_UTILS_COMPONENTS = [
   DialogComponent
@@ -33,7 +34,8 @@ const APP_PIPES = [
 
 const APP_DIALOG_COMPONENTS = [
   DialogComponent,
-  NimdaComponent
+  NimdaComponent,
+  RoomComponent
 ]
 
 @NgModule({
@@ -61,7 +63,8 @@ const APP_DIALOG_COMPONENTS = [
     MainComponent,
     MenuComponent,
     NotFoundComponent,
-    NimdaComponent 
+    NimdaComponent,
+    RoomComponent 
   ],
   providers: [
     HttpDefaultService,

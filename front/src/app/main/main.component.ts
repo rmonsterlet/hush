@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
 
   user
   message
-  
+
   selectedIndex = 0
   selectedRoom
 
@@ -30,10 +30,10 @@ export class MainComponent implements OnInit {
 
     this.user = this.appService.user
 
-    if(!this.user.uuid && localStorage.getItem('user'))
+    if (!this.user.uuid && localStorage.getItem('user'))
       this.user = JSON.parse(localStorage.getItem('user'))
 
-    if(this.user.uuid)
+    if (this.user.uuid)
       this.wsService.ws.onopen = (event: MessageEvent) => {
         this.wsService.send({
           route: RouteType.USER,
@@ -45,12 +45,14 @@ export class MainComponent implements OnInit {
 
   onSelectedIndexChange() {
 
-    if(this.selectedRoom)
+    if (this.selectedRoom)
       this.selectedRoom.notif = false
 
     const room = this.wsService.rooms.find(room => room.index === this.selectedIndex)
-    room.notif = false
-    this.selectedRoom = room
+    if (room) {
+      room.notif = false
+      this.selectedRoom = room
+    }
   }
 
   onSendClick() {

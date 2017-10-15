@@ -4,17 +4,19 @@
   </button>
 </mat-toolbar>
 <mat-card>
-  <mat-card-title>En ligne</mat-card-title>
+  <mat-card-title>En ligne ({{wsService.users?.length - 1}})</mat-card-title>
   <mat-list>
-    <mat-list-item *ngFor="let _user of wsService.users" [matMenuTriggerFor]=menu>
-      <mat-icon mat-list-icon [style.color]="_user.sex === 'F' ? 'hotpink' : 'dodgerblue'">face</mat-icon>
-      <p mat-line [style.color]=_user.color>{{_user.name + ' (' + _user.age + ')'}}</p>
-      <mat-menu #menu=matMenu>
-        <button mat-menu-item (click)=onCreateRoomClick(_user)>
-          <mat-icon>mode_edit</mat-icon>
-          Ecrire à {{_user.name}}
-        </button>
-      </mat-menu>
-    </mat-list-item>
+    <div *ngFor="let _user of wsService.users">
+      <mat-list-item *ngIf="_user.uuid != appService.user.uuid" [matMenuTriggerFor]=menu>
+        <mat-icon  mat-list-icon [style.color]="_user.sex === 'F' ? 'hotpink' : 'dodgerblue'">face</mat-icon>
+        <p mat-line [style.color]=_user.color>{{_user.name + ' (' + _user.age + ')'}}</p>
+        <mat-menu #menu=matMenu>
+          <button mat-menu-item (click)=onCreateRoomClick(_user)>
+            <mat-icon>mode_edit</mat-icon>
+            Ecrire à {{_user.name}}
+          </button>
+        </mat-menu>
+      </mat-list-item>
+    </div>
   </mat-list>
 </mat-card>

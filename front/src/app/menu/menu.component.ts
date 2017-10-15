@@ -2,6 +2,8 @@ import { RoomAction } from '../../../../shared/RoomAction';
 import { RouteType } from '../../../../shared/RouteType';
 import { Component, Input, OnInit } from '@angular/core';
 import { WsService } from 'app/_utils';
+import { MatDialog } from '@angular/material';
+import { RoomComponent } from 'app/dialog/room/room.component';
 import { AppService } from 'app/app.service';
 
 @Component({
@@ -17,8 +19,9 @@ export class MenuComponent implements OnInit {
   @Input('user') user
 
   constructor(
-    private _appService: AppService,
-    public wsService: WsService
+    public wsService: WsService,
+    public appService: AppService,
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -29,18 +32,14 @@ export class MenuComponent implements OnInit {
 
   onCreateRoomClick(user?) {
 
-    let data: any = {
-      route: RouteType.ROOM,
-      action: RoomAction.ADD_ROOM,
+    const _data: any = {
+      author: this.appService.user,
+      user: user
     }
 
-    if (user)
-      data.userUuids = [
-        this.user.uuid,
-        user.uuid
-      ]
-
-    this.wsService.send(data)
+    const dialog = this._dialog.open(RoomComponent, {
+      data: _data
+    })
   }
 
 }

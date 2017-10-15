@@ -1,0 +1,14 @@
+<div fxLayout=row>
+  <mat-icon color=primary class=app-mr>group_add</mat-icon>
+  <h2 mat-dialog-title>{{title}}</h2>
+</div>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput required placeholder="Nom de la room" [(ngModel)]=roomName name=roomName>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Fermer</button>
+  <div class="spacer app-mr"></div>
+  <button mat-raised-button color="primary" (click)="onCreateRoomClick()">Creer</button>
+</mat-dialog-actions>
