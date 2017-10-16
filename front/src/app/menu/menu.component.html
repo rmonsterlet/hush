@@ -12,7 +12,7 @@
       <mat-panel-description>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <form [formGroup]=filterForm fxLayout=column fxLayoutAlign=" center">
+    <form [formGroup]=filterForm fxLayout=column fxLayoutAlign=" center" class=filter-form>
       <div fxLayout=row>
         <div fxLayout=column fxLayoutAlign="space-around stretch">
           <mat-checkbox [(ngModel)]=filter.woman color=primary name=woman formControlName=woman>Woman</mat-checkbox>

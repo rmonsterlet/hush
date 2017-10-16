@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import 'hammerjs';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
-import { ColorPickerModule } from 'ngx-color-picker';
 import { AgmCoreModule } from '@agm/core'
 
 import { AppComponent } from './app.component'
@@ -49,7 +48,6 @@ const APP_DIALOG_COMPONENTS = [
     AppMaterialModule,
     AppRouting,
     NgxDatatableModule,
-    ColorPickerModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCn5M684ZDoTqQwaoZxMTasOlo7uuVvQ7E',
       libraries: ['places']
