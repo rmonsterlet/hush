@@ -1,0 +1,12 @@
+{
+    "name": "hush",
+    "version": "1.0.0",
+    "description": "",
+    "main": "back/dist/server/back/src/server.js",
+    "scripts": {
+      "start": "node ./back/dist/server/back/src/server.js"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+  

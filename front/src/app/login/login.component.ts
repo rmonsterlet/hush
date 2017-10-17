@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
   countries
   filteredCountries
 
+  options
+
   loginForm: FormGroup
 
   constructor(

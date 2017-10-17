@@ -39,6 +39,6 @@ setInterval(() => {
 }, 5000)
 
 //start our server
-server.listen(process.env.PORT || 4100, () => {
+server.listen(process.env.OPENSHIFT_NODEJS_PORT || 4100, () => {
   console.log(`Server started on port ${server.address().port} :)`)
 })

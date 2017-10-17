@@ -1,8 +1,8 @@
 {
-  "name": "websocket-node-express",
+  "name": "hush-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/server/back/src/server.js",
   "scripts": {
     "clean": "rimraf dist",
     "copy-deps": "copy-newer --cwd node_modules ** ./dist/node_modules",
