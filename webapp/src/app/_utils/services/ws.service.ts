@@ -26,7 +26,7 @@ export class WsService {
 
   constructor(private _dialog: MatDialog) {
 
-    const url = location.origin.replace(/^http/, 'ws')
+    const url = location.origin.replace(/^http/, 'ws').replace('4200','4100')
     this._ws = new WebSocket(url)
     this._ws.onmessage = (event: MessageEvent) => {
 

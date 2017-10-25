@@ -51,7 +51,7 @@ export class MainComponent implements OnInit {
     if (this.selectedRoom)
       this.selectedRoom.notif = false
 
-    const room = this.wsService.rooms.find(room => room.index === this.selectedIndex)
+    const room = this.wsService.rooms[this.selectedIndex]
     if (room) {
       room.notif = false
       this.selectedRoom = room
@@ -77,12 +77,16 @@ export class MainComponent implements OnInit {
   }
 
   onCreateRoomClick(user) {
-    
-    const dialog = this._dialog.open(RoomComponent, {
-      data: {
-        author: this.appService.user,
-        user: user
-      }
-    })
+
+    let data: any = {
+      route: RouteType.ROOM,
+      action: RoomAction.ADD_ROOM,
+      name: this.appService.user.name + ' & ' + user.name,
+      userUuids: [
+        this.appService.user.uuid,
+        user.uuid
+      ]
+    }
+    this.wsService.send(data)
   }
 }

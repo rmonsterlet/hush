@@ -56,8 +56,8 @@ export class RoomController implements AppController {
       name: data.name,
       messages: new Array()
     }
-    room.messages.push(this.getDefaultMessage(room))
     room.secret = (data.userUuids && !!data.userUuids.length)
+    room.messages.push(this.getDefaultMessage(room))
 
     this.wss.clients.forEach((client: AppWebSocket) => {
       if (!room.secret || data.userUuids.includes(client.uuid)) {
@@ -96,7 +96,7 @@ export class RoomController implements AppController {
 
     return {
       date: new Date(),
-      text: `Welcome to ${room.name}`,
+      text: 'Welcome to ' + room.name + (room.secret ? ' (private)' : ' (public)'),
       user: {
         name: 'Hush.io'
       }

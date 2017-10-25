@@ -39,14 +39,9 @@ export class RoomComponent implements OnInit {
     let data: any = {
       route: RouteType.ROOM,
       action: RoomAction.ADD_ROOM,
-      name: this.name
+      name: this.name,
+      userUuids: this.data.userUuids
     }
-
-    if (this.data.author && this.data.user)
-      data.userUuids = [
-        this.data.author.uuid,
-        this.data.user.uuid
-      ]
 
     this._wsService.send(data)
     this.dialog.close(true)

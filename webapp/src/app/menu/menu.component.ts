@@ -50,19 +50,32 @@ export class MenuComponent implements OnInit {
       'sameCountry': new FormControl(''),
       'sameCity': new FormControl(''),
       'ageMin': new FormControl(''),
-      'ageMax': new FormControl('')  
+      'ageMax': new FormControl('')
     })
     this.filter = JSON.parse(JSON.stringify(this.filterIni))
   }
 
   onCreateRoomClick(user?) {
 
-    const dialog = this._dialog.open(RoomComponent, {
-      data: {
-        author: this.appService.user,
-        user: user
+    if (!user) {
+      const dialog = this._dialog.open(RoomComponent, {
+        data: {
+          userUuids: []
+        }
+      })
+    }
+    else {
+      let data: any = {
+        route: RouteType.ROOM,
+        action: RoomAction.ADD_ROOM,
+        name: this.appService.user.name + ' & ' + user.name,
+        userUuids: [
+          this.appService.user.uuid,
+          user.uuid
+        ]
       }
-    })
+      this.wsService.send(data)
+    }
   }
 
   onClearClick() {
