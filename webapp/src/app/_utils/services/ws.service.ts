@@ -26,7 +26,7 @@ export class WsService {
 
   constructor(private _dialog: MatDialog) {
 
-    const url = process.env.OPENSHIFT_NODEJS_PORT ? 'http://hush-hush.1d35.starter-us-east-1.openshiftapps.com:8443' : 'ws://localhost:4100'
+    const url = location.origin.replace(/^http/, 'ws')
     this._ws = new WebSocket(url)
     this._ws.onmessage = (event: MessageEvent) => {
 
