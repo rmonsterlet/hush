@@ -4,7 +4,7 @@ import * as WebSocket from 'ws';
 import { AppRouter } from './router';
 
 const app = express()
-app.use(express.static('dist/public'))
+app.use(express.static('webapp/dist'))
 const server = http.createServer(app)
 
 
