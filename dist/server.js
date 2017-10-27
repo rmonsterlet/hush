@@ -5,7 +5,7 @@ const http = require("http");
 const WebSocket = require("ws");
 const router_1 = require("./router");
 const app = express();
-app.use(express.static('dist/public'));
+app.use(express.static('webapp/dist'));
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 const appRouter = new router_1.AppRouter(wss);
