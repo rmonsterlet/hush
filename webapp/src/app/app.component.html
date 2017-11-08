@@ -28,6 +28,9 @@
       <button [disabled]="router.url !== '/'" mat-menu-item routerLink="/login" routerLinkActive="active">
         <mat-icon>settings</mat-icon>Settings
       </button>
+      <button mat-menu-item routerLink="/crypto" routerLinkActive="active">
+        <mat-icon>show_chart</mat-icon>Crypto
+      </button>
       <button *ngIf="isNimda()" mat-menu-item (click)=onNimdaClick()>
         <mat-icon>school</mat-icon>DEV_DOOR
       </button>

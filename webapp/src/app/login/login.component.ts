@@ -7,6 +7,7 @@ import { createClient, GoogleMapsClient } from '@google/maps'
 import { Router } from '@angular/router';
 import * as uuid from 'uuid';
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-login',
@@ -63,7 +64,6 @@ export class LoginComponent implements OnInit {
     this._httpService.get('https://restcountries.eu/rest/v2/all').then(data => {
       this.appService.session.countries = data
       this.filteredCountries = this.loginForm.controls.country.valueChanges
-        .startWith(null)
         .map(value => value ? this.filterCountry(value) : this.appService.session.countries.slice())
     })
   }
