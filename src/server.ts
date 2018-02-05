@@ -20,6 +20,7 @@ wss.on('connection', (ws: AppWebSocket) => {
 
 
   ws.on('pong', () => {
+
   })
   ws.on('message', (data: string) => {
 
@@ -27,6 +28,7 @@ wss.on('connection', (ws: AppWebSocket) => {
     let _data = JSON.parse(data)
     appRouter.onMessage(ws, _data)
   })
+  ws.on('error', () => console.log('errored'));
 
   appRouter.sendRooms(ws)
   appRouter.sendUsers(ws)
@@ -35,8 +37,8 @@ wss.on('connection', (ws: AppWebSocket) => {
 setInterval(() => {
 
   appRouter.removeDisconnectedUsers(<Set<AppWebSocket>>wss.clients)
-  wss.clients.forEach((ws: AppWebSocket) => {
-    ws.ping(null, false, true)   
+  wss.clients.forEach(ws => {
+    ws.ping(null, false)  
   })
 }, 5000)
 

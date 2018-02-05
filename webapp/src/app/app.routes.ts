@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 
 import { MainComponent } from 'app/main/main.component';
 import { LoginComponent } from 'app/login/login.component';
-import { CryptoComponent } from 'app/crypto/crypto.component';
+import { DevComponent } from 'app/dev/dev.component';
 
 
 const APP_ROUTES: Routes = [
@@ -22,8 +22,8 @@ const APP_ROUTES: Routes = [
     component: MainComponent
   },
   {
-    path: 'crypto',
-    component: CryptoComponent
+    path: 'dev',
+    component: DevComponent
   }
   /*,
   {

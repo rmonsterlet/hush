@@ -65,6 +65,10 @@ export class AppComponent implements OnInit {
     })
   }
 
+  onOpenCvClick(){
+    window.open('/assets/pdf/CV_RMONSTERLET.pdf')
+  }
+
   up() {
     window.scrollTo(0, 0)
   }

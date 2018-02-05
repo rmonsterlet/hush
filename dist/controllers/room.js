@@ -56,7 +56,7 @@ class RoomController {
         };
         room.secret = (data.userUuids && !!data.userUuids.length);
         room.messages.push(this.getDefaultMessage(room));
-        this.wss.clients.forEach((client) => {
+        this.wss.clients.forEach(client => {
             if (!room.secret || data.userUuids.includes(client.uuid)) {
                 client.send(JSON.stringify({
                     route: RouteType_1.RouteType.ROOM,

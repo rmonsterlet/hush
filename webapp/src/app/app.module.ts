@@ -17,10 +17,10 @@ import { AppMaterialModule, HttpDefaultService, DialogComponent, WsService } fro
 import { LoginComponent } from 'app/login/login.component'
 import { MainComponent } from 'app/main/main.component'
 import { MenuComponent } from 'app/menu/menu.component'
-import { CryptoComponent } from 'app/crypto/crypto.component';
 import { NotFoundComponent } from 'app/not-found/not-found.component'
 import { NimdaComponent } from 'app/dialog/admin/admin.component';
 import { RoomComponent } from './dialog/room/room.component';
+import { DevComponent } from './dev/dev.component';
 
 
 const APP_UTILS_COMPONENTS = [
@@ -60,7 +60,7 @@ const APP_DIALOG_COMPONENTS = [
     NotFoundComponent,
     NimdaComponent,
     RoomComponent,
-    CryptoComponent 
+    DevComponent
   ],
   providers: [
     HttpDefaultService,

@@ -17,13 +17,14 @@ wss.on('connection', (ws) => {
         let _data = JSON.parse(data);
         appRouter.onMessage(ws, _data);
     });
+    ws.on('error', () => console.log('errored'));
     appRouter.sendRooms(ws);
     appRouter.sendUsers(ws);
 });
 setInterval(() => {
     appRouter.removeDisconnectedUsers(wss.clients);
-    wss.clients.forEach((ws) => {
-        ws.ping(null, false, true);
+    wss.clients.forEach(ws => {
+        ws.ping(null, false);
     });
 }, 5000);
 //start our server

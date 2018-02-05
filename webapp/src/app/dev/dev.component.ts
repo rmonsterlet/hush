@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from 'app/app.service';
 
 @Component({
-  selector: 'app-crypto',
-  templateUrl: './crypto.component.html',
-  styleUrls: ['./crypto.component.scss']
+  selector: 'app-dev',
+  templateUrl: './dev.component.html',
+  styleUrls: ['./dev.component.scss']
 })
-export class CryptoComponent implements OnInit {
+export class DevComponent implements OnInit {
 
   constructor(public appService: AppService) { }
 

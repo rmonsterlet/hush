@@ -59,8 +59,8 @@ export class RoomController implements AppController {
     room.secret = (data.userUuids && !!data.userUuids.length)
     room.messages.push(this.getDefaultMessage(room))
 
-    this.wss.clients.forEach((client: AppWebSocket) => {
-      if (!room.secret || data.userUuids.includes(client.uuid)) {
+    this.wss.clients.forEach(client => {
+      if (!room.secret || data.userUuids.includes((client as AppWebSocket).uuid)) {
         client.send(JSON.stringify({
           route: RouteType.ROOM,
           action: RoomAction.ADD_ROOM,
