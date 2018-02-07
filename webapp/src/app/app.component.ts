@@ -69,6 +69,10 @@ export class AppComponent implements OnInit {
     window.open('/assets/pdf/CV_RMONSTERLET.pdf')
   }
 
+  onOpenGithubClick(){
+    window.open('https://github.com/rmonsterlet/hush')
+  }
+
   up() {
     window.scrollTo(0, 0)
   }
