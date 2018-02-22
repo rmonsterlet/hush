@@ -7,12 +7,11 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/favicon.ico",
         "/index.html",
-        "/inline.9dd39abda1afa3589a56.bundle.js",
-        "/main.2f6cd332481178afc687.bundle.js",
+        "/inline.1b744cce22fbf7d2a74b.bundle.js",
+        "/main.c492df68410ce5c43d1c.bundle.js",
         "/polyfills.f2e9158370cc7a485aa3.bundle.js",
-        "/styles.aa2a4d5f268388ec507f.bundle.css"
+        "/styles.84093f54e5cf037fafdf.bundle.css"
       ],
       "patterns": []
     },
@@ -39,17 +38,16 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/inline.9dd39abda1afa3589a56.bundle.js": "69f012264464f6e2a30dea03ef84241a02283468",
-    "/assets/icons/android-chrome-512x512.png": "b7a5b040a49ebf8a8e175bc2d43c78dafed5f046",
-    "/main.2f6cd332481178afc687.bundle.js": "f838486cc531fb16be757a2a0b8ff341d5d09eac",
+    "/inline.1b744cce22fbf7d2a74b.bundle.js": "8d8b2cba69b384e397d5b369e83550f298dbba0c",
+    "/assets/icons/android-chrome-512x512.png": "a3c69092591b162724e53384f60351984c03ae77",
+    "/main.c492df68410ce5c43d1c.bundle.js": "d49c95104898d608a20c854dc759f48157150606",
     "/assets/img/C14_Admin_1.png": "ad5d9ca7df3c81b1f335bbfb312d846d60d40140",
     "/polyfills.f2e9158370cc7a485aa3.bundle.js": "3b8ca410b71df5145b781c01c4cc6135026e9787",
     "/assets/img/C14_Admin_2.png": "7e36efd1d5634548620f641e79b3ce0eed267ce8",
-    "/styles.aa2a4d5f268388ec507f.bundle.css": "4507b50652f9269d99a42869f6f59f94adc9b8ee",
+    "/styles.84093f54e5cf037fafdf.bundle.css": "9a78ec1bbc30f48cf0cd34b2182de063d0ce4954",
     "/assets/img/C14_Admin_3.png": "2be66fbb04cce15a25ef8c902b8bb30201032309",
-    "/favicon.ico": "e6ad378ddd88203b7073e27413eb8d3b20715c4b",
+    "/index.html": "3a033e262998232099003b2c1683dfac60c971bb",
     "/assets/img/C14_Hyperv_1.png": "051c2628811f6ce38b978ba0fb8519ee495e5e2b",
-    "/index.html": "679d15cd67c20319ef3061e44659b8fd070260ee",
     "/assets/img/C14_Hyperv_2.png": "ab806a02ea44de582a8715b6d4ffce7538d07306",
     "/assets/img/CEDN.PNG": "b406d926f38ea2bd272a2f2e9a846e25c4c265dc",
     "/assets/img/ISNI1.PNG": "4b7eb65b009ac950df012ac8657afa0ebddc8ace",

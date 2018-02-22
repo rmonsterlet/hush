@@ -32,7 +32,7 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   }
 }
 
-/*.theme-red {
+.theme-red {
   @include theme($mat-red); 
   .app-primary-red {
     background-color: mat-color(mat-palette($mat-red, 500))
@@ -242,7 +242,6 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     background-color: mat-color(mat-palette($mat-blue-grey, 500))
   }
 }
-*/
 
 .mat-list-item-content{
     overflow: visible;
