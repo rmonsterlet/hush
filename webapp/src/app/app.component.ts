@@ -30,7 +30,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     if (!localStorage.getItem('user'))
-      this.router.navigate(['login'])
+      console.log('login modal please')
+      //this.router.navigate(['login'])
     else
       this.appService.user = JSON.parse(localStorage.getItem('user'))
 

@@ -7,6 +7,9 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import 'hammerjs';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 import { AppComponent } from './app.component'
 import { AppService } from './app.service'
 import { AppRouting } from './app.routes'
@@ -40,6 +43,7 @@ const APP_DIALOG_COMPONENTS = [
 
 @NgModule({
   imports: [
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

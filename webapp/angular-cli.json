@@ -1,6 +1,5 @@
 {
   "project": {
-    "version": "1.0.0-rc.4",
     "name": "monster"
   },
   "apps": [
@@ -9,7 +8,8 @@
       "outDir": "./dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -17,6 +17,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "app",
+      "serviceWorker": true,
       "styles": [
         "styles/theme.scss",
         "styles/styles.scss"
@@ -51,18 +52,13 @@
   },
   "defaults": {
     "styleExt": "css",
-    "prefixInterfaces": false,
-    "inline": {
-      "style": false,
-      "template": false
+    "class": {
+      "spec": false
     },
-    "spec": {
-      "class": false,
-      "component": true,
-      "directive": true,
-      "module": false,
-      "pipe": true,
-      "service": true
+    "component": {
+      "spec": true,
+      "inlineStyle": false,
+      "inlineTemplate": false
     }
   }
 }

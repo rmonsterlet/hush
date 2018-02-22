@@ -1,0 +1,61 @@
+{
+  "configVersion": 1,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/inline.9dd39abda1afa3589a56.bundle.js",
+        "/main.2f6cd332481178afc687.bundle.js",
+        "/polyfills.f2e9158370cc7a485aa3.bundle.js",
+        "/styles.aa2a4d5f268388ec507f.bundle.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/icons/android-chrome-512x512.png",
+        "/assets/img/C14_Admin_1.png",
+        "/assets/img/C14_Admin_2.png",
+        "/assets/img/C14_Admin_3.png",
+        "/assets/img/C14_Hyperv_1.png",
+        "/assets/img/C14_Hyperv_2.png",
+        "/assets/img/CEDN.PNG",
+        "/assets/img/ISNI1.PNG",
+        "/assets/img/ISNI2.PNG",
+        "/assets/img/PULSAR.PNG",
+        "/assets/img/WIFI.PNG",
+        "/assets/pdf/CV_RMONSTERLET.pdf"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/inline.9dd39abda1afa3589a56.bundle.js": "69f012264464f6e2a30dea03ef84241a02283468",
+    "/assets/icons/android-chrome-512x512.png": "b7a5b040a49ebf8a8e175bc2d43c78dafed5f046",
+    "/main.2f6cd332481178afc687.bundle.js": "f838486cc531fb16be757a2a0b8ff341d5d09eac",
+    "/assets/img/C14_Admin_1.png": "ad5d9ca7df3c81b1f335bbfb312d846d60d40140",
+    "/polyfills.f2e9158370cc7a485aa3.bundle.js": "3b8ca410b71df5145b781c01c4cc6135026e9787",
+    "/assets/img/C14_Admin_2.png": "7e36efd1d5634548620f641e79b3ce0eed267ce8",
+    "/styles.aa2a4d5f268388ec507f.bundle.css": "4507b50652f9269d99a42869f6f59f94adc9b8ee",
+    "/assets/img/C14_Admin_3.png": "2be66fbb04cce15a25ef8c902b8bb30201032309",
+    "/favicon.ico": "e6ad378ddd88203b7073e27413eb8d3b20715c4b",
+    "/assets/img/C14_Hyperv_1.png": "051c2628811f6ce38b978ba0fb8519ee495e5e2b",
+    "/index.html": "679d15cd67c20319ef3061e44659b8fd070260ee",
+    "/assets/img/C14_Hyperv_2.png": "ab806a02ea44de582a8715b6d4ffce7538d07306",
+    "/assets/img/CEDN.PNG": "b406d926f38ea2bd272a2f2e9a846e25c4c265dc",
+    "/assets/img/ISNI1.PNG": "4b7eb65b009ac950df012ac8657afa0ebddc8ace",
+    "/assets/img/ISNI2.PNG": "36174dcada1050fb2d6c64b7dddcbdf3a6da7e3c",
+    "/assets/img/PULSAR.PNG": "bc3e96374e73fef9630550b92243fc0dd88fa4ef",
+    "/assets/img/WIFI.PNG": "c9b5c22feaf6b58625358a0d6ed6014673ae77f9",
+    "/assets/pdf/CV_RMONSTERLET.pdf": "57de629f0661c1df10cc4870989bc2c70df84b41"
+  }
+}
