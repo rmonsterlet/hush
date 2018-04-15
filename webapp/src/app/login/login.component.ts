@@ -2,8 +2,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core'
 import { AppService } from '../app.service'
 import { Priorite, Statut } from '../_types'
-import { AppUtilsService, GeoCodingService, HttpDefaultService } from 'app/_utils';
-import { createClient, GoogleMapsClient } from '@google/maps'
+import { AppUtilsService, HttpDefaultService } from 'app/_utils';
 import { Router } from '@angular/router';
 import * as uuid from 'uuid';
 import 'rxjs/add/operator/startWith';
@@ -14,8 +13,7 @@ import 'rxjs/add/operator/map';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   providers: [
-    AppUtilsService,
-    GeoCodingService
+    AppUtilsService
   ]
 })
 export class LoginComponent implements OnInit {
@@ -33,12 +31,13 @@ export class LoginComponent implements OnInit {
   constructor(
     public appService: AppService,
     private _appUtilsService: AppUtilsService,
-    private _geoCodingService: GeoCodingService,
     private _httpService: HttpDefaultService,
     private _router: Router
   ) { }
 
   ngOnInit(): void {
+
+    debugger
 
     this.loginForm = new FormGroup({
       'sex': new FormControl(''),
@@ -60,12 +59,6 @@ export class LoginComponent implements OnInit {
 
     this.themes = this._appUtilsService.getThemeNames()
     this.colors = this._appUtilsService.getColorNames()
-
-    this._httpService.get('https://restcountries.eu/rest/v2/all').then(data => {
-      this.appService.session.countries = data
-      this.filteredCountries = this.loginForm.controls.country.valueChanges
-        .map(value => value ? this.filterCountry(value) : this.appService.session.countries.slice())
-    })
   }
 
   filterCountry(value) {

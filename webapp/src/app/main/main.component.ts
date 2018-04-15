@@ -7,6 +7,9 @@ import { WsService } from 'app/_utils';
 import { RoomComponent } from 'app/dialog/room/room.component';
 import { MatDialog } from '@angular/material';
 
+import * as firebase from "firebase";
+import * as firebaseui from "firebaseui";
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -31,7 +34,13 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
 
-    this.user = this.appService.user
+    
+
+
+
+
+
+    /*this.user = this.appService.user
 
     if (!this.user.uuid && localStorage.getItem('user'))
       this.user = JSON.parse(localStorage.getItem('user'))
@@ -44,6 +53,7 @@ export class MainComponent implements OnInit {
           user: this.user
         })
       }
+      */
   }
 
   onSelectedIndexChange() {

@@ -1,7 +1,24 @@
-<h1 class=route-title [ngClass]="'app-primary-'+appService.user.theme">Welcome to Hush.io {{appService.user.name}} !</h1>
+<h1 class=route-title [ngClass]="'app-primary-'+ appService.session.theme">Welcome to Hush.io {{appService.user.displayName}} !</h1>
 <div class=route>
   <form [formGroup]=loginForm>
     <mat-card fxLayout=column fxLayoutAlign="center center">
+
+      <mat-form-field>
+        <input matInput required placeholder=Username [(ngModel)]=appService.user.displayName name=name formControlName=name>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput required placeholder="Room Code" [(ngModel)]=appService.session.roomCode name=roomCode formControlName=roomCode>
+        </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder=Theme [(ngModel)]=appService.session.theme name=theme formControlName=theme>
+          <mat-option *ngFor="let theme of themes" [style.color]=theme.color [value]="theme.label.toLowerCase().split(' ').join('-')">{{theme.label.toUpperCase()}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <h2>De retour très bientôt :)</h2>
+      <button mat-raised-button [disabled]=!loginForm.valid (click)=connect() color=primary>SIGN IN</button>
+
+      <!--
+
       <mat-icon class=app-icon color=primary>speaker_notes_off</mat-icon>
       <mat-radio-group required [(ngModel)]=appService.user.sex name=sex formControlName=sex class=app-mb>
         <mat-radio-button checked value=F color=primary>Woman</mat-radio-button>
@@ -28,7 +45,7 @@
       </mat-form-field>
       <mat-autocomplete #country=matAutocomplete>
         <mat-option *ngFor="let country of filteredCountries | async" [value]=country.name>
-          <img style="vertical-align:middle;" aria-hidden src="{{country.flag}}" height="25" width="40" />  {{country.name}}
+          <img style="vertical-align:middle;" aria-hidden src="{{country.flag}}" height="25" width="40" /> {{country.name}}
         </mat-option>
       </mat-autocomplete>
       <mat-form-field>
@@ -41,7 +58,12 @@
       <mat-form-field>
         <textarea matInput matTextareaAutosize [(ngModel)]=appService.user.description placeholder=Description name=description formControlName=description></textarea>
       </mat-form-field>
-      <button mat-raised-button [disabled]=!loginForm.valid (click)=connect() color=primary>SIGN IN</button>
+      
+
+    -->
+
+
     </mat-card>
+
   </form>
 </div>

@@ -4,14 +4,16 @@ import { AppService } from './app.service'
 import { Priorite, Statut } from './_types'
 import * as sha256 from 'sha256'
 import { MatDialog } from '@angular/material';
-import { NimdaComponent } from 'app/dialog/admin/admin.component';
+import * as firebase from 'firebase'
+import { AppUtilsService } from './_utils';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [
-    AppService
+    AppService,
+    AppUtilsService
   ]
 })
 export class AppComponent implements OnInit {
@@ -21,26 +23,44 @@ export class AppComponent implements OnInit {
   search
   sideNavMode = 'side'
 
+  user = {}
+
   constructor(
     public appService: AppService,
     public router: Router,
+    private _appUtilsService: AppUtilsService,
     private _dialog: MatDialog
   ) { }
 
   ngOnInit() {
 
+    /*
     if (!localStorage.getItem('user'))
       console.log('login modal please')
       //this.router.navigate(['login'])
     else
       this.appService.user = JSON.parse(localStorage.getItem('user'))
+    */
 
+    debugger
+
+    let themes = this._appUtilsService.getThemeNames()
+    this.appService.session.theme = themes[Math.floor(Math.random() * Math.floor(themes.length))].label.toLowerCase().split(' ').join('-')
+
+    //this.login()
     this.sideNavMode = typeof window.orientation === 'undefined' ? 'side' : 'over'
+  }
 
-    /*this._appService.getConf().then(data => {
-      this._appService.conf = data
-      this.initAgent()
-    })*/
+  login() {
+
+    return firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        this.appService.user = user
+      } else {
+        firebase.auth().useDeviceLanguage();
+        firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(obj => this.appService.user = obj.user)
+      }
+    })
   }
 
   setSideNavMode() {
@@ -50,32 +70,15 @@ export class AppComponent implements OnInit {
       this.sideNavMode = window.innerWidth < 600 ? 'over' : 'side'
   }
 
-  isNimda() {
-    if (!this.appService.user.name)
-      return
-
-    const struct = ['b546', '11b2bbdc77', 'b7bf991028', 'd4d549c838', 'd62df68acb', 'a52368d672', '763b216bb3']
-    return sha256.x2(this.appService.user.name.toLowerCase()) === struct.join('')
-  }
-
-  onNimdaClick() {
-
-    const dialog = this._dialog.open(NimdaComponent, {
-      data: {
-      }
-    })
-  }
-
-  onOpenCvClick(){
+  onOpenCvClick() {
     window.open('/assets/pdf/CV_RMONSTERLET.pdf')
   }
 
-  onOpenGithubClick(){
+  onOpenGithubClick() {
     window.open('https://github.com/rmonsterlet/hush')
   }
 
   up() {
     window.scrollTo(0, 0)
   }
-
 }

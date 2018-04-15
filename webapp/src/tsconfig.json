@@ -15,7 +15,6 @@
     "sourceMap": true,
     "target": "es5",
     "types": [
-      "googlemaps",
       "jasmine",
       "hammerjs"
     ],

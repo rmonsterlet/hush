@@ -1,8 +1,8 @@
-<div fxFill [ngClass]="'theme-'+appService.user.theme">
+<div fxFill [ngClass]="'theme-'+ appService.session.theme">
 
   <mat-toolbar class="app-toolbar mat-elevation-z6" color="primary">
 
-    <button mat-icon-button (click)="setSideNavMode(); sidenav.toggle()">
+    <button disabled mat-icon-button (click)="setSideNavMode(); sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
 
@@ -19,7 +19,7 @@
 
     <span class="spacer"></span>
 
-    <div [style.color]=appService.user.color>{{appService.user.name}}</div>
+    <div>{{appService.user.displayName }}</div>
 
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -36,9 +36,6 @@
       </button>
       <button mat-menu-item (click)="onOpenGithubClick()">
         <mat-icon>code</mat-icon>GitHub
-      </button>
-      <button *ngIf="isNimda()" mat-menu-item (click)=onNimdaClick()>
-        <mat-icon>school</mat-icon>DEV_DOOR
       </button>
     </mat-menu>
   </mat-toolbar>

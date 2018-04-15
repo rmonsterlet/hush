@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { FlexLayoutModule } from '@angular/flex-layout'
-import 'hammerjs';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
 
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -21,7 +20,6 @@ import { LoginComponent } from 'app/login/login.component'
 import { MainComponent } from 'app/main/main.component'
 import { MenuComponent } from 'app/menu/menu.component'
 import { NotFoundComponent } from 'app/not-found/not-found.component'
-import { NimdaComponent } from 'app/dialog/admin/admin.component';
 import { RoomComponent } from './dialog/room/room.component';
 import { DevComponent } from './dev/dev.component';
 
@@ -37,7 +35,6 @@ const APP_PIPES = [
 
 const APP_DIALOG_COMPONENTS = [
   DialogComponent,
-  NimdaComponent,
   RoomComponent
 ]
 
@@ -62,7 +59,6 @@ const APP_DIALOG_COMPONENTS = [
     MainComponent,
     MenuComponent,
     NotFoundComponent,
-    NimdaComponent,
     RoomComponent,
     DevComponent
   ],

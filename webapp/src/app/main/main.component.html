@@ -1,4 +1,4 @@
-<h2 class=route-title [ngClass]="'app-primary-'+appService.user.theme">{{selectedRoom?.name}}</h2>
+<h2 class=route-title [ngClass]="'app-primary-'+ appService.session.theme">{{selectedRoom?.name}}</h2>
 <div class="route">
 
   <mat-tab-group [(selectedIndex)]=selectedIndex (selectedIndexChange)=onSelectedIndexChange()>
@@ -24,7 +24,7 @@
 <mat-toolbar class="message-toolbar mat-elevation-z6" color=primary>
   <form class="dark-theme" fxFlex fxLayout=row fxLayoutAlign=" center">
     <mat-form-field class=input>
-      <input matInput [(ngModel)]=message [style.color]=user.color name=_message>
+      <input matInput [(ngModel)]=message name=_message>
     </mat-form-field>
     <button mat-mini-fab color=primary (click)=onSendClick() matTooltip=Envoyer>
       <mat-icon>send</mat-icon>
