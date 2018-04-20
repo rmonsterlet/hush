@@ -7,18 +7,17 @@
         <input matInput required placeholder=Username [(ngModel)]=appService.user.displayName name=name formControlName=name>
       </mat-form-field>
       <mat-form-field>
-          <input matInput required placeholder="Room Code" [(ngModel)]=appService.session.roomCode name=roomCode formControlName=roomCode>
-        </mat-form-field>
-      <mat-form-field>
         <mat-select placeholder=Theme [(ngModel)]=appService.session.theme name=theme formControlName=theme>
           <mat-option *ngFor="let theme of themes" [style.color]=theme.color [value]="theme.label.toLowerCase().split(' ').join('-')">{{theme.label.toUpperCase()}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <h2>De retour très bientôt :)</h2>
-      <button mat-raised-button [disabled]=!loginForm.valid (click)=connect() color=primary>SIGN IN</button>
-
+      <button mat-raised-button [disabled]=!loginForm.valid (click)=connect() color=primary>Se connecter</button>
+      <br/>
+      <h1>De retour très bientôt avec : </h1>
+      <button mat-raised-button (click)="carabistouille()" color=primary>La Carabistouille</button>
+      <br/>
+      <h1>:)</h1>
       <!--
-
       <mat-icon class=app-icon color=primary>speaker_notes_off</mat-icon>
       <mat-radio-group required [(ngModel)]=appService.user.sex name=sex formControlName=sex class=app-mb>
         <mat-radio-button checked value=F color=primary>Woman</mat-radio-button>
@@ -58,10 +57,7 @@
       <mat-form-field>
         <textarea matInput matTextareaAutosize [(ngModel)]=appService.user.description placeholder=Description name=description formControlName=description></textarea>
       </mat-form-field>
-      
-
     -->
-
 
     </mat-card>
 

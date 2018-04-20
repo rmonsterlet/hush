@@ -45,16 +45,9 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.maxLength(16),
       ]),
-      'age': new FormControl('', [
-        Validators.required,
-        Validators.min(0),
-        Validators.max(100)
-      ]),
-      'description': new FormControl(''),
-      'country': new FormControl(''),
       'city': new FormControl({ value: '', disabled: true }),
       'theme': new FormControl(''),
-      'color': new FormControl('')
+      'roomCode': new FormControl('')
     })
 
     this.themes = this._appUtilsService.getThemeNames()
@@ -84,7 +77,11 @@ export class LoginComponent implements OnInit {
     this.appService.user.uuid = uuid.v4()
 
     localStorage.setItem('user', JSON.stringify(this.appService.user))
-    this._router.navigate(['/'])
+    this._router.navigate(['/main'])
+  }
+
+  carabistouille(){
+    window.open('https://amen-cf01b.firebaseapp.com/')
   }
 
 }

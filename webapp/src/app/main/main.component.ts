@@ -34,13 +34,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
 
-    
-
-
-
-
-
-    /*this.user = this.appService.user
+    this.user = this.appService.user
 
     if (!this.user.uuid && localStorage.getItem('user'))
       this.user = JSON.parse(localStorage.getItem('user'))
@@ -53,7 +47,6 @@ export class MainComponent implements OnInit {
           user: this.user
         })
       }
-      */
   }
 
   onSelectedIndexChange() {

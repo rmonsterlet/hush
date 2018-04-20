@@ -42,8 +42,6 @@ export class AppComponent implements OnInit {
       this.appService.user = JSON.parse(localStorage.getItem('user'))
     */
 
-    debugger
-
     let themes = this._appUtilsService.getThemeNames()
     this.appService.session.theme = themes[Math.floor(Math.random() * Math.floor(themes.length))].label.toLowerCase().split(' ').join('-')
 

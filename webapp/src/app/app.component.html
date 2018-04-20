@@ -2,7 +2,7 @@
 
   <mat-toolbar class="app-toolbar mat-elevation-z6" color="primary">
 
-    <button disabled mat-icon-button (click)="setSideNavMode(); sidenav.toggle()">
+    <button mat-icon-button (click)="setSideNavMode(); sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
 
@@ -41,7 +41,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container fxFill>
-    <mat-sidenav #sidenav [mode]="sideNavMode" [ngClass]="'app-primary-'+appService.user.theme" class=app-sidenav>
+    <mat-sidenav #sidenav [mode]="sideNavMode" [ngClass]="'app-primary-'+appService.session.theme" class=app-sidenav>
       <app-menu [user]=appService.user></app-menu>
     </mat-sidenav>
     <router-outlet></router-outlet>

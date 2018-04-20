@@ -51,7 +51,7 @@ class App extends React.Component<AppProps, AppState> {
           <AppBar position="static">
             <Toolbar>
               <Typography variant="title" color="inherit" style={{flex: 1}}>
-                La Carabistouille
+                La Carabistouille™
               </Typography>
               {logged ? <Logged onDisconnect={this.onDisconnect} /> : <Login onConnect={this.onConnect} />}
             </Toolbar>
@@ -70,6 +70,9 @@ class App extends React.Component<AppProps, AppState> {
             {tab === 0 && <Joueurs />}
             {tab === 1 && <Scores />}
           </Paper>
+          <Typography variant="title" color="primary" style={{marginLeft: 10, marginTop: 20, flex: 1}}>
+              La Carabistouille™ est en cours de développement. Wait for it :)
+          </Typography>
         </div>
       </React.Fragment>
     )
