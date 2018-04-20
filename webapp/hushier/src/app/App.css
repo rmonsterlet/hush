@@ -1,0 +1,21 @@
+h1{
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.AppBar{
+  height: 50px;
+}
+
+.app-title{
+  margin-top: 7px;
+}
+
+.app-logo {
+  margin-right: 20px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
