@@ -1,0 +1,32 @@
+[
+{
+  "idDoc": "1",
+  "idLot": "1",
+  "declaration": "10000000322184",
+  "isbn": "9782011818324",
+  "titre": "Le XIXe siècle 1815 - 1914",
+  "format": "PDF",
+  "etat": "en cours",
+  "commentaire": "2018-01-30 14:01:08 test commentaire\n 2018-01-31 16:06:58 2eme commentaire 2018-01-31 16:18:28 3eme commentaire"
+},
+{
+  "idDoc": "2",
+  "idLot": "2",
+  "declaration": "10000000322184",
+  "isbn": "9782011818324",
+  "titre": "Marriage Tunes",
+  "format": "MP3",
+  "etat": "Terminé",
+  "commentaire": null
+},
+{
+  "idDoc": "3",
+  "idLot": "3",
+  "declaration": "10000000322184",
+  "isbn": "9782011818324",
+  "titre": "Opéra, un récital idéal",
+  "format": "FLAC",
+  "etat": "en cours",
+  "commentaire": null
+}
+]
