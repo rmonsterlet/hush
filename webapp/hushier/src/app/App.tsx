@@ -70,7 +70,7 @@ class App extends React.Component<AppProps, AppState> {
             {tab === 0 && <Joueurs />}
             {tab === 1 && <Scores />}
           </Paper>
-          <Typography variant="title" color="primary" style={{marginLeft: 10, marginTop: 20, flex: 1}}>
+          <Typography variant="title" color="primary" style={{marginLeft: 40, marginTop: 20, flex: 1}}>
               La Carabistouille™ est en cours de développement. Wait for it :)
           </Typography>
         </div>

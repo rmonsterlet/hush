@@ -1616,36 +1616,22 @@ var LoginComponent = /** @class */ (function () {
         this._router = _router;
     }
     LoginComponent.prototype.ngOnInit = function () {
-        debugger;
+        if (localStorage.getItem('user'))
+            this.appService.user = JSON.parse(localStorage.getItem('user'));
         this.loginForm = new __WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* FormGroup */]({
-            'sex': new __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* FormControl */](''),
             'name': new __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* FormControl */]('', [
                 __WEBPACK_IMPORTED_MODULE_0__angular_forms__["k" /* Validators */].required,
                 __WEBPACK_IMPORTED_MODULE_0__angular_forms__["k" /* Validators */].maxLength(16),
             ]),
-            'city': new __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* FormControl */]({ value: '', disabled: true }),
             'theme': new __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* FormControl */](''),
-            'roomCode': new __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* FormControl */]('')
         });
         this.themes = this._appUtilsService.getThemeNames();
-        this.colors = this._appUtilsService.getColorNames();
     };
     LoginComponent.prototype.filterCountry = function (value) {
         if (this.appService.session.countries)
             return this.appService.session.countries.filter(function (country) { return country.name.toLowerCase().indexOf(value.toLowerCase()) === 0; });
     };
-    LoginComponent.prototype.onCityChange = function () {
-        /*
-        TODO
-        if(!this.user.city || this.user.city.length < 3)
-          return
-    
-        this._geoCodingService.geocodeAddress(this.user.city).then(data => {
-          debugger
-        })*/
-    };
     LoginComponent.prototype.connect = function () {
-        //if(!this.user.uuid)
         this.appService.user.uuid = __WEBPACK_IMPORTED_MODULE_5_uuid__["v4"]();
         localStorage.setItem('user', JSON.stringify(this.appService.user));
         this._router.navigate(['/main']);
@@ -1726,8 +1712,6 @@ var MainComponent = /** @class */ (function () {
     MainComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.user = this.appService.user;
-        if (!this.user.uuid && localStorage.getItem('user'))
-            this.user = JSON.parse(localStorage.getItem('user'));
         if (this.user.uuid)
             this.wsService.ws.onopen = function (event) {
                 _this.wsService.send({
@@ -1796,7 +1780,7 @@ var MainComponent = /** @class */ (function () {
 /***/ "./src/app/menu/menu.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=accent>\r\n  <button mat-mini-fab color=primary (click)=onCreateRoomClick() matTooltip=\"Create a room\">\r\n    <mat-icon>group_add</mat-icon>\r\n  </button>\r\n</mat-toolbar>\r\n<mat-card>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Filters\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <form [formGroup]=filterForm fxLayout=column fxLayoutAlign=\" center\" class=filter-form>\r\n      <div fxLayout=row>\r\n        <div fxLayout=column fxLayoutAlign=\"space-around stretch\">\r\n          <mat-checkbox [(ngModel)]=filter.woman color=primary name=woman formControlName=woman>Woman</mat-checkbox>\r\n          <mat-checkbox [(ngModel)]=filter.man color=primary name=man formControlName=man>Man</mat-checkbox>\r\n        </div>\r\n        <div fxLayout=column fxLayoutAlign=\"space-around stretch\" class=checkbox-spacer>\r\n          <mat-checkbox [(ngModel)]=filter.sameCountry name=sameCountry formControlName=sameCountry color=primary>Same country</mat-checkbox>\r\n          <mat-checkbox *ngIf=filter.sameCountry [(ngModel)]=filter.sameCity name=sameCity formControlName=sameCity color=primary>Same city</mat-checkbox>\r\n        </div>\r\n      </div>\r\n      <div fxLayout=row fxLayoutAlign=\" center\">\r\n        Min\r\n        <mat-slider [(ngModel)]=\"filter.age.min\" min=0 max=100 thumb-label=true name=ageMin formControlName=ageMin color=primary></mat-slider>\r\n        {{filter.age.min}}\r\n      </div>\r\n      <div fxLayout=row fxLayoutAlign=\" center\">\r\n        Max\r\n        <mat-slider [(ngModel)]=\"filter.age.max\" [min]=filter.age.min max=100 thumb-label=true name=ageMax formControlName=ageMax\r\n          color=primary></mat-slider>\r\n        {{filter.age.max}}\r\n      </div>\r\n      <button mat-raised-button (click)=onClearClick() color=primary>Clear</button>\r\n    </form>\r\n  </mat-expansion-panel>\r\n  <mat-card-title class=app-mt>Online ({{wsService.users?.length - 1}})</mat-card-title>\r\n  <mat-list>\r\n    <div *ngFor=\"let _user of (wsService.users | menuFilter:filter)\">\r\n      <mat-list-item *ngIf=\"_user.uuid !== appService.user.uuid\" [matMenuTriggerFor]=menu>\r\n        <mat-icon mat-list-icon [style.color]=\"_user.sex === 'F' ? 'hotpink' : 'dodgerblue'\">face</mat-icon>\r\n        <p mat-line [style.color]=_user.color>{{_user.name + ' (' + _user.age + ')'}}</p>\r\n        <mat-menu #menu=matMenu>\r\n          <button mat-menu-item (click)=onCreateRoomClick(_user)>\r\n            <mat-icon>mode_edit</mat-icon>\r\n            Write to {{_user.name}}\r\n          </button>\r\n        </mat-menu>\r\n      </mat-list-item>\r\n    </div>\r\n  </mat-list>\r\n</mat-card>"
+module.exports = "<mat-toolbar color=accent>\r\n  <button mat-mini-fab color=primary (click)=onCreateRoomClick() matTooltip=\"Create a room\">\r\n    <mat-icon>group_add</mat-icon>\r\n  </button>\r\n</mat-toolbar>\r\n<mat-card>\r\n  <mat-expansion-panel>\r\n    <mat-expansion-panel-header>\r\n      <mat-panel-title>\r\n        Filters\r\n      </mat-panel-title>\r\n      <mat-panel-description>\r\n      </mat-panel-description>\r\n    </mat-expansion-panel-header>\r\n    <form [formGroup]=filterForm fxLayout=column fxLayoutAlign=\" center\" class=filter-form>\r\n      <div fxLayout=row>\r\n        <div fxLayout=column fxLayoutAlign=\"space-around stretch\">\r\n          <mat-checkbox [(ngModel)]=filter.woman color=primary name=woman formControlName=woman>Woman</mat-checkbox>\r\n          <mat-checkbox [(ngModel)]=filter.man color=primary name=man formControlName=man>Man</mat-checkbox>\r\n        </div>\r\n        <div fxLayout=column fxLayoutAlign=\"space-around stretch\" class=checkbox-spacer>\r\n          <mat-checkbox [(ngModel)]=filter.sameCountry name=sameCountry formControlName=sameCountry color=primary>Same country</mat-checkbox>\r\n          <mat-checkbox *ngIf=filter.sameCountry [(ngModel)]=filter.sameCity name=sameCity formControlName=sameCity color=primary>Same city</mat-checkbox>\r\n        </div>\r\n      </div>\r\n      <div fxLayout=row fxLayoutAlign=\" center\">\r\n        Min\r\n        <mat-slider [(ngModel)]=\"filter.age.min\" min=0 max=100 thumb-label=true name=ageMin formControlName=ageMin color=primary></mat-slider>\r\n        {{filter.age.min}}\r\n      </div>\r\n      <div fxLayout=row fxLayoutAlign=\" center\">\r\n        Max\r\n        <mat-slider [(ngModel)]=\"filter.age.max\" [min]=filter.age.min max=100 thumb-label=true name=ageMax formControlName=ageMax\r\n          color=primary></mat-slider>\r\n        {{filter.age.max}}\r\n      </div>\r\n      <button mat-raised-button (click)=onClearClick() color=primary>Clear</button>\r\n    </form>\r\n  </mat-expansion-panel>\r\n  <mat-card-title class=app-mt>Online ({{wsService.users?.length - 1}})</mat-card-title>\r\n  <mat-list>\r\n    <div *ngFor=\"let _user of (wsService.users | menuFilter:filter)\">\r\n      <mat-list-item *ngIf=\"_user.uuid !== appService.user.uuid\" [matMenuTriggerFor]=menu>\r\n        <mat-icon mat-list-icon [style.color]=\"_user.sex === 'F' ? 'hotpink' : 'dodgerblue'\">face</mat-icon>\r\n        <p mat-line [style.color]=_user.color>{{_user.displayName}}</p>\r\n        <mat-menu #menu=matMenu>\r\n          <button mat-menu-item (click)=onCreateRoomClick(_user)>\r\n            <mat-icon>mode_edit</mat-icon>\r\n            Write to {{_user.name}}\r\n          </button>\r\n        </mat-menu>\r\n      </mat-list-item>\r\n    </div>\r\n  </mat-list>\r\n</mat-card>"
 
 /***/ }),
 
@@ -1997,12 +1981,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var config = {
-    apiKey: "AIzaSyCKgs4qkCqcCKRbNxK6LdxtmyqnvOxSICw",
-    authDomain: "amen-cf01b.firebaseapp.com",
-    databaseURL: "https://amen-cf01b.firebaseio.com",
-    projectId: "amen-cf01b",
-    storageBucket: "amen-cf01b.appspot.com",
-    messagingSenderId: "839573369133"
+    apiKey: "AIzaSyDg-Zqke9mFG95EFjSDpXFmdSNC7Zh2_qY",
+    authDomain: "thecarabistouille.firebaseapp.com",
+    databaseURL: "https://thecarabistouille.firebaseio.com",
+    projectId: "thecarabistouille",
+    storageBucket: "thecarabistouille.appspot.com",
+    messagingSenderId: "229462910372"
 };
 __WEBPACK_IMPORTED_MODULE_4_firebase__["initializeApp"](config);
 if (__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].production) {

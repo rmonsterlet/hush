@@ -42,7 +42,7 @@
     <div *ngFor="let _user of (wsService.users | menuFilter:filter)">
       <mat-list-item *ngIf="_user.uuid !== appService.user.uuid" [matMenuTriggerFor]=menu>
         <mat-icon mat-list-icon [style.color]="_user.sex === 'F' ? 'hotpink' : 'dodgerblue'">face</mat-icon>
-        <p mat-line [style.color]=_user.color>{{_user.name + ' (' + _user.age + ')'}}</p>
+        <p mat-line [style.color]=_user.color>{{_user.displayName}}</p>
         <mat-menu #menu=matMenu>
           <button mat-menu-item (click)=onCreateRoomClick(_user)>
             <mat-icon>mode_edit</mat-icon>

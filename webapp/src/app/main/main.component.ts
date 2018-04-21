@@ -36,9 +36,6 @@ export class MainComponent implements OnInit {
 
     this.user = this.appService.user
 
-    if (!this.user.uuid && localStorage.getItem('user'))
-      this.user = JSON.parse(localStorage.getItem('user'))
-
     if (this.user.uuid)
       this.wsService.ws.onopen = (event: MessageEvent) => {
         this.wsService.send({

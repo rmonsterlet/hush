@@ -68,7 +68,7 @@ export class Logged extends React.Component<LoggedProps, LoggedState> {
           style={{ marginRight: 10 }}
         >
           <Icon className="material-icons" style={{marginRight: 10}}>face</Icon>
-          Romain MONSTERLET
+          Romain
         </Button>
 
         <Menu
@@ -76,26 +76,12 @@ export class Logged extends React.Component<LoggedProps, LoggedState> {
           open={Boolean(anchorEl)}
           onClose={this.onMenuClose}
         >
-          <MenuItem onClick={this.onMenuClose}>Mon profil</MenuItem>
-          <MenuItem onClick={this.onMenuClose}>Mes préférences</MenuItem>
+          <MenuItem disabled={true} onClick={this.onMenuClose}>Mon profil</MenuItem>
+          <MenuItem disabled={true} onClick={this.onMenuClose}>Mes préférences</MenuItem>
+          <MenuItem onClick={this.onAProposClick}>A propos</MenuItem>
+          <MenuItem onClick={this.onContactClick}>Contact</MenuItem>
           <MenuItem onClick={this.onDisconnectClick}>Déconnexion</MenuItem>
         </Menu>
-
-        <Button 
-          variant="raised"
-          color="primary"
-          style={{ marginRight: 10 }}
-          onClick={this.onAProposClick}
-        >
-          A propos
-        </Button>
-        <Button
-          variant="raised"
-          color="primary"
-          onClick={this.onContactClick}
-        >
-          Contact
-        </Button>
       </div>
     )
   }

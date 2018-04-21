@@ -5,12 +5,12 @@ import { AppModule } from './app/app.module'
 import * as firebase from 'firebase'
 
 const config = {
-  apiKey: "AIzaSyCKgs4qkCqcCKRbNxK6LdxtmyqnvOxSICw",
-  authDomain: "amen-cf01b.firebaseapp.com",
-  databaseURL: "https://amen-cf01b.firebaseio.com",
-  projectId: "amen-cf01b",
-  storageBucket: "amen-cf01b.appspot.com",
-  messagingSenderId: "839573369133"
+  apiKey: "AIzaSyDg-Zqke9mFG95EFjSDpXFmdSNC7Zh2_qY",
+  authDomain: "thecarabistouille.firebaseapp.com",
+  databaseURL: "https://thecarabistouille.firebaseio.com",
+  projectId: "thecarabistouille",
+  storageBucket: "thecarabistouille.appspot.com",
+  messagingSenderId: "229462910372"
 }
 firebase.initializeApp(config);
 

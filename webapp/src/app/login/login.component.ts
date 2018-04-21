@@ -37,21 +37,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    debugger
+    if (localStorage.getItem('user'))
+      this.appService.user = JSON.parse(localStorage.getItem('user'))
 
     this.loginForm = new FormGroup({
-      'sex': new FormControl(''),
       'name': new FormControl('', [
         Validators.required,
         Validators.maxLength(16),
       ]),
-      'city': new FormControl({ value: '', disabled: true }),
       'theme': new FormControl(''),
-      'roomCode': new FormControl('')
     })
 
     this.themes = this._appUtilsService.getThemeNames()
-    this.colors = this._appUtilsService.getColorNames()
   }
 
   filterCountry(value) {
@@ -59,21 +56,8 @@ export class LoginComponent implements OnInit {
       return this.appService.session.countries.filter(country => country.name.toLowerCase().indexOf(value.toLowerCase()) === 0)
   }
 
-  onCityChange() {
-
-    /*
-    TODO
-    if(!this.user.city || this.user.city.length < 3) 
-      return
-
-    this._geoCodingService.geocodeAddress(this.user.city).then(data => {
-      debugger
-    })*/
-  }
-
   connect() {
 
-    //if(!this.user.uuid)
     this.appService.user.uuid = uuid.v4()
 
     localStorage.setItem('user', JSON.stringify(this.appService.user))
