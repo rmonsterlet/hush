@@ -1637,7 +1637,7 @@ var LoginComponent = /** @class */ (function () {
         this._router.navigate(['/main']);
     };
     LoginComponent.prototype.carabistouille = function () {
-        window.open('https://amen-cf01b.firebaseapp.com/');
+        window.open('https://thecarabistouille.firebaseapp.com/');
     };
     LoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({

@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
   }
 
   carabistouille(){
-    window.open('https://amen-cf01b.firebaseapp.com/')
+    window.open('https://thecarabistouille.firebaseapp.com/')
   }
 
 }
