@@ -41,7 +41,6 @@ const APP_DIALOG_COMPONENTS = [
 
 @NgModule({
   imports: [
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -50,7 +49,8 @@ const APP_DIALOG_COMPONENTS = [
     FlexLayoutModule,
     AppMaterialModule,
     AppRouting,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [
     ...APP_UTILS_COMPONENTS,
