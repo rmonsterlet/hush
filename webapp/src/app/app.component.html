@@ -16,7 +16,8 @@
         <mat-icon>search</mat-icon>
       </button>
     </div>
-
+    <span class="spacer"></span>
+    <img width=85 src='../assets/icons/ego.PNG'/>
     <span class="spacer"></span>
 
     <div>{{appService.user.displayName }}</div>
@@ -36,6 +37,9 @@
       </button>
       <button mat-menu-item (click)="onOpenGithubClick()">
         <mat-icon>code</mat-icon>GitHub
+      </button>
+      <button mat-menu-item routerLink="/ego" routerLinkActive="active">
+        <mat-icon>dashboard</mat-icon>Ego
       </button>
     </mat-menu>
   </mat-toolbar>

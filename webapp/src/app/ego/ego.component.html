@@ -1,0 +1,15 @@
+<h1 class=route-title [ngClass]="'app-primary-'+ appService.session.theme">Bienvenue sur ego {{prenom}} !</h1>
+<div class=route>
+  <form [formGroup]=egoForm>
+    <mat-card fxLayout=column fxLayoutAlign="center center">
+
+      <mat-form-field>
+        <input matInput required placeholder=Prénom [(ngModel)]=prenom name=prenom formControlName=prenom>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput required placeholder=Nom [(ngModel)]=nom  name=nom  formControlName=nom>
+      </mat-form-field>
+      <button mat-raised-button [disabled]="!prenom || !nom" (click)=connect() color=primary>Générer l'ego {{ prenom && nom ? 'pour ' + prenom + ' ' + nom : '' }}</button>
+    </mat-card>
+  </form>
+</div>

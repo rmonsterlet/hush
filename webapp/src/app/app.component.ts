@@ -18,7 +18,7 @@ import { AppUtilsService } from './_utils';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Hush.io'
+  title = 'ego'
   theme = {}
   search
   sideNavMode = 'side'
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     */
 
     let themes = this._appUtilsService.getThemeNames()
-    this.appService.session.theme = themes[Math.floor(Math.random() * Math.floor(themes.length))].label.toLowerCase().split(' ').join('-')
+    //this.appService.session.theme = themes[Math.floor(Math.random() * Math.floor(themes.length))].label.toLowerCase().split(' ').join('-')
 
     //this.login()
     this.sideNavMode = typeof window.orientation === 'undefined' ? 'side' : 'over'

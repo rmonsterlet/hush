@@ -1,18 +1,18 @@
 {
-    "short_name": "hush",
-    "name": "Hush.io",
+    "short_name": "ego",
+    "name": "ego",
     "start_url": "/",
 
-    "theme_color": "#009688",
-    "background_color": "#ffffff",
+    "theme_color": "#6a7e85",
+    "background_color": "#6a7e85",
 
     "display": "standalone",
     "orientation": "portrait",
 
     "icons": [
         {
-            "src": "/assets/icons/android-chrome-512x512.png",
-            "sizes": "512x512",
+            "src": "/assets/icons/ego.png",
+            "sizes": "446x293",
             "type": "image/png"
         }
     ]

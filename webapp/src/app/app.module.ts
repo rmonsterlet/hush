@@ -22,6 +22,7 @@ import { MenuComponent } from 'app/menu/menu.component'
 import { NotFoundComponent } from 'app/not-found/not-found.component'
 import { RoomComponent } from './dialog/room/room.component';
 import { DevComponent } from './dev/dev.component';
+import { EgoComponent } from 'app/ego/ego.component';
 
 
 const APP_UTILS_COMPONENTS = [
@@ -56,6 +57,7 @@ const APP_DIALOG_COMPONENTS = [
     ...APP_PIPES,
     AppComponent,
     LoginComponent,
+    EgoComponent,
     MainComponent,
     MenuComponent,
     NotFoundComponent,

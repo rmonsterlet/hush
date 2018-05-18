@@ -2,7 +2,40 @@
 
 @include mat-core();
 
-$app-primary: mat-palette($mat-teal, 500);
+$ego-mat-default: (
+  50: #e3f2fd,
+  100: #6a7e85,
+  200: #6a7e85,
+  300: #6a7e85,
+  400: #6a7e85,
+  500: #6a7e85,
+  600: #6a7e85,
+  700: #6a7e85,
+  800: #6a7e85,
+  900: #6a7e85,
+  A100: #6a7e85,
+  A200: #6a7e85, // app main color
+  A400: #6a7e85,
+  A700: #6a7e85,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$app-primary: mat-palette($ego-mat-default, A200);
 $app-accent:  mat-palette($mat-grey, 100);
 $app-warn:    mat-palette($mat-red, 600);
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
@@ -26,9 +59,9 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 }
 
 .theme-undefined {
-  @include theme($mat-teal); 
+  @include theme($ego-mat-default); 
   .app-primary-undefined {
-    background-color: mat-color(mat-palette($mat-teal, 500))
+    background-color: mat-color(mat-palette($ego-mat-default, A200))
   }
 }
 
