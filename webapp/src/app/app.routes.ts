@@ -9,10 +9,14 @@ import { EgoComponent } from 'app/ego/ego.component';
 
 const APP_ROUTES: Routes = [
   
-  {
+  /*{
     path: '',
     redirectTo: 'ego',
     pathMatch: 'full'
+  },*/
+  {
+    path: '',
+    component: EgoComponent
   },
   {
     path: 'ego',

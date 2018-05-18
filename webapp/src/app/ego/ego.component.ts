@@ -1,13 +1,13 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, OnInit } from '@angular/core'
 import { AppService } from '../app.service'
 import { Priorite, Statut } from '../_types'
-import { AppUtilsService, HttpDefaultService } from 'app/_utils';
-import { Router } from '@angular/router';
-import * as uuid from 'uuid';
-import * as THREE from 'three';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
+import { AppUtilsService, HttpDefaultService } from 'app/_utils'
+import { Router } from '@angular/router'
+import * as uuid from 'uuid'
+import * as THREE from 'three'
+import 'rxjs/add/operator/startWith'
+import 'rxjs/add/operator/map'
 
 @Component({
   selector: 'app-ego',
@@ -19,8 +19,8 @@ import 'rxjs/add/operator/map';
 })
 export class EgoComponent implements OnInit {
 
-  nom
-  prenom
+  nom: string
+  prenom: string
 
   egoForm: FormGroup
 
@@ -46,52 +46,55 @@ export class EgoComponent implements OnInit {
         Validators.maxLength(16),
       ]),
     })
-
-    var camera, scene, renderer;
-var geometry, material, mesh;
- 
-init();
-animate();
- 
-function init() {
- 
-    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-    camera.position.z = 1;
- 
-    scene = new THREE.Scene();
- 
-    geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-    material = new THREE.MeshNormalMaterial();
- 
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
- 
-    renderer = new THREE.WebGLRenderer( { antialias: true } );
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    document.body.appendChild( renderer.domElement );
- 
-}
- 
-function animate() {
- 
-    requestAnimationFrame( animate );
- 
-    mesh.rotation.x += 0.0
-    mesh.rotation.y += 0.02
- 
-    renderer.render( scene, camera );
- 
-}
   }
 
-  connect() {
+  generate() {
 
     this.appService.user.uuid = uuid.v4()
 
+    const letter1 = this.prenom.toLocaleUpperCase().charAt(0)
+    const letter2 = this.nom.toLocaleUpperCase().charAt(0)
+
     //localStorage.setItem('user', JSON.stringify(this.appService.user))
     //this._router.navigate(['/main'])
-    window.scrollTo(0,document.body.scrollHeight)
-    
+
+    var camera, scene, renderer
+    var geometry, material, mesh
+
+    init()
+    animate()
+
+    function init() {
+
+      camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10)
+      camera.position.z = 0.5
+
+      scene = new THREE.Scene()
+
+      geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2)
+      material = new THREE.MeshNormalMaterial()
+
+      mesh = new THREE.Mesh(geometry, material)
+      scene.add(mesh)
+
+      renderer = new THREE.WebGLRenderer({ antialias: true })
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      document.body.appendChild(renderer.domElement)
+
+    }
+
+    function animate() {
+
+      requestAnimationFrame(animate)
+
+      mesh.rotation.x += 0.0
+      mesh.rotation.y += 0.02
+
+      renderer.render(scene, camera)
+
+    }
+
+    window.scrollTo(0, document.body.scrollHeight)
   }
 
 }

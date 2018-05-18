@@ -9,7 +9,7 @@
       <mat-form-field>
         <input matInput required placeholder=Nom [(ngModel)]=nom  name=nom  formControlName=nom>
       </mat-form-field>
-      <button mat-raised-button [disabled]="!prenom || !nom" (click)=connect() color=primary>Générer l'ego {{ prenom && nom ? 'pour ' + prenom + ' ' + nom : '' }}</button>
+      <button mat-raised-button [disabled]="!prenom || !nom" (click)=generate() color=primary>Générer l'ego {{ prenom && nom ? 'pour ' + prenom + ' ' + nom : '' }}</button>
     </mat-card>
   </form>
 </div>
