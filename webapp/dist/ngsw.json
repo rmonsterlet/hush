@@ -8,10 +8,10 @@
       "updateMode": "prefetch",
       "urls": [
         "/index.html",
-        "/main.e83841b645788eb0ffb0.js",
+        "/main.d228ed66c4a1cc1eea51.js",
         "/polyfills.9fc197778185b334d14c.js",
         "/runtime.a66f828dca56eeb90e02.js",
-        "/styles.e4e4f5cf593bfcb4c602.css"
+        "/styles.b404075e5aea23e6933f.css"
       ],
       "patterns": []
     },
@@ -20,6 +20,19 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "urls": [
+        "/assets/ego/letters/A1.jpg",
+        "/assets/ego/letters/A2.jpg",
+        "/assets/ego/letters/A3.jpg",
+        "/assets/ego/letters/A4.jpg",
+        "/assets/ego/letters/B1.jpg",
+        "/assets/ego/letters/B2.jpg",
+        "/assets/ego/letters/B3.jpg",
+        "/assets/ego/letters/B4.jpg",
+        "/assets/ego/logotype_ego-BLC.png",
+        "/assets/ego/logotype_ego.png",
+        "/assets/ego/slides/slide1.png",
+        "/assets/ego/slides/slide2.png",
+        "/assets/ego/slides/slide3.png",
         "/assets/icons/android-chrome-512x512.png",
         "/assets/icons/ego-2.PNG",
         "/assets/icons/ego.PNG",
@@ -49,6 +62,19 @@
   ],
   "dataGroups": [],
   "hashTable": {
+    "/assets/ego/letters/A1.jpg": "14aab27b78a4843730e5787319c07f691851aea1",
+    "/assets/ego/letters/A2.jpg": "f740debad3bdc7a73710a3d2d318e8ffade274d9",
+    "/assets/ego/letters/A3.jpg": "dc050ed20942e0e52404b9b15a7371c5c399de2f",
+    "/assets/ego/letters/A4.jpg": "0d645229439cac1bd99c6590ef83e41198aa0cdf",
+    "/assets/ego/letters/B1.jpg": "ce95c422d895ad87f608636a5c96dd5640402607",
+    "/assets/ego/letters/B2.jpg": "96a0e8302bd3e0afee91e875d6c86572571cc6e3",
+    "/assets/ego/letters/B3.jpg": "b8ca9530993d17be67715ba16878be9625027f16",
+    "/assets/ego/letters/B4.jpg": "c5e36ed52768bf57934f3039cfea9d01af874f57",
+    "/assets/ego/logotype_ego-BLC.png": "9eb3aabaafcb7948453423a14bf64c1e4aa263c6",
+    "/assets/ego/logotype_ego.png": "5df65762115407b429d367103c582c7c4724df18",
+    "/assets/ego/slides/slide1.png": "59713c3346d576e84a111f61c74c457a3603b604",
+    "/assets/ego/slides/slide2.png": "52fcbde8435b5a06560749f82be545b241f28260",
+    "/assets/ego/slides/slide3.png": "9c010631648d826f36a622417b231dd8267649b3",
     "/assets/icons/android-chrome-512x512.png": "a3c69092591b162724e53384f60351984c03ae77",
     "/assets/icons/ego-2.PNG": "e48a2ab167f0e90dd16fd860043e7b09eaaeb7eb",
     "/assets/icons/ego.PNG": "0fab634eea911c72dee15b38493de6f4dad168e3",
@@ -72,11 +98,11 @@
     "/assets/img/PULSAR.PNG": "bc3e96374e73fef9630550b92243fc0dd88fa4ef",
     "/assets/img/WIFI.PNG": "c9b5c22feaf6b58625358a0d6ed6014673ae77f9",
     "/assets/pdf/CV_RMONSTERLET.pdf": "57de629f0661c1df10cc4870989bc2c70df84b41",
-    "/index.html": "88e0fc438ba6605f8d5228cca48880dc80d81b7c",
-    "/main.e83841b645788eb0ffb0.js": "0bfb227c3ff44a27234cc66750fc84527467368d",
+    "/index.html": "376d81a271b750e05f2dfe4f3fec440d9e314084",
+    "/main.d228ed66c4a1cc1eea51.js": "a38216c6886003c72d635bb443174ffa60d5870a",
     "/polyfills.9fc197778185b334d14c.js": "d6359519eb78d39ee94ca6c6778b1fb905e145d1",
     "/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
-    "/styles.e4e4f5cf593bfcb4c602.css": "9e64b2f1ed5217d1dcbe93edf02409eff2cdca7b"
+    "/styles.b404075e5aea23e6933f.css": "8cad49b2af49bd95f4e64addb00d53e3d52259ff"
   },
   "navigationUrls": [
     {

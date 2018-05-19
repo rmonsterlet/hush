@@ -3,7 +3,7 @@
     <mat-card class=names fxLayout=column fxLayoutAlign="start center">
       <div fxLayout=row>
         <div fxLayout=column>
-          <div fxLayout=row *ngFor="let user of users; let i = index; trackBy:trackByIndex;" >
+          <div fxLayout=row *ngFor="let user of users; let i = index;" >
             <mat-form-field>
               <input matInput required placeholder=Nom [(ngModel)]=user.nom name=nom-{{i}}>
             </mat-form-field>
