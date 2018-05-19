@@ -1,0 +1,33 @@
+.ego{
+    height: 100%;
+
+    canvas{
+        height: 200px;
+    }
+
+    .names{
+        min-height: 25%;
+    }
+    
+    .letter{
+        top: -260px;
+        z-index: 1;
+        position: absolute;
+    }
+    
+    .actions{
+        margin-top: 45px;
+        position: absolute;
+        right: 200px;
+        z-index: 1;
+    }
+
+    .signs{
+        margin-left: 20px;
+        margin-bottom: 20px;
+        position: fixed;
+        bottom: 0;
+    }
+
+}
+

@@ -21,9 +21,9 @@ import { MainComponent } from 'app/main/main.component'
 import { MenuComponent } from 'app/menu/menu.component'
 import { NotFoundComponent } from 'app/not-found/not-found.component'
 import { RoomComponent } from './dialog/room/room.component';
+import { EgoDialogComponent } from './dialog/ego/ego.component';
 import { DevComponent } from './dev/dev.component';
 import { EgoComponent } from 'app/ego/ego.component';
-
 
 const APP_UTILS_COMPONENTS = [
   DialogComponent
@@ -36,7 +36,8 @@ const APP_PIPES = [
 
 const APP_DIALOG_COMPONENTS = [
   DialogComponent,
-  RoomComponent
+  RoomComponent,
+  EgoDialogComponent
 ]
 
 @NgModule({
@@ -62,6 +63,7 @@ const APP_DIALOG_COMPONENTS = [
     MenuComponent,
     NotFoundComponent,
     RoomComponent,
+    EgoDialogComponent,
     DevComponent
   ],
   providers: [
