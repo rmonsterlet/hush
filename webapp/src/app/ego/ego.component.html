@@ -1,9 +1,10 @@
 <div class=ego>
   <div id=canvas></div>
-    <mat-card class=names fxLayout=column fxLayoutAlign="start center">
-      <div fxLayout=row>
-        <div fxLayout=column>
-          <div fxLayout=row *ngFor="let user of users; let i = index;" >
+  <mat-card>
+    <div class=names fxLayout=column fxLayoutAlign="start center">
+      <div fxLayout=row fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column">
+        <div fxFlex fxLayout=column>
+          <div fxLayout=row *ngFor="let user of users; let i = index;">
             <mat-form-field>
               <input matInput required placeholder=Nom [(ngModel)]=user.nom name=nom-{{i}}>
             </mat-form-field>
@@ -18,19 +19,18 @@
             </button>
           </div>
         </div>
-        <div class=actions fxLayout=column fxLayoutAlign="center">
+        <div class=actions fxLayout=column fxLayoutAlign="center" fxLayoutGap="20px">
           <button mat-raised-button [disabled]="!users[0].prenom || !users[0].nom" (click)=generate() color=primary>Générer l'ego {{ users[0].prenom && users[0].nom ? 'pour ' + users[0].prenom + ' ' + users[0].nom : '' }}</button>
-          <button mat-raised-button [disabled]="!users[0].prenom || !users[0].nom" color=primary class=app-mt>Commander</button>
-        </div>
-      </div>
-    </mat-card>
-    <div class="signs" fxLayout="row" fxLayoutAlign="start center">
-      <button mat-raised-button color=primary (click)="showSigns = !showSigns">Signes</button>
-      <div *ngIf="showSigns" fxLayout=row fxLayoutAlign="space-around center">
-        <div *ngFor="let letter of letters" fxLayut=column>
-          <img *ngIf="letter.imgSrc" [src]="letter.imgSrc" class=letter>
-          <button mat-button color=primary (click)="onLetterClick(letter)" (mouseenter)="onLetterMouseEnter(letter, $event)" (mouseleave)="onLetterMouseLeave(letter)">{{letter.code}}</button>
+          <button mat-raised-button [disabled]="!users[0].prenom || !users[0].nom" color=primary>Commander</button>
         </div>
       </div>
     </div>
+    <button mat-raised-button color=primary (click)="showSigns = !showSigns" cass="app-mt">Signes</button>
+    <div *ngIf="showSigns" fxLayout="row wrap">
+      <div *ngFor="let letter of letters" fxLayut=column>
+        <img *ngIf="letter.imgSrc" [src]="letter.imgSrc" class=letter>
+        <button mat-button color=primary (click)="onLetterClick(letter)" (mouseenter)="onLetterMouseEnter(letter, $event)" (mouseleave)="onLetterMouseLeave(letter)">{{letter.code}}</button>
+      </div>
+    </div>
+  </mat-card>
 </div>
