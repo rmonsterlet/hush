@@ -11,8 +11,7 @@ import 'rxjs/add/operator/startWith'
 import 'rxjs/add/operator/map'
 import { EgoDialogComponent } from '../dialog/ego/ego.component';
 
-const OrbitControls = require('three-orbit-controls')(THREE)
-const OBJLoader = require('three-obj-loader')(THREE)
+import OrbitControls from 'orbit-controls-es6';
 
 @Component({
   selector: 'app-ego',
@@ -104,9 +103,6 @@ export class EgoComponent implements OnInit {
       meshFloor.receiveShadow = true;
       meshFloor.position.set(0, -0.3, 0);
       scene.add(meshFloor);
-
-      const loader = new THREE.OBJLoader();
-      loader.load('/assets/ego/obj/A1.obj', (object) => { debugger; scene.add(object) })
 
       let textureLoader = new THREE.TextureLoader();
       const materials = [
