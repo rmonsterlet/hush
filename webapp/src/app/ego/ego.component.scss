@@ -1,6 +1,12 @@
 .ego{
     height: 100%;
 
+    .logo {
+        width: 200px;
+        position: absolute;
+        margin: 20px;
+    }
+
     canvas{
         height: 200px;
     }

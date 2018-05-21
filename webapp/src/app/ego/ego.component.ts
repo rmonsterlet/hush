@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Component, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material'
 import { AppService } from '../app.service'
 import { Priorite, Statut } from '../_types'
 import { AppUtilsService, HttpDefaultService } from 'app/_utils'
@@ -9,9 +9,9 @@ import * as uuid from 'uuid'
 import * as THREE from 'three'
 import 'rxjs/add/operator/startWith'
 import 'rxjs/add/operator/map'
-import { EgoDialogComponent } from '../dialog/ego/ego.component';
+import { EgoDialogComponent } from '../dialog/ego/ego.component'
 
-import OrbitControls from 'orbit-controls-es6';
+import OrbitControls from 'orbit-controls-es6'
 
 @Component({
   selector: 'app-ego',
@@ -33,6 +33,8 @@ export class EgoComponent implements OnInit {
       prenom: ''
     }
   ]
+
+  scene
 
   letters = [
     { code: "A", imgSrc: null },
@@ -85,91 +87,48 @@ export class EgoComponent implements OnInit {
       scene = new THREE.Scene()
       renderer = new THREE.WebGLRenderer({ antialias: true })
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / (window.innerHeight * 0.65), 0.01, 10)
-      camera.rotation.x = 45 * Math.PI / 180;
-      camera.rotation.y = 45 * Math.PI / 180;
-      camera.rotation.z = 45 * Math.PI / 180;
+      camera.rotation.x = 45 * Math.PI / 180
+      camera.rotation.y = 45 * Math.PI / 180
+      camera.rotation.z = 45 * Math.PI / 180
       geometry = new THREE.CubeGeometry(0.2, 0.2, 0.2)
       controls = new OrbitControls(camera)
 
       camera.position.z = 0.3
       scene.background = new THREE.Color(0x2e2e2e)
 
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / (window.innerHeight * 0.65);
+        camera.updateProjectionMatrix()
+        renderer.setSize(window.innerWidth, (window.innerHeight * 0.65))
+      }, false)
 
       let meshFloor = new THREE.Mesh(
         new THREE.PlaneGeometry(20, 20, 10, 10),
         new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: false })
-      );
-      meshFloor.rotation.x -= Math.PI / 2;
-      meshFloor.receiveShadow = true;
-      meshFloor.position.set(0, -0.3, 0);
-      scene.add(meshFloor);
+      )
+      meshFloor.rotation.x -= Math.PI / 2
+      meshFloor.receiveShadow = true
+      meshFloor.position.set(0, -0.3, 0)
+      scene.add(meshFloor)
 
-      let textureLoader = new THREE.TextureLoader();
-      const materials = [
-        new THREE.MeshPhongMaterial({
-          color: 0xffffff,
-          map: textureLoader.load("/assets/ego/letters/A1.jpg"),
-          bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
-          normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
-        }),
-        new THREE.MeshPhongMaterial({
-          color: 0xffffff,
-          map: textureLoader.load("/assets/ego/letters/A3.jpg"),
-          bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
-          normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
-        }),
-        new THREE.MeshPhongMaterial({
-          color: 0xffffff,
-          map: textureLoader.load("/assets/ego/crate0/crate0_diffuse.png"),
-          bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
-          normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
-        }),
-        new THREE.MeshPhongMaterial({
-          color: 0xffffff,
-          map: textureLoader.load("/assets/ego/crate0/crate0_diffuse.png"),
-          bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
-          normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
-        }),
-        new THREE.MeshPhongMaterial({
-          color: 0xffffff,
-          map: textureLoader.load("/assets/ego/letters/A2.jpg"),
-          bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
-          normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
-        }),
-        new THREE.MeshPhongMaterial({
-          color: 0xffffff,
-          map: textureLoader.load("/assets/ego/crate0/crate0_diffuse.png"),
-          bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
-          normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
-        }),
-      ]
+      scene.add(this.generateEgo())
 
+      let ambientLight = new THREE.AmbientLight(0xffffff, 0.2)
+      scene.add(ambientLight)
 
+      let light = new THREE.PointLight(0xffffff, 0.8, 18)
+      light.position.set(4, 4, 4)
+      light.castShadow = true
+      light.shadow.camera.near = 0.1
+      light.shadow.camera.far = 25
+      scene.add(light)
 
-      let crate = new THREE.Mesh(
-        new THREE.BoxGeometry(0.2, 0.2, 0.2),
-        materials
-      );
-      crate.receiveShadow = true;
-      crate.castShadow = true;
-      scene.add(crate);
-
-      let ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-      scene.add(ambientLight);
-
-      let light = new THREE.PointLight(0xffffff, 0.8, 18);
-      light.position.set(4, 4, 4);
-      light.castShadow = true;
-      light.shadow.camera.near = 0.1;
-      light.shadow.camera.far = 25;
-      scene.add(light);
-
-      let light2 = new THREE.PointLight(0xffffff, 0.8, 18);
-      light2.position.set(3, -6, 3);
-      light2.castShadow = true;
-      light2.shadow.camera.near = 0.1;
-      light2.shadow.camera.far = 25;
-      scene.add(light2);
+      let light2 = new THREE.PointLight(0xffffff, 0.8, 18)
+      light2.position.set(3, -6, 3)
+      light2.castShadow = true
+      light2.shadow.camera.near = 0.1
+      light2.shadow.camera.far = 25
+      scene.add(light2)
 
       renderer.setSize(window.innerWidth, window.innerHeight * 0.65)
 
@@ -182,11 +141,8 @@ export class EgoComponent implements OnInit {
       requestAnimationFrame(animate)
       controls.update()
 
-      //mesh.rotation.x += 0.0
-      //mesh.rotation.y += 0.01
-
       renderer.render(scene, camera)
-
+      this.scene = scene
     }
 
     init()
@@ -205,9 +161,11 @@ export class EgoComponent implements OnInit {
 
     this.appService.user.uuid = uuid.v4()
 
-    const letter1 = this.prenom.toLocaleUpperCase().charAt(0)
-    const letter2 = this.nom.toLocaleUpperCase().charAt(0)
+    const letter1 = this.users[0].prenom.toLocaleUpperCase().charAt(0)
+    const letter2 = this.users[0].nom.toLocaleUpperCase().charAt(0)
 
+    this.scene.remove(this.scene.getObjectByName('cube'))
+    this.scene.add(this.generateEgo())
   }
 
   onLetterClick(letter) {
@@ -232,5 +190,62 @@ export class EgoComponent implements OnInit {
 
   private generateLetter(letter) {
     return '/assets/ego/letters/' + letter.code + Math.floor(Math.random() * Math.floor(4) + 1) + '.jpg'
+  }
+
+  private generateEgo() {
+    const materials = this.getMaterials()
+    const ego = new THREE.Mesh(
+      new THREE.BoxGeometry(0.2, 0.2, 0.2),
+      materials
+    )
+    ego.name = 'cube'
+    ego.receiveShadow = true
+    ego.castShadow = true
+    ego.rotation.x = Math.PI / 4
+    ego.rotation.y = Math.PI / 4
+
+    return ego
+  }
+
+  private getMaterials() {
+    let textureLoader = new THREE.TextureLoader()
+    return [
+      new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        map: textureLoader.load(this.generateLetter(this.letters[0])),
+        bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
+        normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
+      }),
+      new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        map: textureLoader.load(this.generateLetter(this.letters[0])),
+        bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
+        normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
+      }),
+      new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        map: textureLoader.load("/assets/ego/crate0/crate0_diffuse.png"),
+        bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
+        normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
+      }),
+      new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        map: textureLoader.load("/assets/ego/crate0/crate0_diffuse.png"),
+        bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
+        normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
+      }),
+      new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        map: textureLoader.load(this.generateLetter(this.letters[0])),
+        bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
+        normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
+      }),
+      new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        map: textureLoader.load("/assets/ego/crate0/crate0_diffuse.png"),
+        bumpMap: textureLoader.load("/assets/ego/crate0/crate0_bump.png"),
+        normalMap: textureLoader.load("/assets/ego/crate0/crate0_normal.png")
+      }),
+    ]
   }
 }
