@@ -6,12 +6,16 @@ import { Priorite, Statut } from '../_types'
 import { AppUtilsService, HttpDefaultService } from 'app/_utils'
 import { Router } from '@angular/router'
 import * as uuid from 'uuid'
-import * as THREE from 'three'
 import 'rxjs/add/operator/startWith'
 import 'rxjs/add/operator/map'
 import { EgoDialogComponent } from '../dialog/ego/ego.component'
 
 import OrbitControls from 'orbit-controls-es6'
+
+import * as THREE from 'three'
+import MTLLoader from 'three-mtl-loader'
+import OBJLoader from 'three-obj-loader'
+OBJLoader(THREE)
 
 @Component({
   selector: 'app-ego',
@@ -74,10 +78,10 @@ export class EgoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._dialog.open(EgoDialogComponent, {
+    /*this._dialog.open(EgoDialogComponent, {
       data: {
       }
-    })
+    })*/
 
     let camera, scene, renderer, controls
     let geometry, material, mesh
@@ -85,43 +89,66 @@ export class EgoComponent implements OnInit {
     const init = () => {
 
       scene = new THREE.Scene()
-      renderer = new THREE.WebGLRenderer({ antialias: true })
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / (window.innerHeight * 0.65), 0.01, 10)
-      camera.rotation.x = 45 * Math.PI / 180
-      camera.rotation.y = 45 * Math.PI / 180
-      camera.rotation.z = 45 * Math.PI / 180
       geometry = new THREE.CubeGeometry(0.2, 0.2, 0.2)
       controls = new OrbitControls(camera)
 
-      camera.position.z = 0.3
+      camera.position.z = 2.5
       scene.background = new THREE.Color(0x2e2e2e)
 
       window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / (window.innerHeight * 0.65);
+        camera.aspect = window.innerWidth / (window.innerHeight * 0.65)
         camera.updateProjectionMatrix()
         renderer.setSize(window.innerWidth, (window.innerHeight * 0.65))
       }, false)
 
       let meshFloor = new THREE.Mesh(
-        new THREE.PlaneGeometry(20, 20, 10, 10),
+        new THREE.PlaneGeometry(50, 50, 50, 50),
         new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: false })
       )
       meshFloor.rotation.x -= Math.PI / 2
       meshFloor.receiveShadow = true
-      meshFloor.position.set(0, -0.3, 0)
+      meshFloor.position.set(0, -0.75, 0)
       scene.add(meshFloor)
 
-      scene.add(this.generateEgo())
 
-      let ambientLight = new THREE.AmbientLight(0xffffff, 0.2)
+      //scene.add(this.generateEgo())
+
+      var path = '/assets/ego/mtl/'
+      var filename = 'Object.mtl'
+      var mtlLoader = new MTLLoader()
+      mtlLoader.setBaseUrl(path)
+      mtlLoader.setPath(path)
+      mtlLoader.load(filename, function (materials) {
+        materials.preload()
+        var objLoader = new THREE.OBJLoader()
+        objLoader.setMaterials(materials)
+        objLoader.setPath(path)
+        objLoader.load(filename.replace('.mtl', '.obj'), function (object) {
+
+          var box = new THREE.Box3()
+          box.setFromObject(object)
+          var size = new THREE.Vector3()
+          size.subVectors(box.max, box.min)
+          var center = new THREE.Vector3()
+          center.addVectors(box.max, box.min).multiplyScalar(0.5)
+
+          var objSize = Math.max(size.x, size.y, size.z)
+          var scaleSet = 2 / objSize
+
+          var theObject = new THREE.Object3D()
+          theObject.add(object)
+          object.scale.set(scaleSet, scaleSet, scaleSet)
+          object.position.set(-center.x * scaleSet, (-center.y * scaleSet + size.y / 2 * scaleSet) - 0.75, -center.z * scaleSet)
+
+          scene.add(theObject)
+        })
+      })
+
+
+      let ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
       scene.add(ambientLight)
-
-      let light = new THREE.PointLight(0xffffff, 0.8, 18)
-      light.position.set(4, 4, 4)
-      light.castShadow = true
-      light.shadow.camera.near = 0.1
-      light.shadow.camera.far = 25
-      scene.add(light)
 
       let light2 = new THREE.PointLight(0xffffff, 0.8, 18)
       light2.position.set(3, -6, 3)

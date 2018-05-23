@@ -1,5 +1,5 @@
 <div class=ego>
-  <img class=logo src='/assets/ego/logotype_ego-BLC.png'/>
+  <img class=logo src='/assets/ego/logotype_ego-BLC.png' />
   <div id=canvas></div>
   <mat-card>
     <div class=names fxLayout=column fxLayoutAlign="start center">
@@ -21,8 +21,16 @@
           </div>
         </div>
         <div class=actions fxLayout=column fxLayoutAlign="center" fxLayoutGap="20px">
-          <button mat-raised-button [disabled]="!users[0].prenom || !users[0].nom" (click)=generate() color=primary>Générer l'ego {{ users[0].prenom && users[0].nom ? 'pour ' + users[0].prenom + ' ' + users[0].nom : '' }}</button>
-          <button mat-raised-button [disabled]="!users[0].prenom || !users[0].nom" color=primary>Commander</button>
+          <button *ngIf="users.length === 1" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom" (click)=generate() color=primary>
+            Générer l'ego {{ users[0].prenom && users[0].nom ? 'pour ' + users[0].nom + ' ' + users[0].prenom : '' }}
+          </button>
+          <button *ngIf="users.length === 2" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom || !users[1].prenom || !users[1].nom" (click)=generate() color=primary>
+            Générer l'ego {{ users[0].prenom && users[0].nom && users[1].prenom && users[1].nom ? 'pour ' + users[0].prenom + ' et ' + users[1].prenom : '' }}
+          </button>
+          <button *ngIf="users.length === 3" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom || !users[1].prenom || !users[1].nom || !users[2].prenom || !users[2].nom" (click)=generate() color=primary>
+            Générer l'ego {{ users[0].prenom && users[0].nom && users[1].prenom && users[1].nom && users[2].prenom && users[2].nom ? 'pour ' + users[0].prenom + ', ' + users[1].prenom + ' et ' + users[2].prenom: '' }}
+          </button>
+          <button mat-raised-button color=primary>Commander</button>
         </div>
       </div>
     </div>
