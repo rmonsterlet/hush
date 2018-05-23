@@ -15,6 +15,7 @@ import OrbitControls from 'orbit-controls-es6'
 import * as THREE from 'three'
 import MTLLoader from 'three-mtl-loader'
 import OBJLoader from 'three-obj-loader'
+import FBXLoader from 'three-fbx-loader'
 OBJLoader(THREE)
 
 @Component({
@@ -105,57 +106,53 @@ export class EgoComponent implements OnInit {
 
       let meshFloor = new THREE.Mesh(
         new THREE.PlaneGeometry(50, 50, 50, 50),
-        new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: false })
+        new THREE.MeshPhongMaterial({ color: 0x2e2e2e, wireframe: false })
       )
       meshFloor.rotation.x -= Math.PI / 2
       meshFloor.receiveShadow = true
       meshFloor.position.set(0, -0.75, 0)
       scene.add(meshFloor)
 
+      /*var loader = new FBXLoader()
+      loader.load('/assets/ego/fbx/ego.FBX', function (object) {
+        
+        var box = new THREE.Box3()
+        box.setFromObject(object)
+        var size = new THREE.Vector3()
+        size.subVectors(box.max, box.min)
+        var center = new THREE.Vector3()
+        center.addVectors(box.max, box.min).multiplyScalar(0.5)
 
-      //scene.add(this.generateEgo())
+        var objSize = Math.max(size.x, size.y, size.z)
+        var scaleSet = 2 / objSize
 
-      var path = '/assets/ego/mtl/'
-      var filename = 'Object.mtl'
-      var mtlLoader = new MTLLoader()
-      mtlLoader.setBaseUrl(path)
-      mtlLoader.setPath(path)
-      mtlLoader.load(filename, function (materials) {
-        materials.preload()
-        var objLoader = new THREE.OBJLoader()
-        objLoader.setMaterials(materials)
-        objLoader.setPath(path)
-        objLoader.load(filename.replace('.mtl', '.obj'), function (object) {
-
-          var box = new THREE.Box3()
-          box.setFromObject(object)
-          var size = new THREE.Vector3()
-          size.subVectors(box.max, box.min)
-          var center = new THREE.Vector3()
-          center.addVectors(box.max, box.min).multiplyScalar(0.5)
-
-          var objSize = Math.max(size.x, size.y, size.z)
-          var scaleSet = 2 / objSize
-
-          var theObject = new THREE.Object3D()
-          theObject.add(object)
-          object.scale.set(scaleSet, scaleSet, scaleSet)
-          object.position.set(-center.x * scaleSet, (-center.y * scaleSet + size.y / 2 * scaleSet) - 0.75, -center.z * scaleSet)
-
-          scene.add(theObject)
-        })
-      })
+        var theObject = new THREE.Object3D()
+        theObject.add(object)
+        object.scale.set(scaleSet, scaleSet, scaleSet)
+        object.position.set(-center.x * scaleSet, (-center.y * scaleSet + size.y / 2 * scaleSet) - 0.75, -center.z * scaleSet)
+        scene.add(theObject)
+      })*/
 
 
       let ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
       scene.add(ambientLight)
 
-      let light2 = new THREE.PointLight(0xffffff, 0.8, 18)
+      let light1 = new THREE.PointLight(0xe4e8fe, 0.3, 18)
+      scene.add(light1)
+
+      let light2 = new THREE.PointLight(0xe4e8fe, 0.8, 18)
       light2.position.set(3, -6, 3)
       light2.castShadow = true
       light2.shadow.camera.near = 0.1
       light2.shadow.camera.far = 25
       scene.add(light2)
+
+      let light3 = new THREE.PointLight(0xe4e8fe, 0.8, 18)
+      light3.position.set(-5, 8, -4)
+      light3.castShadow = true
+      light3.shadow.camera.near = 0.1
+      light3.shadow.camera.far = 25
+      scene.add(light3)
 
       renderer.setSize(window.innerWidth, window.innerHeight * 0.65)
 
