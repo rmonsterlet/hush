@@ -21,24 +21,32 @@
           </div>
         </div>
         <div class=actions fxLayout=column fxLayoutAlign="center" fxLayoutGap="20px">
-          <button *ngIf="users.length === 1" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom" (click)=generate() color=primary>
-            Générer l'ego {{ users[0].prenom && users[0].nom ? 'pour ' + users[0].nom + ' ' + users[0].prenom : '' }}
+          <button *ngIf="users.length === 1" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom" (click)=generate()>
+            GÉNERER {{ users[0].prenom && users[0].nom ? 'POUR ' + users[0].nom.toUpperCase() + ' ' + users[0].prenom.toUpperCase() :
+            '' }}
           </button>
-          <button *ngIf="users.length === 2" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom || !users[1].prenom || !users[1].nom" (click)=generate() color=primary>
-            Générer l'ego {{ users[0].prenom && users[0].nom && users[1].prenom && users[1].nom ? 'pour ' + users[0].prenom + ' et ' + users[1].prenom : '' }}
+          <button *ngIf="users.length === 2" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom || !users[1].prenom || !users[1].nom"
+            (click)=generate()>
+            GÉNERER {{ users[0].prenom && users[0].nom && users[1].prenom && users[1].nom ? 'POUR ' + users[0].prenom.toUpperCase() +
+            ' ET ' + users[1].prenom.toUpperCase() : '' }}
           </button>
-          <button *ngIf="users.length === 3" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom || !users[1].prenom || !users[1].nom || !users[2].prenom || !users[2].nom" (click)=generate() color=primary>
-            Générer l'ego {{ users[0].prenom && users[0].nom && users[1].prenom && users[1].nom && users[2].prenom && users[2].nom ? 'pour ' + users[0].prenom + ', ' + users[1].prenom + ' et ' + users[2].prenom: '' }}
+          <button *ngIf="users.length === 3" mat-raised-button [disabled]="!users[0].prenom || !users[0].nom || !users[1].prenom || !users[1].nom || !users[2].prenom || !users[2].nom"
+            (click)=generate()>
+            GÉNERER {{ users[0].prenom && users[0].nom && users[1].prenom && users[1].nom && users[2].prenom && users[2].nom ? 'POUR
+            ' + users[0].prenom.toUpperCase() + ', ' + users[1].prenom.toUpperCase() + ' ET ' + users[2].prenom.toUpperCase()
+            : '' }}
           </button>
-          <button mat-raised-button color=primary>Commander</button>
+          <button mat-raised-button>RÉSERVER</button>
         </div>
       </div>
     </div>
-    <button mat-raised-button color=primary (click)="showSigns = !showSigns" cass="app-mt">Signes</button>
-    <div *ngIf="showSigns" fxLayout="row wrap">
-      <div *ngFor="let letter of letters" fxLayut=column>
-        <img *ngIf="letter.imgSrc" [src]="letter.imgSrc" class=letter>
-        <button mat-button color=primary (click)="onLetterClick(letter)" (mouseenter)="onLetterMouseEnter(letter, $event)" (mouseleave)="onLetterMouseLeave(letter)">{{letter.code}}</button>
+    <div class="signs">
+      <button *ngIf=!showSigns mat-button color=primary (click)="showSigns = !showSigns" cass="app-mt signs-btn">Signes</button>
+      <div *ngIf="showSigns" fxLayout="row wrap" class=letters>
+        <div *ngFor="let letter of letters" fxLayut=column>
+          <img *ngIf="letter.imgSrc" [src]="letter.imgSrc" class=letter>
+          <button mat-button color=primary (click)="onLetterClick(letter)" (mouseenter)="onLetterMouseEnter(letter, $event)" (mouseleave)="onLetterMouseLeave(letter)">{{letter.code}}</button>
+        </div>
       </div>
     </div>
   </mat-card>

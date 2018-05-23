@@ -44,13 +44,12 @@ export class EgoComponent implements OnInit {
   letters = [
     { code: "A", imgSrc: null },
     { code: "B", imgSrc: null },
-    { code: "C", imgSrc: null },
+    { code: "C/G", imgSrc: null },
     { code: "D", imgSrc: null },
     { code: "E", imgSrc: null },
     { code: "F", imgSrc: null },
-    { code: "G", imgSrc: null },
     { code: "H", imgSrc: null },
-    { code: "IJ", imgSrc: null },
+    { code: "I/J", imgSrc: null },
     { code: "K", imgSrc: null },
     { code: "L", imgSrc: null },
     { code: "M", imgSrc: null },
@@ -61,11 +60,9 @@ export class EgoComponent implements OnInit {
     { code: "R", imgSrc: null },
     { code: "S", imgSrc: null },
     { code: "T", imgSrc: null },
-    { code: "U", imgSrc: null },
-    { code: "V", imgSrc: null },
-    { code: "W", imgSrc: null },
+    { code: "U/W", imgSrc: null },
+    { code: "V/Y", imgSrc: null },
     { code: "X", imgSrc: null },
-    { code: "Y", imgSrc: null },
     { code: "Z", imgSrc: null }
   ]
 
@@ -113,7 +110,7 @@ export class EgoComponent implements OnInit {
       meshFloor.position.set(0, -0.75, 0)
       scene.add(meshFloor)
 
-      /*var loader = new FBXLoader()
+      var loader = new FBXLoader()
       loader.load('/assets/ego/fbx/ego.FBX', function (object) {
         
         var box = new THREE.Box3()
@@ -131,7 +128,7 @@ export class EgoComponent implements OnInit {
         object.scale.set(scaleSet, scaleSet, scaleSet)
         object.position.set(-center.x * scaleSet, (-center.y * scaleSet + size.y / 2 * scaleSet) - 0.75, -center.z * scaleSet)
         scene.add(theObject)
-      })*/
+      })
 
 
       let ambientLight = new THREE.AmbientLight(0xffffff, 0.4)

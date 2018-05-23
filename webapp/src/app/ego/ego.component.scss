@@ -15,24 +15,49 @@
         min-height: 25%;
     }
     
-    .letter{
-        top: -150px;
-        z-index: 1;
-        position: absolute;
+    .letters{
+        button {
+            min-width: 83px; 
+        }
+        .letter{
+            top: -150px;
+            z-index: 1;
+            position: absolute;
+        }
     }
     
+    
     .actions{
-        margin-left: 40px;
+
+        button {
+            margin-bottom: 20px;
+            border: 1px solid #e2e2e2;
+            border-radius: 0px;
+            box-shadow: none;
+            border: 1px solid #e2e2e2;
+            height: 3.8em;
+        }
+
+        margin-left: 5em;
         right: 200px;
         z-index: 1;
     }
 
-    .signs{
-        margin-left: 20px;
-        margin-bottom: 20px;
-        position: fixed;
-        bottom: 0;
-    }
+    .signs {
 
+        margin-top: 3.6em;
+
+        button {
+            margin: 0.4em 0.4em;
+            border: 1px solid #e2e2e2;
+            border-radius: 0px;
+            box-shadow: none;
+            border: 1px solid #e2e2e2;
+            height: 3.8em;
+            padding: 0px !important;
+            min-width: 5em;
+        }
+        
+    }
 }
 
