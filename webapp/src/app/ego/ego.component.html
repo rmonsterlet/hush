@@ -1,6 +1,9 @@
 <div class=ego>
   <img class=logo src='/assets/ego/logotype_ego-BLC.png' />
   <div id=canvas></div>
+  <section>
+    <mat-progress-bar *ngIf="!loaded" color=primary mode="buffer"></mat-progress-bar>
+  </section>
   <mat-card>
     <div class=names fxLayout=column fxLayoutAlign="start center">
       <div fxLayout=row fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column">

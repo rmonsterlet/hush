@@ -30,6 +30,8 @@ export class EgoComponent implements OnInit {
 
   nom: string
   prenom: string
+
+  loaded = false
   showSigns = false
 
   users = [
@@ -44,12 +46,12 @@ export class EgoComponent implements OnInit {
   letters = [
     { code: "A", imgSrc: null },
     { code: "B", imgSrc: null },
-    { code: "C/G", imgSrc: null },
+    { code: "C-G", imgSrc: null },
     { code: "D", imgSrc: null },
     { code: "E", imgSrc: null },
     { code: "F", imgSrc: null },
     { code: "H", imgSrc: null },
-    { code: "I/J", imgSrc: null },
+    { code: "I-J", imgSrc: null },
     { code: "K", imgSrc: null },
     { code: "L", imgSrc: null },
     { code: "M", imgSrc: null },
@@ -60,8 +62,8 @@ export class EgoComponent implements OnInit {
     { code: "R", imgSrc: null },
     { code: "S", imgSrc: null },
     { code: "T", imgSrc: null },
-    { code: "U/W", imgSrc: null },
-    { code: "V/Y", imgSrc: null },
+    { code: "U-W", imgSrc: null },
+    { code: "V-Y", imgSrc: null },
     { code: "X", imgSrc: null },
     { code: "Z", imgSrc: null }
   ]
@@ -111,7 +113,7 @@ export class EgoComponent implements OnInit {
       scene.add(meshFloor)
 
       var loader = new FBXLoader()
-      loader.load('/assets/ego/fbx/ego.FBX', function (object) {
+      /*loader.load('/assets/ego/fbx/ego.FBX', (object) => {
         
         var box = new THREE.Box3()
         box.setFromObject(object)
@@ -128,7 +130,9 @@ export class EgoComponent implements OnInit {
         object.scale.set(scaleSet, scaleSet, scaleSet)
         object.position.set(-center.x * scaleSet, (-center.y * scaleSet + size.y / 2 * scaleSet) - 0.75, -center.z * scaleSet)
         scene.add(theObject)
+        this.loaded = true
       })
+      */
 
 
       let ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
@@ -210,7 +214,12 @@ export class EgoComponent implements OnInit {
   }
 
   private generateLetter(letter) {
-    return '/assets/ego/letters/' + letter.code + Math.floor(Math.random() * Math.floor(4) + 1) + '.jpg'
+    let src = '/assets/ego/letters/' 
+    src += letter.code + Math.floor(Math.random() * 3 + 1) 
+    if(Math.random() > 0.5)
+      src += '_2'
+    src += '.jpg'
+    return src
   }
 
   private generateEgo() {
