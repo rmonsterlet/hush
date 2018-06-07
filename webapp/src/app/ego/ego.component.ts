@@ -85,7 +85,7 @@ export class EgoComponent implements OnInit {
 
     const init = () => {
 
-      const canvasHeightPercent = 0.50
+      const canvasHeightPercent = 0.57
 
       scene = new THREE.Scene()
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
