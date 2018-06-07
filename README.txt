@@ -5,3 +5,7 @@ se rendre sur chrome : "localhost:4200"
 
 Pour recupere les modifs : 
 taper "cd webapp" puis "git pull", puis "npm start" (si ca ne fonctionne pas, faire "npm install", puis "npm start")
+
+
+Emplacement du code ego :
+"ego_website/webapp/src/app/ego"

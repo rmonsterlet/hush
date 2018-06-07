@@ -28,9 +28,6 @@ OBJLoader(THREE)
 })
 export class EgoComponent implements OnInit {
 
-  nom: string
-  prenom: string
-
   loaded = false
   showSigns = false
 
@@ -93,6 +90,8 @@ export class EgoComponent implements OnInit {
       camera = new THREE.PerspectiveCamera(70, window.innerWidth / (window.innerHeight * 0.65), 0.01, 10)
       geometry = new THREE.CubeGeometry(0.2, 0.2, 0.2)
       controls = new OrbitControls(camera)
+      controls.minDistance = 2
+      controls.maxDistance = 7
 
       camera.position.z = 2.5
       scene.background = new THREE.Color(0x2e2e2e)
@@ -114,7 +113,7 @@ export class EgoComponent implements OnInit {
 
       var loader = new FBXLoader()
       loader.load('/assets/ego/fbx/ego.FBX', (object) => {
-        
+
         var box = new THREE.Box3()
         box.setFromObject(object)
         var size = new THREE.Vector3()
@@ -212,9 +211,9 @@ export class EgoComponent implements OnInit {
   }
 
   private generateLetter(letter) {
-    let src = '/assets/ego/letters/' 
-    src += letter.code + Math.floor(Math.random() * 3 + 1) 
-    if(Math.random() > 0.5)
+    let src = '/assets/ego/letters/'
+    src += letter.code + Math.floor(Math.random() * 3 + 1)
+    if (Math.random() > 0.5)
       src += '_2'
     src += '.jpg'
     return src
