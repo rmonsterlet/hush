@@ -85,9 +85,11 @@ export class EgoComponent implements OnInit {
 
     const init = () => {
 
+      const canvasHeightPercent = 0.50
+
       scene = new THREE.Scene()
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-      camera = new THREE.PerspectiveCamera(70, window.innerWidth / (window.innerHeight * 0.65), 0.01, 10)
+      camera = new THREE.PerspectiveCamera(70, window.innerWidth / (window.innerHeight * canvasHeightPercent), 0.01, 10)
       geometry = new THREE.CubeGeometry(0.2, 0.2, 0.2)
       controls = new OrbitControls(camera)
       controls.minDistance = 2
@@ -97,9 +99,9 @@ export class EgoComponent implements OnInit {
       scene.background = new THREE.Color(0x2e2e2e)
 
       window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / (window.innerHeight * 0.65)
+        camera.aspect = window.innerWidth / (window.innerHeight * canvasHeightPercent)
         camera.updateProjectionMatrix()
-        renderer.setSize(window.innerWidth, (window.innerHeight * 0.65))
+        renderer.setSize(window.innerWidth, (window.innerHeight * canvasHeightPercent))
       }, false)
 
       let meshFloor = new THREE.Mesh(
@@ -152,7 +154,7 @@ export class EgoComponent implements OnInit {
       light3.shadow.camera.far = 25
       scene.add(light3)
 
-      renderer.setSize(window.innerWidth, window.innerHeight * 0.65)
+      renderer.setSize(window.innerWidth, window.innerHeight * canvasHeightPercent)
 
       controls.update()
       document.getElementById('canvas').appendChild(renderer.domElement)

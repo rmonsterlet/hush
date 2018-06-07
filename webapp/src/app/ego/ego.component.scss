@@ -1,6 +1,16 @@
 .ego{
     height: 100%;
 
+    .navbar {
+        color: #888888;
+        height: 7em;
+        margin: 12px;
+
+        button{
+            margin: 0 40px;
+        }
+    }
+
     .logo {
         padding: 2.5%;
         width: 6%;
@@ -20,7 +30,7 @@
             min-width: 83px; 
         }
         .letter{
-            top: -150px;
+            top: -75px;
             z-index: 1;
             position: absolute;
         }
@@ -38,16 +48,18 @@
             height: 3.8em;
         }
 
-        margin-left: 5em;
+        margin-left: 10em;
         right: 200px;
         z-index: 1;
     }
 
     .signs {
 
-        margin-top: 3.6em;
+        border-top: 1px solid #888888;
+        padding-top: 10px;
 
         button {
+            color: #888888;
             margin: 0.4em 0.4em;
             border: 1px solid #e2e2e2;
             border-radius: 0px;

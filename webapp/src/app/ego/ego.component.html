@@ -1,5 +1,10 @@
 <div class=ego>
-  <img class=logo src='/assets/ego/logotype_ego-BLC.png' />
+  <div class=navbar fxLayout=row fxLayoutAlign="center center">
+      <button mat-button>LE PROJET</button>
+      <img width=100 src='/assets/ego/logotype_ego-BLC.png' />
+      <button mat-button>CONTACT</button>
+  </div>
+  <!--<img class=logo src='/assets/ego/logotype_ego-BLC.png' />-->
   <div id=canvas></div>
   <section>
     <mat-progress-bar *ngIf="!loaded" color=primary mode="buffer"></mat-progress-bar>
