@@ -113,7 +113,7 @@ export class EgoComponent implements OnInit {
       scene.add(meshFloor)
 
       var loader = new FBXLoader()
-      /*loader.load('/assets/ego/fbx/ego.FBX', (object) => {
+      loader.load('/assets/ego/fbx/ego.FBX', (object) => {
         
         var box = new THREE.Box3()
         box.setFromObject(object)
@@ -132,8 +132,6 @@ export class EgoComponent implements OnInit {
         scene.add(theObject)
         this.loaded = true
       })
-      */
-
 
       let ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
       scene.add(ambientLight)

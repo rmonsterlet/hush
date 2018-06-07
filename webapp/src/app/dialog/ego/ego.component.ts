@@ -6,8 +6,6 @@ import { RoomAction } from '../../../../../src/shared/RoomAction';
 import { AppService } from 'app/app.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Flickity } from 'flickity'
-
 @Component({
   selector: 'app-ego-dialog',
   templateUrl: './ego.component.html',
