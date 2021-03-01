@@ -48,7 +48,7 @@
     "rxjs": "6.1.0",
     "rxjs-compat": "6.1.0",
     "sha256": "^0.2.0",
-    "three": "^0.92.0",
+    "three": "^0.125.0",
     "three-fbx-loader": "^1.0.3",
     "three-mtl-loader": "^1.0.2",
     "three-obj-loader": "^1.1.3",
